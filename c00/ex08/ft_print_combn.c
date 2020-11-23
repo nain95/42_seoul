@@ -6,47 +6,51 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 16:58:13 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/23 19:05:00 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/23 21:21:46 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
+void	ft_putstring(char *c, int n)
+{
+	int i;
+
+	i = -1;
+	while (c[++i] != '\0')
+	{
+		write(1, &c[i], 1);
+	}
+	if (c[0] - 48 != 9 - n + 1)
+	{
+		write(1, ", ", 2);
+	}
+}
 
 void	ft_print_combn(int n)
 {
-	char number[11] = "00000000000";
-	int count;
-	int tmp;
-	int plus;
+	int		tmp;
+	int		count;
+	char	*number;
 
+	number = "0000000000";
 	count = -1;
 	number[n] = '\0';
-	plus = n-1;
-	tmp = n-2;
-	while (number[0]-48 < 9-n+2)
+	tmp = n - 2;
+	while (number[0] - 48 < 9 - n + 2)
 	{
-		number[plus] += 1;
-		printf("%s\n",number);
-		if (number[plus] >= '9')
+		number[n - 1] += 1;
+		ft_putstring(number, n);
+		if (number[n - 1] >= '9')
 		{
 			number[tmp] += 1;
-			if (number[tmp] >= '9')
+			if (number[tmp--] >= '9' && tmp != 0)
 			{
-				tmp--;
 				number[tmp] += 1;
-				number[tmp+1] = number[tmp];
+				number[tmp + 1] = number[tmp] + 1;
 			}
-			tmp = n-2;
-			number[plus] = number[plus-1];
+			tmp = n - 2;
+			number[n - 1] = number[n - 2];
 		}
 	}
-
-}
-
-int main(void)
-{
-	ft_print_combn(2);
-
 }

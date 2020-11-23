@@ -1,46 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_comb.c                                    :+:      :+:    :+:   */
+/*   ft_is_negative.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 23:35:48 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/23 21:09:02 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/23 21:22:36 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/23 21:28:16 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
+void	ft_putchar(char ch)
 {
-	write(1, &c, 1);
+	write(1, &ch, 1);
 }
 
-void	ft_print_comb(void)
+void	ft_is_negative(int n)
 {
-	int	first;
-	int	second;
-	int	third;
-
-	first = -1;
-	while (++first <= 9)
+	if (n % 2 == 0)
 	{
-		second = first;
-		while (++second <= 9)
-		{
-			third = second;
-			while (++third <= 9)
-			{
-				ft_putchar(first + '0');
-				ft_putchar(second + '0');
-				ft_putchar(third + '0');
-				if (first != 7 || second != 8 || third != 9)
-				{
-					ft_putchar(',');
-					ft_putchar(' ');
-				}
-			}
-		}
+		ft_putchar('P');
+	}
+	else
+	{
+		ft_putchar('N');
 	}
 }
