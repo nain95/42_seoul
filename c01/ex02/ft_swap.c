@@ -6,15 +6,15 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:23:54 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 11:25:59 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/24 17:17:09 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_swap(int *a, int*b)
+void	ft_swap(int *a, int *b)
 {
-	int *swap;
+	int swap;
 
-	*swap = *a;
+	swap = *a;
 	*a = *b;
-	*b = *swap;
+	*b = swap;
 }

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 21:11:25 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/23 21:36:57 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/24 21:54:51 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	ft_print_reverse_alphabet(void)
 {
 	char	alpha;
 
-	alpha = "z";
+	alpha = 'z';
 	while (alpha >= 'a')
 	{
-		ft_putchar(alpha++);
+		ft_putchar(alpha--);
 	}
 }

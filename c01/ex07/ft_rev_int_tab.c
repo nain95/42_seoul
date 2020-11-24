@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:36:13 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 14:01:18 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/24 23:21:32 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	ft_rev_int_tab(int *tab, int size)
 
 	index = 0;
 	size -= 1;
-	while (index <= size / 2)
+	while (index < size)
 	{
-		swap = tab[size - index];
-		tab[size - index] = tab[index];
+		swap = tab[size];
+		tab[size] = tab[index];
 		tab[index] = swap;
+		size--;
 		index++;
 	}
 }

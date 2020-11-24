@@ -6,11 +6,11 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:26:14 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 11:27:59 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/24 15:21:18 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void 	ft_div_mod(int a, int b, int *div, int *mod)
+void	ft_div_mod(int a, int b, int *div, int *mod)
 {
 	*div = a / b;
 	*mod = a % b;

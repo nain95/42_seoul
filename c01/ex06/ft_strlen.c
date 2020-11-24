@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:33:27 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 11:35:42 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/24 15:23:17 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		ft_strlen(char *str)
 {
 	int count;
 
-	count = -1;
-	while (str[count + 1] != '\0')
+	count = 0;
+	while (str[count] != '\0')
 	{
 		count += 1;
 	}
