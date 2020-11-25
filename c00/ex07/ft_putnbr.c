@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 16:33:12 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/25 18:23:00 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/25 22:23:07 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_rev_num(char *num, int count)
+void			ft_rev_num(char *num, int count)
 {
 	while (--count >= 0)
 	{
@@ -20,28 +20,39 @@ void	ft_rev_num(char *num, int count)
 	}
 }
 
-void	ft_putnbr(int nb)
+unsigned int	converter(int nb)
 {
-	int		count;
-	int		n;
-	char	number[11];
-	unsigned int	unsigned_nb;
+	unsigned int unsigned_nb;
 
-	count = 0;
-	n = 1;
 	if (nb < 0)
 	{
 		unsigned_nb = nb * (-1);
+		write(1, "-", 1);
 	}
-	while (nb % n != nb)
+	else if (nb == 0)
 	{
-		number[count++] = (nb / n % 10) + '0';
-		if (n == 1000000000)
-		{
-			number[count] = (nb / 1000000000) + '0';
-			break ;
-		}
-		n *= 10;
+		write(1, "0", 1);
+		unsigned_nb = 0;
 	}
-	ft_rev_num(number, count);
+	else
+	{
+		unsigned_nb = nb;
+	}
+	return (unsigned_nb);
+}
+
+void			ft_putnbr(int nb)
+{
+	int				n;
+	char			number[11];
+	unsigned int	unsigned_nb;
+
+	n = 0;
+	unsigned_nb = converter(nb);
+	while (unsigned_nb != 0)
+	{
+		number[n++] = (unsigned_nb % 10) + '0';
+		unsigned_nb /= 10;
+	}
+	ft_rev_num(number, n);
 }
