@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strupcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 22:31:30 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/25 23:16:54 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/26 00:55:08 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/26 00:58:12 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int		ft_strlen(char *str)
+#include <stdio.h>
+char	*ft_strupcase(char *str)
 {
-	int count;
+	int i;
 
-	count = 0;
-	while (str[count++] != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-		count++;
+		if ('a' <= str[i] && str[i] <= 'z')
+		{
+			str[i] -= 32;
+		}
+		i++;
 	}
-	return (count + 1);
+	return (str);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+int main()
 {
-	int		src_len;
-	char	*d;
-	char	*s;
+	char test[10] = "adcAsdW12";
 
-	d = dest;
-	s = src;
-	src_len = ft_strlen(src);
-	while (src_len--)
-	{
-		*d++ = *s++;
-	}
-	return (dest);
+	ft_strupcase(test);
+	printf("%s",test);
 }

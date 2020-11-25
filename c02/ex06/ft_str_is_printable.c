@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 22:31:30 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/25 23:16:54 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/26 00:53:19 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/26 00:59:17 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strlen(char *str)
+int	ft_str_is_printable(char *str)
 {
-	int count;
+	int i;
 
-	count = 0;
-	while (str[count++] != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-		count++;
+		if (!32 <= str[i] && !str[i] <= 126)
+		{
+			return (1);
+		}
+		i++;
 	}
-	return (count + 1);
-}
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	int		src_len;
-	char	*d;
-	char	*s;
-
-	d = dest;
-	s = src;
-	src_len = ft_strlen(src);
-	while (src_len--)
-	{
-		*d++ = *s++;
-	}
-	return (dest);
+	return (0);
 }
