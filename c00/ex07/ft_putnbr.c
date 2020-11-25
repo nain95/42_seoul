@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 16:33:12 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 22:11:37 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/25 18:23:00 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,18 @@ void	ft_rev_num(char *num, int count)
 	}
 }
 
-int		check(int num)
-{
-	if (num == 0)
-	{
-		write(1, "0", 1);
-		return (1);
-	}
-	else if (num < 0)
-	{
-		write(1, "-", 1);
-		return (-1);
-	}
-	else
-	{
-		return (1);
-	}
-}
-
 void	ft_putnbr(int nb)
 {
 	int		count;
 	int		n;
 	char	number[11];
+	unsigned int	unsigned_nb;
 
 	count = 0;
-	n = check(nb);
-	if (nb == -2147483648)
+	n = 1;
+	if (nb < 0)
 	{
-		nb = ((nb + 1) * (-1)) / 10;
-		number[0] = '8';
-		count = 1;
-		n = 1;
+		unsigned_nb = nb * (-1);
 	}
 	while (nb % n != nb)
 	{
