@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 00:00:13 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 21:53:37 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/25 21:49:49 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/25 21:49:52 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char ch)
+void	ft_swap(int *a, int *b)
 {
-	write(1, &ch, 1);
-}
+	int swap;
 
-void	ft_print_alphabet(void)
-{
-	char alpha;
-
-	alpha = 'a';
-	while (alpha <= 'z')
-	{
-		ft_putchar(alpha++);
-	}
+	swap = *a;
+	*a = *b;
+	*b = swap;
 }

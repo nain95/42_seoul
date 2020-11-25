@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 00:00:13 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 21:53:37 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/24 11:33:27 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/24 15:23:17 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char ch)
+int		ft_strlen(char *str)
 {
-	write(1, &ch, 1);
-}
+	int count;
 
-void	ft_print_alphabet(void)
-{
-	char alpha;
-
-	alpha = 'a';
-	while (alpha <= 'z')
+	count = 0;
+	while (str[count] != '\0')
 	{
-		ft_putchar(alpha++);
+		count += 1;
 	}
+	return (count);
 }

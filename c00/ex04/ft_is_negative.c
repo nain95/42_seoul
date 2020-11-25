@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 21:22:36 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/23 21:28:16 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/25 00:30:04 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putchar(char ch)
 
 void	ft_is_negative(int n)
 {
-	if (n % 2 == 0)
+	if (n > 0)
 	{
 		ft_putchar('P');
 	}

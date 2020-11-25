@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/20 23:52:56 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/25 21:13:45 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/24 11:29:36 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/24 15:22:51 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-extern void	ft_print_comb2(void);
-
-int		main(void)
+void	ft_putstr(char *str)
 {
-	ft_print_comb2();
-	return (0);
+	int index;
+
+	index = 0;
+	while (str[index] != '\0')
+	{
+		write(1, &str[index++], 1);
+	}
 }

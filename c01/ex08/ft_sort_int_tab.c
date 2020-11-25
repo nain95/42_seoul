@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 00:00:13 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 21:53:37 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/24 11:51:55 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/24 15:25:04 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char ch)
+void	swap(int *tab, int a, int b)
 {
-	write(1, &ch, 1);
+	int tmp;
+
+	tmp = tab[a];
+	tab[a] = tab[b];
+	tab[b] = tmp;
 }
 
-void	ft_print_alphabet(void)
+void	ft_sort_int_tab(int *tab, int size)
 {
-	char alpha;
+	int i;
+	int j;
 
-	alpha = 'a';
-	while (alpha <= 'z')
+	i = 0;
+	while (i < size)
 	{
-		ft_putchar(alpha++);
+		j = i + 1;
+		while (j < size)
+		{
+			if (tab[i] > tab[j])
+			{
+				swap(tab, i, j);
+			}
+			j++;
+		}
+		i++;
 	}
 }

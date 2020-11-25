@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_rev_int_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 00:00:13 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 21:53:37 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/24 11:36:13 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/25 21:45:09 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char ch)
+void	ft_rev_int_tab(int *tab, int size)
 {
-	write(1, &ch, 1);
-}
+	int swap;
+	int index;
 
-void	ft_print_alphabet(void)
-{
-	char alpha;
-
-	alpha = 'a';
-	while (alpha <= 'z')
+	index = 0;
+	size -= 1;
+	while (index < size)
 	{
-		ft_putchar(alpha++);
+		swap = tab[size];
+		tab[size] = tab[index];
+		tab[index] = swap;
+		size--;
+		index++;
 	}
 }

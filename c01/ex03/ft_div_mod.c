@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_div_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 00:00:13 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/24 21:53:37 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/24 11:26:14 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/24 15:21:18 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char ch)
+void	ft_div_mod(int a, int b, int *div, int *mod)
 {
-	write(1, &ch, 1);
-}
-
-void	ft_print_alphabet(void)
-{
-	char alpha;
-
-	alpha = 'a';
-	while (alpha <= 'z')
-	{
-		ft_putchar(alpha++);
-	}
+	*div = a / b;
+	*mod = a % b;
 }
