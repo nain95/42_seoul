@@ -6,14 +6,23 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:42:31 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 14:24:31 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/26 21:22:53 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+int				ft_strlen(char *str)
+{
+	int count;
 
-unsigned int ft_strlcpy(char *dest, char *src, unsigned int size)
+	count = 0;
+	while (str[count] != '\0')
+	{
+		count++;
+	}
+	return (count);
+}
+
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	int i;
 
@@ -28,15 +37,6 @@ unsigned int ft_strlcpy(char *dest, char *src, unsigned int size)
 		dest[i] = src[i];
 		i++;
 	}
-	dest[i+1] = '\0';
-	return (size);
-}
-
-int main()
-{
-	char dest[5] = "";
-	char src[7] = "123456";
-
-	ft_strlcpy(dest,src,5);
-	printf("%s\n",dest);
+	dest[i] = '\0';
+	return (ft_strlen(src));
 }

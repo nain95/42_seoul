@@ -6,29 +6,25 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:24:04 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 15:00:01 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/26 20:58:37 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		check_char(char c)
 {
-	if (9 <= c && c <= 13)
+	if (48 <= c && c <= 57)
 	{
-		return (0);
+		return (1);
 	}
-	else if (32 <= c && c <= 47)
+	else if (65 <= c && c <= 90)
 	{
-		return (0);
+		return (1);
 	}
-	else if (58 <= c && c <= 64)
+	else if (97 <= c && c <= 122)
 	{
-		return (0);
+		return (1);
 	}
-	else if (123 <= c && c <= 126)
-	{
-		return (0);
-	}
-	return (1);
+	return (0);
 }
 
 char	*ft_strcapitalize(char *str)
