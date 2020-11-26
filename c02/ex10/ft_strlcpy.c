@@ -1,19 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 03:10:37 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 15:58:08 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/26 13:42:31 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/26 14:24:31 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-extern void *ft_print_memory(void *addr, unsigned int size);
+#include <stdio.h>
+#include <string.h>
 
-int	main(void)
+unsigned int ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	char test[100] = "asduhfa ashjad a\t\tadajsdjw \tadwio";
-	ft_print_memory(test, 100);
+	int i;
+
+	i = 0;
+	if (size == 1)
+	{
+		dest[i] = '\0';
+		return (size);
+	}
+	while (src[i] != '\0' && size-- != 1)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i+1] = '\0';
+	return (size);
+}
+
+int main()
+{
+	char dest[5] = "";
+	char src[7] = "123456";
+
+	ft_strlcpy(dest,src,5);
+	printf("%s\n",dest);
 }

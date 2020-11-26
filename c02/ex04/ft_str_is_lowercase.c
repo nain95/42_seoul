@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 00:45:21 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 00:51:10 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/26 13:19:28 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_str_is_lowercase(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (!'a' <= str[i] <= 'z')
+		if ('a' > str[i] && str[i] > 'z')
 		{
 			return (0);
 		}

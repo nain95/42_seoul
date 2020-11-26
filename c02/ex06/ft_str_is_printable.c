@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 00:53:19 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 00:59:17 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/26 13:20:07 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_str_is_printable(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (!32 <= str[i] && !str[i] <= 126)
+		if (32 > str[i] && str[i] > 126)
 		{
 			return (1);
 		}
