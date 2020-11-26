@@ -115,6 +115,6 @@
 
 int main()
 {
-	char test[100] = "abcdef123\t\t213 asd weweqesad";
+	char test[100] = "Bonjour les aminches\t\t\tc  est fo\t\tlol\tlol\t \t";
 	ft_print_memory(test, 100);
 }

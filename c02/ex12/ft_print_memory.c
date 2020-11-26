@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 01:26:23 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 18:04:28 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/26 19:48:47 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ char	print_hex_contents(char c)
 
 	i = 1;
 	hex[0] = 0;
+	hex[1] = 0;
 	tmp = c;
 	while (tmp != 0)
 	{
 		hex[i--] = tmp % 16;
 		tmp /= 16;
 	}
-	i++;
+	i=0;
 	while (i < 2)
 	{
 		print_hex(hex[i++]);
@@ -96,21 +97,24 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	char *add;
 	int i;
 	char print[17];
+	int count;
 
+	count = 0;
 	print[16] = '\0';
 	add = addr;
-	while (*add != '\0')
+	while (count < size)
 	{
+		i = 0;
 		print_memory(add);
 		write(1,": ",2);
-		i = 0;
-		while (i < 16)	
+		while (i < 16 && count != size)	
 		{
 			print[i++] = print_hex_contents(*add++); 
 			if (i % 2 == 0)
 			{
 				write(1, " ", 1);
 			}
+			count++;
 		}
 		print_contents(print);
 	}
