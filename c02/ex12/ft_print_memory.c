@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 01:26:23 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 21:21:56 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/28 03:19:16 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_hex(int num)
 	}
 	else
 	{
-		hex = num + 39 + '0';
+		hex = num - 10 + 'a';
 	}
 	write(1, &hex, 1);
 }
@@ -48,7 +48,7 @@ void	print_memory(void *addr)
 	}
 }
 
-char	print_hex_contents(char c)
+char	print_hex_contents(unsigned char c)
 {
 	int tmp;
 	int i;
@@ -71,14 +71,14 @@ char	print_hex_contents(char c)
 	return (c);
 }
 
-void	print_contents(char *contents, unsigned int count, unsigned int size)
+void	print_contents(unsigned char *contents, unsigned int count, unsigned int size)
 {
 	int i;
 
 	i = 0;
 	while (i < 16 && (count < size))
 	{
-		if (0 <= contents[i] && contents[i] <= 31)
+		if (contents[i] <= 31 || contents[i] >= 127)
 		{
 			write(1, ".", 1);
 		}
@@ -96,7 +96,7 @@ void	*ft_print_memory(void *addr, unsigned int size)
 {
 	int					i;
 	char				print[17];
-	char				*add;
+	unsigned char			*add;
 	unsigned int		count;
 
 	count = 0;
@@ -119,4 +119,9 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		print_contents(print, count - i, size + 1);
 	}
 	return (addr);
+}
+
+int main()
+{
+	ft_print_memory("■",1);
 }

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 00:48:28 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 13:19:47 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/28 01:53:48 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	ft_str_is_uppercase(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if ('A' > str[i] && str[i] > 'Z')
+		if ('A' > str[i] || str[i] > 'Z')
 		{
-			return (1);
+			return (0);
 		}
 		i++;
 	}
-	return (0);
+	return (1);
 }
