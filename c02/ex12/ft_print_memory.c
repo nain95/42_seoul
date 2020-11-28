@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 20:47:55 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/28 20:47:57 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/28 20:52:24 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	print_contents(unsigned char *contents,\
 void	*ft_print_memory(void *addr, unsigned int size)
 {
 	int					i;
-	unsigned char			print[16];
+	unsigned char		print[16];
 	unsigned char		*add;
 	unsigned int		count;
 
