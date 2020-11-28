@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 01:26:23 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/28 19:20:06 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/28 20:47:55 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/28 20:47:57 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_hex(int num)
 	}
 	else
 	{
-		hex = num - 10 + 'a';
+		hex = num + 39 + '0';
 	}
 	write(1, &hex, 1);
 }
@@ -95,28 +95,26 @@ void	print_contents(unsigned char *contents,\
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
-	int						i;
-	char					print[17];
-	unsigned char			*add;
-	unsigned int			count;
+	int					i;
+	unsigned char			print[16];
+	unsigned char		*add;
+	unsigned int		count;
 
 	count = 0;
-	print[16] = '\0';
 	add = addr;
 	while (count < size)
 	{
 		i = 0;
 		print_memory(add);
-		while (i < 16 && count != size)
+		while (i < 16)
 		{
-			print[i++] = print_hex_contents(*add++);
-			if (i % 2 == 0)
-			{
+			if (count++ >= size)
+				write(1, "  ", 2);
+			else
+				print[i] = print_hex_contents(*add++);
+			if (i++ % 2 == 1)
 				write(1, " ", 1);
-			}
-			count++;
 		}
-		write(1, "                                 ", (16 - i) / 2 * 5);
 		print_contents(print, count - i, size);
 	}
 	return (addr);
