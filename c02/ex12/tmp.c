@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 01:26:23 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/28 19:20:06 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/28 19:40:25 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_hex(int num)
 	}
 	else
 	{
-		hex = num - 10 + 'a';
+		hex = num + 39 + '0';
 	}
 	write(1, &hex, 1);
 }
@@ -48,7 +48,7 @@ void	print_memory(void *addr)
 	write(1, ": ", 2);
 }
 
-char	print_hex_contents(unsigned char c)
+char	print_hex_contents(char c)
 {
 	int tmp;
 	int i;
@@ -71,15 +71,14 @@ char	print_hex_contents(unsigned char c)
 	return (c);
 }
 
-void	print_contents(unsigned char *contents,\
-		unsigned int count, unsigned int size)
+void	print_contents(char *contents, unsigned int count, unsigned int size)
 {
 	int i;
 
 	i = 0;
 	while (i < 16 && (count < size))
 	{
-		if (contents[i] <= 31 || contents[i] >= 127)
+		if (0 <= contents[i] && contents[i] <= 31)
 		{
 			write(1, ".", 1);
 		}
@@ -95,13 +94,12 @@ void	print_contents(unsigned char *contents,\
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
-	int						i;
-	char					print[17];
-	unsigned char			*add;
-	unsigned int			count;
+	int					i;
+	char				print[16];
+	char				*add;
+	unsigned int		count;
 
 	count = 0;
-	print[16] = '\0';
 	add = addr;
 	while (count < size)
 	{
@@ -120,4 +118,9 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		print_contents(print, count - i, size);
 	}
 	return (addr);
+}
+int main()
+{
+	char c[] = "aaaaaaaaaaaaaaaabbbbbb";
+	ft_print_memory(c,22);
 }
