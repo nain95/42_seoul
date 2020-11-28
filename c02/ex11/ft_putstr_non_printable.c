@@ -6,9 +6,11 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 14:48:52 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 21:21:32 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/28 18:57:55 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 void	print_hex(int num)
 {
@@ -57,7 +59,7 @@ void	ft_putstr_non_printable(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (0 <= str[i] && str[i] <= 31)
+		if (str[i] <= 31)
 		{
 			write(1, "\\", 1);
 			non_printable(str[i]);

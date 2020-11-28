@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 23:44:52 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 21:23:18 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/28 01:44:28 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_str_is_alpha(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] < 'A' || 'Z' < str[i] < 'a' || str[i] > 'z')
+		if (str[i] < 'A' || ('Z' < str[i] && str[i] < 'a') || str[i] > 'z')
 		{
 			return (0);
 		}

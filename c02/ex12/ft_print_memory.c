@@ -6,12 +6,11 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 01:26:23 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/26 21:21:56 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/28 18:56:56 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 void	print_hex(int num)
 {
@@ -23,7 +22,7 @@ void	print_hex(int num)
 	}
 	else
 	{
-		hex = num + 39 + '0';
+		hex = num - 10 + 'a';
 	}
 	write(1, &hex, 1);
 }
@@ -46,9 +45,10 @@ void	print_memory(void *addr)
 	{
 		print_hex(address[i]);
 	}
+	write(1, ": ", 2);
 }
 
-char	print_hex_contents(char c)
+char	print_hex_contents(unsigned char c)
 {
 	int tmp;
 	int i;
@@ -71,14 +71,15 @@ char	print_hex_contents(char c)
 	return (c);
 }
 
-void	print_contents(char *contents, unsigned int count, unsigned int size)
+void	print_contents(unsigned char *contents,\
+		unsigned int count, unsigned int size)
 {
 	int i;
 
 	i = 0;
 	while (i < 16 && (count < size))
 	{
-		if (0 <= contents[i] && contents[i] <= 31)
+		if (contents[i] <= 31 || contents[i] >= 127)
 		{
 			write(1, ".", 1);
 		}
@@ -96,27 +97,27 @@ void	*ft_print_memory(void *addr, unsigned int size)
 {
 	int					i;
 	char				print[17];
-	char				*add;
-	unsigned int		count;
+	unsigned char			*add;
+	unsigned int			count;
 
 	count = 0;
 	print[16] = '\0';
 	add = addr;
-	while (count < size + 1)
+	while (count < size)
 	{
 		i = 0;
 		print_memory(add);
-		write(1, ": ", 2);
-		while (i < 16 && ++count != size + 1)
+		while (i < 16 && count != size)
 		{
 			print[i++] = print_hex_contents(*add++);
 			if (i % 2 == 0)
 			{
 				write(1, " ", 1);
 			}
+			count++;
 		}
 		write(1, "                                 ", (16 - i) / 2 * 5);
-		print_contents(print, count - i, size + 1);
+		print_contents(print, count - i, size);
 	}
 	return (addr);
 }
