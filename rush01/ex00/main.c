@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 11:25:18 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/29 20:02:08 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/29 23:07:08 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 extern int	dfs(int depth, int **visible_num, int**map);
 
-const int	g_size = 2;
+const int	g_size = 4;
 
 int			init(int argc, char *argv[], int *visible_num[])
 {

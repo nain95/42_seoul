@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/28 19:19:06 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/29 22:10:30 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/30 00:30:29 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/30 00:33:37 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
+char *ft_strncat(char *dest, char *src, unsigned int nb)
 {
 	char *d;
 	char *s;
 
 	d = dest;
 	s = src;
-	while (*s != '\0' && n != 0)
+	while (*d++ != '\0')
+	{
+	}
+	while (nb-- != 0)
 	{
 		*d++ = *s++;
-		n--;
 	}
-	while (n != 0)
-	{
-		*d++ = '\0';
-		n--;
-	}
-	return (dest);
 }

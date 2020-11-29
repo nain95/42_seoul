@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/28 19:19:06 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/29 22:10:30 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/30 00:23:01 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/30 00:27:55 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	char *d;
-	char *s;
+	int i;
 
-	d = dest;
-	s = src;
-	while (*s != '\0' && n != 0)
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && n != 0)
 	{
-		*d++ = *s++;
+		if (s1[i] < s2[i])
+			return (-1);
+		else if (s1[i] > s2[i])
+			return (1);
 		n--;
+		i++;
 	}
-	while (n != 0)
+	if (n == 0)
+		return (0);
+	else
 	{
-		*d++ = '\0';
-		n--;
+		if (s1[i] < s2[i])
+			return (-1);
+		else if (s1[i] > s2[i])
+			return (1);
 	}
-	return (dest);
+
 }

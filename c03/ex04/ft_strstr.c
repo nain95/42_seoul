@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/28 19:19:06 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/29 22:10:30 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/30 00:33:54 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/30 00:42:35 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
+char	*ft_strstr(char *src, char *to_find)
 {
-	char *d;
-	char *s;
-
-	d = dest;
+	int		i;
+	char	*s;
+	char	*t;
+	
+	t = to_find;
 	s = src;
-	while (*s != '\0' && n != 0)
+	while (*src != '\0')
 	{
-		*d++ = *s++;
-		n--;
+		if (*src == *t)
+		{
+			i = 1;
+			while (src[i] == t[i] || t[i] != '\0')
+			{
+				i++;
+			}
+
+		}
 	}
-	while (n != 0)
-	{
-		*d++ = '\0';
-		n--;
-	}
-	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 13:42:31 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/28 19:15:15 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/29 22:20:11 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 	int i;
 
 	i = 0;
-	while (src[i] != '\0' && size-- != 1)
+	if (size == 0)
+	{
+		return (ft_strlen(src));
+	}
+	size -= 1;
+	while (src[i] != '\0' && size-- != 0)
 	{
 		dest[i] = src[i];
 		i++;
