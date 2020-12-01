@@ -6,13 +6,12 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/01 21:08:50 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/01 22:01:41 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 int	ft_atoi(char *str)
 {
