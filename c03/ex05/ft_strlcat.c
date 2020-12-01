@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 00:30:29 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/30 11:31:45 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/30 23:37:30 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/30 23:51:44 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strncat(char *dest, char *src, unsigned int nb)
+unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
 {
 	char *d;
 	char *s;
 
 	d = dest;
 	s = src;
-	while (*d != '\0')
+	while (*dest != '\0')
 	{
-		d++;
+		dest++;
 	}
-	while (nb-- != 0)
-	{
-		*d++ = *s++;
-	}
-	return (dest);
+	
 }

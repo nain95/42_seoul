@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 00:30:29 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/30 11:31:45 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/01 00:03:29 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/01 00:04:47 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strncat(char *dest, char *src, unsigned int nb)
+void	ft_putstr(char *str)
 {
-	char *d;
-	char *s;
+	char *tmp;
 
-	d = dest;
-	s = src;
-	while (*d != '\0')
+	tmp = str;
+	while (*tmp != '\0')
 	{
-		d++;
+		write(1, tmp++, 1);
 	}
-	while (nb-- != 0)
-	{
-		*d++ = *s++;
-	}
-	return (dest);
 }

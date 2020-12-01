@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 00:30:29 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/30 11:31:45 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/01 00:05:08 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/01 15:40:34 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strncat(char *dest, char *src, unsigned int nb)
-{
-	char *d;
-	char *s;
+#include <unistd.h>
 
-	d = dest;
-	s = src;
-	while (*d != '\0')
-	{
-		d++;
-	}
-	while (nb-- != 0)
-	{
-		*d++ = *s++;
-	}
-	return (dest);
+void	ft_putnbr(int nb)
+{
+	
 }

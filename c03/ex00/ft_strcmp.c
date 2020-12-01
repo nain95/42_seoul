@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 00:04:39 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/30 00:22:39 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/11/30 11:04:29 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -18,16 +18,12 @@ int	ft_strcmp(char *s1, char *s2)
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0')
 	{
-		if (s1[i] < s2[i])
-			return (-1);
-		else if(s1[i] > s2[i])
-			return (1);
+		if (s1[i] != s2[i])
+			return (s2[i] - s1[i]);
 		i++;
 	}
-	if (s1[i] < s2[i])
-		return (-1);
-	else if(s1[i] > s2[i])
-		return (1);
+	if (s1[i] != s2[i])
+		return (s2[i] - s1[i]);
 	return (0);
 }
 

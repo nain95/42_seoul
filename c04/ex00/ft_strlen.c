@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 00:30:29 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/30 11:31:45 by ijeon            ###   ########.fr       */
+/*   Created: 2020/11/30 23:52:36 by ijeon             #+#    #+#             */
+/*   Updated: 2020/11/30 23:59:59 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strncat(char *dest, char *src, unsigned int nb)
+int	ft_strlen(chat *src)
 {
-	char *d;
-	char *s;
+	int	count;
+	char	*s;
 
-	d = dest;
 	s = src;
-	while (*d != '\0')
+	count = 0;
+	while (*s != '\0')
 	{
-		d++;
+		s++;
+		count++;
 	}
-	while (nb-- != 0)
-	{
-		*d++ = *s++;
-	}
-	return (dest);
+	return (count);
 }
