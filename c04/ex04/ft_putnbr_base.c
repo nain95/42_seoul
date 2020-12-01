@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 00:33:54 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/01 20:15:55 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/01 21:09:17 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/01 21:12:16 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strstr(char *src, char *to_find)
-{
-	int		i;
-	char	*s;
-	char	*t;
+#include <unistd.h>
+#include <stdio.h>
 
-	t = to_find;
+int		ft_strlen(char *src)
+{
+	int count;
+	char *s;
+
 	s = src;
-	if (*t == '\0')
-		return (s);
 	while (*s != '\0')
 	{
-		if (*s == *t)
-		{
-			i = 1;
-			while (s[i] == t[i] && t[i] != '\0')
-			{
-				i++;
-			}
-			if (t[i] == '\0')
-			{
-				return (s);
-			}
-		}
-		s++;
+		count++;
 	}
-	return (0);
+	return (count)
+}
+
+void	ft_putnbr_base(int nbr, char *base)
+{
+	int b;
+
+	b = ft_strlen(base);
+
 }

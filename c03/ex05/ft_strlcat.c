@@ -5,21 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 23:37:30 by ijeon             #+#    #+#             */
-/*   Updated: 2020/11/30 23:51:44 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/01 20:00:05 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/01 21:53:40 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
+unsigned int	ft_strlen(char *src)
 {
-	char *d;
-	char *s;
+	int		count;
+	char	*tmp;
+
+	count = 0;
+	tmp = src;
+	while (*tmp != '\0')
+	{
+		tmp++;
+		count++;
+	}
+	return (count);
+}
+
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	char			*d;
+	char			*s;
+	unsigned int	answer;
 
 	d = dest;
 	s = src;
-	while (*dest != '\0')
+	if (size <= ft_strlen(d))
 	{
-		dest++;
+		return (ft_strlen(s) + size);
 	}
-	
+	answer = ft_strlen(d) + ft_strlen(s);
+	size -= 1;
+	while (*d != '\0')
+	{
+		d++;
+		size--;
+	}
+	while (size != 0)
+	{
+		*d++ = *s++;
+		size--;
+	}
+	*d = '\0';
+	return (answer);
 }

@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 23:52:36 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/01 20:42:04 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/01 21:08:50 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include <string.h>
 
-int	ft_strlen(char *src)
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int	ft_atoi(char *str)
 {
-	int	count;
+	int		answer;
+	int		flag;
 	char	*s;
 
-	s = src;
-	count = 0;
-	while (*s != '\0')
-	{
+	flag = 1;
+	answer = 0;
+	s = str;
+	while (*s == ' ')
 		s++;
-		count++;
+	if (*s != '+' && *s != '-')
+		return (answer);
+	while (*s == '+' || *s == '-')
+	{
+		if (*s == '-')
+			flag *= -1;
+		s++;
 	}
-	return (count);
+	while ('0' <= *s && *s <= '9')
+	{
+		answer *= 10;
+		answer += *s++ - '0';
+	}
+	return (answer * flag);
 }
 
 int main()
 {
-	char tmp[] = "abc";
-
-	printf("%d ",ft_strlen(tmp));
-	printf("%lu\n",strlen(tmp));
+	char c[] = " ---+--+1234ab567";
+	printf("%d",ft_atoi(c));
 }
