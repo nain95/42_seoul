@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/01 22:01:41 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/02 22:29:32 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_atoi(char *str)
 	flag = 1;
 	answer = 0;
 	s = str;
-	while (*s == ' ')
+	while (*s == ' ' || *s == '\t' || *s == '\n' ||\
+			*s == '\v' || *s == '\r' || *s == '\f')
 		s++;
 	if (*s != '+' && *s != '-')
 		return (answer);
@@ -42,6 +43,6 @@ int	ft_atoi(char *str)
 
 int main()
 {
-	char c[] = " ---+--+1234ab567";
+	char c[] = "\n---+--+1234ab567";
 	printf("%d",ft_atoi(c));
 }
