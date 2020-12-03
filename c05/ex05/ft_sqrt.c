@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_power.c                               :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 01:03:07 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 15:37:44 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/03 15:43:01 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/03 15:46:39 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
-
-int	ft_recursive_power(int nb, int power)
+int	ft_sqrt(int nb)
 {
-	int	int_max;
-	int	tmp;
+	int num;
 
-	int_max = 2147483647;
-	if (power < 0)
-		return (0);
-	if (power == 0)
-		return (1);
-	return (nb * ft_recursive_power(nb, power - 1));
+	num = 1;
+	while (num * num <= nb)
+	{
+		if (num * num == nb)
+			return (num);
+		num++;
+	}
+	return (0);
 }
 
 int main()
 {
-	printf("%d",ft_recursive_power(10,9));
+	printf("%d",ft_sqrt(26));
 }

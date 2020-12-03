@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_power.c                               :+:      :+:    :+:   */
+/*   ft_sort_params.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 01:03:07 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 15:37:44 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/03 17:53:45 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/03 17:55:57 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
 
-int	ft_recursive_power(int nb, int power)
+#include <unistd.h>
+
+int	main(int argc, char **argv)
 {
-	int	int_max;
-	int	tmp;
+	int 	i;
+	int 	j;
+	int		z;
+	int 	count;
 
-	int_max = 2147483647;
-	if (power < 0)
-		return (0);
-	if (power == 0)
-		return (1);
-	return (nb * ft_recursive_power(nb, power - 1));
-}
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		z = 0;
 
-int main()
-{
-	printf("%d",ft_recursive_power(10,9));
+		argv[i]	
+	}
 }
