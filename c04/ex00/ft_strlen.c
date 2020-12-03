@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 23:52:36 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 10:44:54 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 13:15:41 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_strlen(char *src)
 {
-	int	count;
+	int		count;
 	char	*s;
 
 	s = src;

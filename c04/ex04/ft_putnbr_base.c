@@ -6,16 +6,16 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:09:17 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 10:45:49 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 13:23:25 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int		ft_strlen(char *src)
+int			ft_strlen(char *src)
 {
-	int count;
-	char *s;
+	int		count;
+	char	*s;
 
 	count = 0;
 	s = src;
@@ -36,8 +36,9 @@ void		print_nbr(char *nbr, int i)
 	}
 }
 
-int		check(int len_b, char *base)
-{	int i;
+int			check(int len_b, char *base)
+{
+	int i;
 	int j;
 
 	i = 0;
@@ -63,10 +64,10 @@ int		check(int len_b, char *base)
 
 void		ft_putnbr_base(int nbr, char *base)
 {
-	int	len_b;
-	int	i;
-	char	answer[32];
-	unsigned int unsigned_nbr;
+	int				len_b;
+	int				i;
+	char			answer[32];
+	unsigned int	unsigned_nbr;
 
 	len_b = ft_strlen(base);
 	if (len_b <= 1 || check(len_b, base))
@@ -85,5 +86,5 @@ void		ft_putnbr_base(int nbr, char *base)
 		unsigned_nbr = unsigned_nbr / len_b;
 		i++;
 	}
-	print_nbr(answer,i);
+	print_nbr(answer, i);
 }

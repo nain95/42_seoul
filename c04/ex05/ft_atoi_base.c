@@ -6,14 +6,14 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 22:02:25 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 10:47:57 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 13:22:03 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_strlen(char *src)
 {
-	int count;
-	char *s;
+	int		count;
+	char	*s;
 
 	count = 0;
 	s = src;
@@ -26,11 +26,16 @@ int		ft_strlen(char *src)
 }
 
 int		check(char c, char *base)
-{	int i;
+{
+	int i;
 
 	i = 0;
 	while (base[i] != '\0')
 	{
+		if (base[i] == ' ' || base[i] == '\t' || base[i] == '\n' || \
+				base[i] == '\v' || base[i] == '\r' || base[i] == '\f' || \
+				base[i] == '+' || base[i] == '-')
+			return (-1);
 		if (base[i] == c)
 			return (i);
 		i++;
@@ -57,10 +62,10 @@ int		init(char **s)
 
 int		ft_atoi_base(char *str, char *base)
 {
-	int	flag;
-	int	num;
-	int	i;
-	int	answer;
+	int		flag;
+	int		num;
+	int		i;
+	int		answer;
 	char	*s;
 
 	num = 1;
@@ -71,7 +76,7 @@ int		ft_atoi_base(char *str, char *base)
 	while (check(s[i], base) != -1)
 		i++;
 	i -= 1;
-	while(i >= 0)
+	while (i >= 0)
 	{
 		answer += check(s[i], base) * num;
 		num *= ft_strlen(base);
