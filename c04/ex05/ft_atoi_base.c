@@ -6,11 +6,9 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 22:02:25 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 00:02:43 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 10:47:57 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int		ft_strlen(char *src)
 {
@@ -80,9 +78,4 @@ int		ft_atoi_base(char *str, char *base)
 		i--;
 	}
 	return (answer * flag);
-}
-
-int main()
-{
-	printf("%d",ft_atoi_base("---+-+ab12cabq567", "0123456789abcdef"));
 }

@@ -6,12 +6,11 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:09:17 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/02 22:00:38 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 10:45:49 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 int		ft_strlen(char *src)
 {
@@ -87,9 +86,4 @@ void		ft_putnbr_base(int nbr, char *base)
 		i++;
 	}
 	print_nbr(answer,i);
-}
-
-int main()
-{
-	ft_putnbr_base(2147483647,"0123456789ABCDEF");
 }

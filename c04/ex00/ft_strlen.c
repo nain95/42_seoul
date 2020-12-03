@@ -6,11 +6,9 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 23:52:36 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/01 20:42:04 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 10:44:54 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include <string.h>
 
 int	ft_strlen(char *src)
 {
@@ -25,12 +23,4 @@ int	ft_strlen(char *src)
 		count++;
 	}
 	return (count);
-}
-
-int main()
-{
-	char tmp[] = "abc";
-
-	printf("%d ",ft_strlen(tmp));
-	printf("%lu\n",strlen(tmp));
 }
