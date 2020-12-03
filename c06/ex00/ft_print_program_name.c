@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 17:43:54 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 17:47:09 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 19:53:15 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int i;
 
