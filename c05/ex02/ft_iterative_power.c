@@ -6,10 +6,10 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 00:49:33 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 01:10:10 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 20:11:45 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 int	ft_iterative_power(int nb, int power)
 {
 	int result;
@@ -29,9 +29,4 @@ int	ft_iterative_power(int nb, int power)
 			return (0);
 	}
 	return (result);
-}
-
-int 	main()
-{
-	printf("%d",ft_iterative_power(10,10));
 }

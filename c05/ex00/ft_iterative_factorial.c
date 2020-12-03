@@ -6,11 +6,9 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 00:07:02 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 00:48:58 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/03 22:44:02 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	ft_iterative_factorial(int nb)
 {
@@ -26,9 +24,4 @@ int	ft_iterative_factorial(int nb)
 		answer *= i++;
 	}
 	return (answer);
-}
-
-int main()
-{
-	printf("%d",ft_iterative_factorial(5));
 }
