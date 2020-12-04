@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:56:16 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 22:48:13 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/04 23:42:15 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,6 @@ void	print(int (*map)[10])
 void	recursive(int depth, int (*map)[10])
 {
 	int		num;
-	int		i;
-	int		j;
-	int		z;
-	char	result;
 
 	num = 0;
 	if (depth == 10)
@@ -119,4 +115,9 @@ int		ft_ten_queens_puzzle(void)
 	init(map);
 	recursive(0, map);
 	return (g_count);
+}
+
+int main()
+{
+	ft_ten_queens_puzzle();
 }

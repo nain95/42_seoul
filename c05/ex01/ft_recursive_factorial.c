@@ -6,15 +6,15 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 00:38:12 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 22:44:44 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/04 23:28:55 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_recursive_factorial(int nb)
 {
-	if (nb <= 0 || nb > 12)
+	if (nb < 0 || nb > 12)
 		return (0);
-	if (nb == 1)
+	if (nb == 0 || nb == 1)
 		return (1);
 	return (nb * ft_recursive_factorial(nb - 1));
 }

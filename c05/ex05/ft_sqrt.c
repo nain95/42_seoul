@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:43:01 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 20:13:37 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/04 23:40:49 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@ int	ft_sqrt(int nb)
 	int num;
 
 	num = 1;
-	while (num * num <= nb)
+	while (num * num < nb)
 	{
-		if (num * num == nb)
-			return (num);
 		num++;
 	}
+	if (num * num == nb)
+		return (num);
 	return (0);
 }
