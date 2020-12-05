@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 14:48:52 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/04 23:52:07 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/05 00:20:46 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/05 00:26:35 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-void	print_hex(unsigned char c)
+int	ft_ultimate_range(int **range, int min, int max)
 {
-	c = c + '0';
-	if (c > '9')
-		c += 39;
-	write(1, &c, 1);
-}
+	int count;
+	int *tmp;
 
-void	ft_putstr_non_printable(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] <= 31 || str[i] >= 127)
-		{
-			write(1, "\\", 1);
-			print_hex(str[i] / 16);
-			print_hex(srt[i] % 16);
-		}
-		else
-		{
-			write(1, &str[i], 1);
-		}
-		i++;
-	}
+	if (min <= max)
+		return (0);
+	count = max - min;
+	*range = (int *)malloc(sizeof(int) * count);
+	if (!*range)
+		return (-1);
+	while (min < max)
+		range[i++] = min++;
+	return (count);
 }

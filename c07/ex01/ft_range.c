@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 14:48:52 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/04 23:52:07 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/05 00:10:15 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/05 00:19:26 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-void	print_hex(unsigned char c)
+int	*ft_range(int min, int max)
 {
-	c = c + '0';
-	if (c > '9')
-		c += 39;
-	write(1, &c, 1);
-}
-
-void	ft_putstr_non_printable(char *str)
-{
+	int *answer;
 	int i;
 
+	if (min <= max)
+		return (0);
+	answer = (int *)malloc(sizeof(int) * (unsigned int)(max - min));
 	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] <= 31 || str[i] >= 127)
-		{
-			write(1, "\\", 1);
-			print_hex(str[i] / 16);
-			print_hex(srt[i] % 16);
-		}
-		else
-		{
-			write(1, &str[i], 1);
-		}
-		i++;
-	}
+	while (min < max)
+		answer[i++] = min++;
+	return (answer);
 }
