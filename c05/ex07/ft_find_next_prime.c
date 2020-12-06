@@ -6,9 +6,23 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:51:47 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/06 12:18:50 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/06 17:01:37 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_sqrt(int nb)
+{
+	unsigned int num;
+
+	num = 1;
+	if (nb < 0)
+		return (0);
+	while (num * num < (unsigned int)nb)
+	{
+		num++;
+	}
+	return (num);
+}
 
 int	ft_is_prime(int nb)
 {
@@ -17,7 +31,7 @@ int	ft_is_prime(int nb)
 
 	if (nb <= 1)
 		return (0);
-	e = nb / 2;
+	e = ft_sqrt(nb);
 	s = 2;
 	while (s <= e)
 	{
