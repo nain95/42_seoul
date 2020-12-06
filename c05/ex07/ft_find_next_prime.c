@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:51:47 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 22:46:13 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/06 12:18:50 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	ft_find_next_prime(int nb)
 {
 	int answer;
 
-	if (ft_is_prime(nb) == 1)
+	if (nb <= 2)
+		return (2);
+	else if (ft_is_prime(nb) == 1)
 		return (nb);
 	answer = nb;
 	while (1)

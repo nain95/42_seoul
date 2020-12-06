@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:56:16 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/04 23:42:15 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/06 12:19:09 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,4 @@ int		ft_ten_queens_puzzle(void)
 	init(map);
 	recursive(0, map);
 	return (g_count);
-}
-
-int main()
-{
-	ft_ten_queens_puzzle();
 }
