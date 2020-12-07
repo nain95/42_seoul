@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/05 00:10:15 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 20:27:18 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/07 21:07:27 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/07 21:08:16 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int	*ft_range(int min, int max)
+#include "ft_abs.h"
+#include <stdio.h>
+int main(int argc, char **argv)
 {
-	int *answer;
-	int *tmp;
-
-	if (min <= max)
-		return (0);
-	answer = (int *)malloc(sizeof(int) * (unsigned int)(max - min));
-	if (!answer)
-		return (0);
-	tmp = answer;
-	while (min < max)
-		*(tmp++) = min++;
-	return (answer);
+	printf("%d",ABS(-33));
 }

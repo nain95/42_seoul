@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/05 00:10:15 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 20:27:18 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/07 21:02:43 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/07 21:05:15 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_boolean.h"
 
-int	*ft_range(int min, int max)
+void	ft_putstr(char *str)
 {
-	int *answer;
-	int *tmp;
+	while (*str)
+		write(1, str++, 1);
+}
 
-	if (min <= max)
-		return (0);
-	answer = (int *)malloc(sizeof(int) * (unsigned int)(max - min));
-	if (!answer)
-		return (0);
-	tmp = answer;
-	while (min < max)
-		*(tmp++) = min++;
-	return (answer);
+t_bool	ft_is_even(int nbr)
+{
+	return ((EVEN(nbr)) ? TRUE : FALSE);
+}
+
+int	main(int argc, char **argv)
+{
+	(void)argv;
+	if(ft_is_even(argc-1) == TRUE)
+		ft_putstr(EVEN_MSG);
+	else
+		ft_putstr(ODD_MSG);
+	return (SUCCESS);
 }

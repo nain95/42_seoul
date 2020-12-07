@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   ft_abs.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/05 00:10:15 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 20:27:18 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/07 21:06:40 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/07 21:09:58 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int	*ft_range(int min, int max)
-{
-	int *answer;
-	int *tmp;
-
-	if (min <= max)
-		return (0);
-	answer = (int *)malloc(sizeof(int) * (unsigned int)(max - min));
-	if (!answer)
-		return (0);
-	tmp = answer;
-	while (min < max)
-		*(tmp++) = min++;
-	return (answer);
-}
+#ifndef FT_ABS_H
+# define FT_ABS_H
+# define ABS(Value) ((Value < 0) ? (-Value) : (Value))
+#endif

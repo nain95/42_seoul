@@ -6,8 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/06 19:36:35 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/07 20:18:20 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
+char	**ft_split(char *str, char *charset)
+{
+	
+}

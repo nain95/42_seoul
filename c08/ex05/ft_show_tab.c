@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   ft_show_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/05 00:10:15 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 20:27:18 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/07 21:50:11 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/07 22:16:56 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <unistd.h>
+#include "ft_stock_str.h"
 
-int	*ft_range(int min, int max)
+void	ft_putstr(char *str)
 {
-	int *answer;
-	int *tmp;
+	while(*str)
+		write(1, str++, 1);
+	write(1, "\n", 1);
+}
 
-	if (min <= max)
-		return (0);
-	answer = (int *)malloc(sizeof(int) * (unsigned int)(max - min));
-	if (!answer)
-		return (0);
-	tmp = answer;
-	while (min < max)
-		*(tmp++) = min++;
-	return (answer);
+void	ft_putnbr(int nbr)
+{
+	char c;
+
+	c = '0' + nbr % 10;
+	ft_putnbr(nbr / 10);
+	write(1, &c, 1);
+}
+
+void	ft_show_tab(struct s_stock_str *par)
+{
+	while (par->str)
+	{
+		ft_putstr(par->str);
+		ft_putnbr(par->size);
+		write(1, "\n", 1);
+		ft_putstr(par->copy);
+		par++;
+	}
 }

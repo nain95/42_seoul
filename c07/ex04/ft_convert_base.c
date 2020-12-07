@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 14:29:14 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/06 20:12:46 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/07 20:53:31 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ unsigned int		converter(char *str, char *base)
 
 char				*converter2(unsigned int num, int flag, char *base)
 {
-	char	answer[34];
-	char	tmp[34];
+	char	answer[40];
+	char	tmp[40];
 	int		i;
 	int		j;
 	char	*a;
