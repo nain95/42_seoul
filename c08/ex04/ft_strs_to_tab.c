@@ -6,20 +6,17 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 21:24:46 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 22:47:59 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/08 13:07:56 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "ft_stock_str.h"
 
-void ft_show_tab(struct s_stock_str *par);
-
-int	ft_strlen(char *str)
+int					ft_strlen(char *str)
 {
 	int count;
-	
+
 	count = 0;
 	while (str[count])
 		count++;
@@ -28,12 +25,11 @@ int	ft_strlen(char *str)
 
 struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
-	t_stock_str *answer;
-	int		i;
-	int		j;
+	t_stock_str		*answer;
+	int				i;
+	int				j;
 
-	answer = (t_stock_str*)malloc(sizeof(t_stock_str) * (ac + 1));
-	if (!answer)
+	if (!(answer = (t_stock_str*)malloc(sizeof(t_stock_str) * (ac + 1))))
 		return (0);
 	i = 0;
 	while (i < ac)
@@ -54,14 +50,4 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 	}
 	answer[i].str = 0;
 	return (answer);
-}
-
-int main(int argc, char **argv)
-{
-	struct s_stock_str *tmp;
-
-	tmp  =ft_strs_to_tab(argc,argv);
-	ft_show_tab(tmp);
-
-
 }

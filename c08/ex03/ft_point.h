@@ -6,16 +6,16 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 21:18:02 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 21:19:46 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/08 11:13:01 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_POINT_H
-#define FT_POINT_H
+# define FT_POINT_H
 
-typedef struct point
+typedef struct	s_point
 {
 	int x;
 	int y;
-}		t_point;
+}				t_point;
 #endif
