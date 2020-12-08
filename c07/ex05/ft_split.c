@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/08 17:22:10 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/08 18:22:14 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int		check(char c, char *charset)
+int				check(char c, char *charset)
 {
 	while (*charset)
 	{
@@ -23,7 +23,7 @@ int		check(char c, char *charset)
 	return (0);
 }
 
-int		malloc_size(char *str, char *charset)
+unsigned int	malloc_size(char *str, char *charset)
 {
 	int	cnt;
 	
@@ -43,7 +43,7 @@ int		malloc_size(char *str, char *charset)
 	return (cnt);
 }
 
-char	**ft_split(char *str, char *charset)
+char			**ft_split(char *str, char *charset)
 {
 	int					i;
 	int					j;
@@ -67,10 +67,7 @@ char	**ft_split(char *str, char *charset)
 		answer[i][j] = '\0';
 		z = 0;
 		while (z < j)
-		{
-			answer[i][z] = *tmp++;
-			z++;
-		}
+			answer[i][z++] = *tmp++;
 		i++;
 	}
 	answer[i] = 0;
