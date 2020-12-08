@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:00:05 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/01 21:53:40 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/08 15:35:30 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	}
 	answer = ft_strlen(d) + ft_strlen(s);
 	size -= 1;
-	while (*d != '\0')
+	while (*d != '\0' && size != 0)
 	{
 		d++;
 		size--;
