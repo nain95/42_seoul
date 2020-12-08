@@ -6,11 +6,9 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 14:29:14 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 20:53:31 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/08 10:37:27 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int					check_base(char flag, char *base, char num)
 {
@@ -85,6 +83,13 @@ char				*converter2(unsigned int num, int flag, char *base)
 
 	i = 0;
 	j = 0;
+	a = answer;
+	if (num == 0)
+	{
+		answer[0] = base[0];
+		answer[1] = '\0';
+		return (a);
+	}
 	if (flag == -1)
 	{
 		answer[i++] = '-';
@@ -98,7 +103,6 @@ char				*converter2(unsigned int num, int flag, char *base)
 	while (j >= 0)
 		answer[i++] = tmp[j--];
 	answer[i] = '\0';
-	a = answer;
 	return (a);
 }
 
@@ -110,7 +114,8 @@ char				*ft_convert_base(char *nbr, char *base_from, char *base_to)
 
 	nb = nbr;
 	flag = 1;
-	if (check_base(0, base_from, ' ') == 0 || check_base(0, base_to, ' ') == 0)
+	if (ft_len(base_from) <= 1 || ft_len(base_to) <= 1 || \
+			check_base(0, base_from, ' ') == 0 || check_base(0, base_to, ' ') == 0)
 		return (0);
 	while (*nb == ' ' || *nb == '\t' || *nb == '\n' || *nb == '\v' || \
 			*nb == '\r' || *nb == '\f')

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 00:10:15 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/07 20:27:18 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/08 10:01:24 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	*ft_range(int min, int max)
 	int *answer;
 	int *tmp;
 
-	if (min <= max)
+	if (min >= max)
 		return (0);
 	answer = (int *)malloc(sizeof(int) * (unsigned int)(max - min));
 	if (!answer)
