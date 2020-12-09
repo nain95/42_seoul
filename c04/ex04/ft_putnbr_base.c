@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:09:17 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/03 13:23:25 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/10 00:36:52 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ int			ft_strlen(char *src)
 	return (count);
 }
 
-void		print_nbr(char *nbr, int i)
+void		print_nbr(char *nbr, int i, char *base)
 {
+	if (i == 0)
+	{
+		write(1, &base[0], 1);
+		return ;
+	}
 	while (i >= 0)
 	{
 		write(1, &nbr[i], 1);
@@ -86,5 +91,5 @@ void		ft_putnbr_base(int nbr, char *base)
 		unsigned_nbr = unsigned_nbr / len_b;
 		i++;
 	}
-	print_nbr(answer, i);
+	print_nbr(answer, i, base);
 }

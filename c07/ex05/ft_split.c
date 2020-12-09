@@ -6,12 +6,12 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/08 18:22:14 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/09 00:13:07 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
+#include <stdio.h>
 int				check(char c, char *charset)
 {
 	while (*charset)
@@ -68,8 +68,19 @@ char			**ft_split(char *str, char *charset)
 		z = 0;
 		while (z < j)
 			answer[i][z++] = *tmp++;
+		printf("%s\n",answer[i]);
 		i++;
 	}
 	answer[i] = 0;
 	return (answer);
+}
+
+int main()
+{
+	char **t;
+
+	t = ft_split("1234asdf1234","2a");
+	printf("-----------\n");
+	while (*t)
+		printf("%s\n",*t++);
 }
