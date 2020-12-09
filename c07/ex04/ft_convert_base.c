@@ -6,9 +6,11 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 14:29:14 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/08 10:37:27 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/10 03:41:13 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 int					check_base(char flag, char *base, char num)
 {
@@ -75,35 +77,28 @@ unsigned int		converter(char *str, char *base)
 
 char				*converter2(unsigned int num, int flag, char *base)
 {
-	char	answer[40];
-	char	tmp[40];
+	char	*answer;
+	char	*tmp;
 	int		i;
 	int		j;
-	char	*a;
 
+	answer = (char*)malloc(34);
+	tmp = (char*)malloc(34);
 	i = 0;
-	j = 0;
-	a = answer;
+	j = -1;
 	if (num == 0)
-	{
-		answer[0] = base[0];
-		answer[1] = '\0';
-		return (a);
-	}
-	if (flag == -1)
-	{
+		answer[i++] = base[0];
+	if (num != 0 && flag == -1)
 		answer[i++] = '-';
-	}
 	while (num != 0)
 	{
-		tmp[j++] = base[num % ft_len(base)];
+		tmp[++j] = base[num % ft_len(base)];
 		num /= ft_len(base);
 	}
-	j--;
 	while (j >= 0)
 		answer[i++] = tmp[j--];
 	answer[i] = '\0';
-	return (a);
+	return (answer);
 }
 
 char				*ft_convert_base(char *nbr, char *base_from, char *base_to)
@@ -127,4 +122,13 @@ char				*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	}
 	answer = converter2(converter(nb, base_from), flag, base_to);
 	return (answer);
+}
+
+#include <stdio.h>
+int main()
+{
+	char *c;
+
+	c = ft_convert_base("--11ab--","0123456789","ab");
+	printf("%s",c);
 }
