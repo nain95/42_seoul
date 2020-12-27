@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/09 00:13:07 by ijeon            ###   ########.fr       */
+/*   Updated: 2020/12/10 03:45:04 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char			**ft_split(char *str, char *charset)
 	int					z;
 	char				*tmp;
 	char				**answer;
-	unsigned long		size;
+	int		size;
 
 	size = malloc_size(str, charset);
-	answer = (char **)malloc(size + 1);
+	answer = (char **)malloc(sizeof(char**) * (size + 1));
 	i = 0;
 	tmp = str;
 	while (i < size)
@@ -79,7 +79,7 @@ int main()
 {
 	char **t;
 
-	t = ft_split("1234asdf1234","2a");
+	t = ft_split("1234asdf1234","34");
 	printf("-----------\n");
 	while (*t)
 		printf("%s\n",*t++);

@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 23:57:37 by ijeon             #+#    #+#             */
-/*   Updated: 2020/12/08 09:56:59 by ijeon            ###   ########.fr       */
+/*   Created: 2020/12/27 15:57:15 by ijeon             #+#    #+#             */
+/*   Updated: 2020/12/27 16:03:22 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-char	*ft_strdup(char *src)
+int ft_memcmp(const void *s1, const void *s2, int n)
 {
-	char			*answer;
-	unsigned long	count;
+	const unsigned char *t1;
+	const unsigned char *t2;
 
-	count = 0;
-	while (src[count])
-		count++;
-	answer = (char *)malloc(sizeof(char) * (count + 1));
-	answer[count] = '\0';
-	while (--count >= 0)
+	t1 = s1;
+	t2 = s2;
+	while (n--)
 	{
-		answer[count] = src[count];
+		if (*t1 != *t2)
+			return (*t1 - *t2);
+		t1++;
+		t2++;
 	}
-	return (answer);
+	return (0);
 }
