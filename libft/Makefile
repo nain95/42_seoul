@@ -1,63 +1,37 @@
-# Name of the library.
-NAME    := libft.a
+NAME = libft.a
 
-# Name of the directories.
-INC_DIR := includes
-SRC_DIR := src
-OBJ_DIR := objs
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 
-# Path of the directories.
-INCLS   := $(INC_DIR)
-SRCS    := $(wildcard $(SRC_DIR)/*.c)
-OBJS    := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c\
+	   ft_memchr.c ft_memcmp.c ft_strlen.c ft_strlcpy.c ft_strlcat.c\
+	   ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strncmp.c ft_atoi.c\
+	   ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c\
+	   ft_toupper.c ft_tolower.c ft_calloc.c ft_strdup.c ft_substr.c\
+	   ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c\
+	   ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c\
+		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c\
+		ft_lstmap.c
 
-# Define all the compiling flags.
-CC      := gcc
-CFLAGS  += -Wall -Werror -Wextra -g
-#-fsanitize=address -fno-omit-frame-pointer
-LFLAGS  += -I.
-AR      := ar rcs
-RLIB    := ranlib
+OBJS = $(SRCS:.c=.o)
 
-# Compile and create everything.
-all:	obj
-		@$(MAKE) -j $(NAME)
+OBJS_BONUS = $(BONUS:.c=.o)
 
-# Creates the object files' directory.
-obj:
-		@mkdir -p $(OBJ_DIR)
-
-# This won't run if the object files don't exist or are not modified.
 $(NAME): $(OBJS)
-		@$(AR) $(NAME) $(OBJS)
-		@$(RLIB) $(NAME)
-		@echo "[INFO] $(NAME) created!"
+	ar rcs $(NAME) $(OBJS)
 
-# This won't run if the source files don't exist or are not modified.
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-		$(CC) $(CFLAGS) -c $< -o $@ $(LFLAGS)/$(INCLS)
+bonus: $(OBJS) $(OBJS_BONUS)
+	ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
 
-# Rule to remove all the object files and directory.
+all: $(NAME)
+
 clean:
-		@rm -rf $(OBJS) $(OBJ_DIR)
-		@echo "[INFO] Objects removed!"
+	rm -f $(OBJS) $(OBJS_BOUNS)
 
-# Rule to remove everything that has been created by the makefile.
 fclean: clean
-		@rm -rf $(NAME) $(LIB_DIR)
-		@echo "[INFO] Library [$(NAME)] removed!"
+	rm -f $(NAME)
 
-# Rule to re-make everything.
-re:		fclean all
+re: fclean all
 
-# Unit test the library.
-test:	all
-		@echo "Test"
-
-# Installs the library.
-install:test
-		@echo "You must be root to install"
-
-# Makes sure that gnu make will still run even if files called
-# clean / fclean / all and re already exist in the directory
-.PHONY:	all clean fclean re test install
+.PHONY: bonus all clean fclean re
