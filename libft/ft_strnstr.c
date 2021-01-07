@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 22:38:08 by ijeon             #+#    #+#             */
-/*   Updated: 2021/01/06 18:40:26 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/01/07 16:29:53 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strnstr(const char *src, const char *to_find, size_t len)
 	t = (char *)to_find;
 	s = (char *)src;
 	if (ft_strlen(src) < ft_strlen(to_find) || len < ft_strlen(to_find))
-		return (0);
+		return (NULL);
 	if (!*t)
 		return (s);
 	len -= ft_strlen(t) - 1;

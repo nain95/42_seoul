@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/01/07 19:57:15 by ijeon             #+#    #+#              #
+#    Updated: 2021/01/07 22:27:43 by ijeon            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libft.a
 
 CC = gcc
@@ -18,6 +30,9 @@ OBJS = $(SRCS:.c=.o)
 
 OBJS_BONUS = $(BONUS:.c=.o)
 
+%.o : %.c
+	$(CC) $(CFLAGS) -c $?
+
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
@@ -34,4 +49,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: bonus all clean fclean re
+.PHONY: all clean fclean re bonus

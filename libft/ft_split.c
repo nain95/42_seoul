@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/01/07 16:11:36 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/01/07 16:36:17 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ char			**ft_split(char const *s, char c)
 	char	**answer;
 
 	if (s == NULL ||\
-			!(answer = (char **)malloc(sizeof(char*) * malloc_size(s, c))))
+			!(answer = (char **)malloc(sizeof(char*) *\
+					(malloc_size(s, c) + 1))))
 		return (NULL);
 	i = -1;
 	tmp = (char *)s;
