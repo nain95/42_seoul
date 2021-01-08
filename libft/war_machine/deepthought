@@ -3,7 +3,7 @@ $> hostname; uname -msr
 jeon-in-yeob-ui-MacBookPro.local
 Darwin 20.1.0 x86_64
 $> date
-2021년 1월  7일 목요일 22시 28분 11초 KST
+2021년 1월  8일 금요일 21시 38분 00초 KST
 $> gcc --version
 Apple clang version 12.0.0 (clang-1200.0.32.27)
 Target: x86_64-apple-darwin20.1.0
@@ -60,7 +60,7 @@ gcc -Wall -Wextra -Werror -c ft_putnbr_fd.c
 ar rcs libft.a ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o ft_memchr.o ft_memcmp.o ft_strlen.o ft_strlcpy.o ft_strlcat.o ft_strchr.o ft_strrchr.o ft_strnstr.o ft_strncmp.o ft_atoi.o ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_toupper.o ft_tolower.o ft_calloc.o ft_strdup.o ft_substr.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o
 
 $> ls -la libft.a
--rw-r--r--  1 jeon-in-yeop  staff  33632  1  7 22:28 /Users/jeon-in-yeop/Desktop/42seoul/libft/war_machine/dirlibft/libft.a
+-rw-r--r--  1 jeon-in-yeop  staff  33696  1  8 21:38 /Users/jeon-in-yeop/Desktop/42seoul/libft/war_machine/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -1508,9 +1508,9 @@ $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_lstmap.c main.c libft.a
 
 Undefined symbols for architecture x86_64:
   "_ft_lstclear", referenced from:
-      _ft_lstmap in ft_lstmap-3c56c2.o
+      _ft_lstmap in ft_lstmap-10942d.o
   "_ft_lstnew", referenced from:
-      _ft_lstmap in ft_lstmap-3c56c2.o
+      _ft_lstmap in ft_lstmap-10942d.o
      (maybe you meant: _ft_lstnewone)
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
