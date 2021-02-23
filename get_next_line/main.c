@@ -7,7 +7,7 @@ int main()
 	int i;
 	int ans;
 
-	i = 0;
+	i = 1;
 	if ((fd = open("test.txt", O_RDONLY)) < 0)
 			printf("123");
 	printf("-------test--------\n");

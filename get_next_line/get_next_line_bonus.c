@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:47:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/01/13 20:53:31 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/01/14 17:46:11 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		line_split(char **backup, int idx, char **split_line)
 {
-	char *tmp;
-	int len;
+	char	*tmp;
+	int		len;
 
 	(*backup)[idx] = '\0';
 	*split_line = ft_strdup(*backup);
@@ -43,28 +43,41 @@ int		backup_read(char **backup, int read_size, char **split_line)
 	else if (*backup)
 	{
 		*split_line = *backup;
-		*backup = 0;
+		*backup = NULL;
 		return (0);
 	}
 	*split_line = ft_strdup("");
 	return (0);
 }
 
+char	*malloc_buf(void)
+{
+	char *buf;
+
+	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+		return (NULL);
+	return (buf);
+}
+
 int		get_next_line(int fd, char **line)
 {
 	static char		*backup[OPEN_MAX];
-	char			buf[BUFFER_SIZE + 1];
+	char			*buf;
 	int				read_size;
 	int				line_idx;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
+	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0 || !(buf = malloc_buf()))
 		return (-1);
 	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[read_size] = '\0';
 		backup[fd] = ft_strjoin(backup[fd], buf);
 		if ((line_idx = ft_strchr(backup[fd], '\n')) >= 0)
+		{
+			free(buf);
 			return (line_split(&backup[fd], line_idx, line));
+		}
 	}
+	free(buf);
 	return (backup_read(&backup[fd], read_size, line));
 }

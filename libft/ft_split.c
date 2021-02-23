@@ -6,36 +6,42 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/01/08 21:37:39 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/01/10 21:02:38 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int				malloc_size(char const *str, char c)
+int    			malloc_size(const char *str, char c)
 {
 	int	cnt;
-	int flag;
 
-	flag = 1;
-	while (*str == c)
+	if (!*str)
+		return (0);
+	cnt = 0;
+	while (*str && *str == c)
 		str++;
-	cnt = 1;
 	while (*str)
 	{
-		if (*str++ == c)
-		{
-			flag = 1;
-			while (*str && *str == c)
-				str++;
-		}
-		else if (flag == 1)
+		if (*str == c)
 		{
 			cnt++;
-			flag = 0;
+			while (*str && *str == c)
+				str++;
+			continue;
 		}
+		str++;
 	}
+	if (*(--str) != c)
+		cnt++;
 	return (cnt);
+}
+
+void			ft_free(char **str, int i)
+{
+	while (i >= 0)
+		free(str[i--]);
+	free(str);
 }
 
 char			*split_malloc(char *s, char c)
@@ -65,19 +71,19 @@ char			**ft_split(char const *s, char c)
 		return (NULL);
 	i = -1;
 	tmp = (char *)s;
-	while (++i < malloc_size(s, c) - 1)
+	while (++i < malloc_size(s, c))
 	{
 		while (*tmp == c)
 			tmp++;
 		if (!(answer[i] = split_malloc(tmp, c)))
 		{
-			free(answer);
+			ft_free(answer, i - 1);
 			return (NULL);
 		}
 		j = 0;
 		while (answer[i][j] != '\0')
 			answer[i][j++] = *tmp++;
 	}
-	answer[i] = 0;
+	answer[i] = NULL;
 	return (answer);
 }
