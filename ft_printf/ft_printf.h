@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct		s_list
+typedef struct		s_option
 {
-	char flag;
-	char conversions;
-}					t_list;
+	int minus;
+	int zero;
+	int dot;
+	int width;
+}					t_option;
 
