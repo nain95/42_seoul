@@ -11,3 +11,21 @@ typedef struct		s_option
 	int width;
 }					t_option;
 
+
+//=================================
+void	print_hex(int num);
+void	print_memory(char *addr);
+int		ft_strlen(char *s);
+
+
+
+
+
+
+
+
+// =============================
+void	print_nbr(va_list ap, t_option *options);
+void	ft_putnbr(int nb);
+unsigned int	converter(int nb);
+void	ft_rev_num(char *num, int count);
