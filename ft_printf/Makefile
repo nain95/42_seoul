@@ -1,12 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/30 19:59:00 by ijeon             #+#    #+#              #
+#    Updated: 2021/04/30 19:59:01 by ijeon            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		= libftprintf.a
 LIBFT		= libft
 LIBFT_LIB	= libft.a
 
-SRCS		= ./ft_printf.c ./print_number.c\
+SRCS		= ./ft_printf.c ./print_number.c ./print_string.c ./utils.c ./print_char.c
 OBJS		= $(SRCS:.c=.o)
 INCS		= .
 RM			= rm -f
-LIBC		= ar rc
+LIBC		= ar rcs
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
