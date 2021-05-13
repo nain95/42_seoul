@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:17:07 by ijeon             #+#    #+#             */
-/*   Updated: 2021/05/07 17:53:07 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/05/13 16:36:24 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*precision_number(long long nb, int precision, char *base)
+static char			*precision_number(long long nb, int precision, char *base)
 {
 	char		*nbr;
 	long long	unsigned_nb;
@@ -37,7 +37,8 @@ char		*precision_number(long long nb, int precision, char *base)
 	return (nbr);
 }
 
-int			plus_print(long long nb, char *nbr, int space, t_option *options)
+static int			plus_case(long long nb, char *nbr, \
+		int space, t_option *options)
 {
 	int	cnt;
 
@@ -59,7 +60,8 @@ int			plus_print(long long nb, char *nbr, int space, t_option *options)
 	return (cnt);
 }
 
-int			width_number(long long nb, char *nbr, int len, t_option *options)
+static int			width_number(long long nb, char *nbr,\
+		int len, t_option *options)
 {
 	int cnt;
 	int space;
@@ -77,11 +79,11 @@ int			width_number(long long nb, char *nbr, int len, t_option *options)
 		cnt += print_space(space, " ");
 	}
 	else
-		cnt += plus_print(nb, nbr, space, options);
+		cnt += plus_case(nb, nbr, space, options);
 	return (cnt);
 }
 
-int			print_nbr(long long nb, t_option *options, char *base)
+int					print_nbr(long long nb, t_option *options, char *base)
 {
 	int			cnt;
 	int			precision;

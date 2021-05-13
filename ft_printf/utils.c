@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:19:43 by ijeon             #+#    #+#             */
-/*   Updated: 2021/05/01 03:36:28 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/05/13 16:40:23 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ int		print_space(int size, char *space)
 }
 
 int		num_len(long long nb, char *base)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (nb != 0)
+	{
+		nb = nb / (int)ft_strlen(base);
+		++cnt;
+	}
+	return (cnt);
+}
+
+int		unsigned_num_len(unsigned long long nb, char *base)
 {
 	int	cnt;
 

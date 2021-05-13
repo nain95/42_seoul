@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 00:01:04 by ijeon             #+#    #+#             */
-/*   Updated: 2021/05/01 00:01:12 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/05/13 12:19:01 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int		print_string(char *ans, t_option *options)
 	{
 		if (options->minus == 1)
 			write(1, string, print_len);
-		print_space(options->width - print_len, " ");
+		if (options->zero == 1 && options->minus == 0)
+			print_space(options->width - print_len, "0");
+		else
+			print_space(options->width - print_len, " ");
 		if (options->minus == 0)
 			write(1, string, print_len);
 	}

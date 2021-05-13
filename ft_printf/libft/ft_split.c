@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/02/23 11:22:34 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/05/13 18:38:39 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int    			malloc_size(const char *str, char c)
+int				malloc_size(const char *str, char c)
 {
 	int	cnt;
 
