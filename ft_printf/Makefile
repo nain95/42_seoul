@@ -6,7 +6,7 @@
 #    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/30 19:59:00 by ijeon             #+#    #+#              #
-#    Updated: 2021/05/13 18:42:49 by ijeon            ###   ########.fr        #
+#    Updated: 2021/05/13 19:05:30 by ijeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,3 +41,5 @@ clean :
 	make clean -C $(LIBFT)
 
 re : fclean all
+
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:17:07 by ijeon             #+#    #+#             */
-/*   Updated: 2021/05/13 16:36:24 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/05/13 19:29:53 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char			*precision_number(long long nb, int precision, char *base)
 {
-	char		*nbr;
-	long long	unsigned_nb;
+	char				*nbr;
+	unsigned long long	unsigned_nb;
 
 	if (!(nbr = (char *)malloc(sizeof(char) * (precision + 1))))
 		return (NULL);
@@ -38,7 +38,7 @@ static char			*precision_number(long long nb, int precision, char *base)
 }
 
 static int			plus_case(long long nb, char *nbr, \
-		int space, t_option *options)
+		int space_len, t_option *options)
 {
 	int	cnt;
 
@@ -47,11 +47,11 @@ static int			plus_case(long long nb, char *nbr, \
 	{
 		if (nb < 0 && ++cnt)
 			write(1, "-", 1);
-		cnt += print_space(space, "0");
+		cnt += print_space(space_len, "0");
 	}
 	else
 	{
-		cnt += print_space(space, " ");
+		cnt += print_space(space_len, " ");
 		if (nb < 0 && ++cnt)
 			write(1, "-", 1);
 	}
@@ -64,22 +64,22 @@ static int			width_number(long long nb, char *nbr,\
 		int len, t_option *options)
 {
 	int cnt;
-	int space;
+	int space_len;
 
 	cnt = 0;
-	space = max(0, options->width - len);
+	space_len = max(0, options->width - len);
 	if (nb < 0)
-		space--;
+		space_len--;
 	if (options->minus == 1)
 	{
 		if (nb < 0 && ++cnt)
 			write(1, "-", 1);
 		while (*nbr && ++cnt)
 			write(1, nbr++, 1);
-		cnt += print_space(space, " ");
+		cnt += print_space(space_len, " ");
 	}
 	else
-		cnt += plus_case(nb, nbr, space, options);
+		cnt += plus_case(nb, nbr, space_len, options);
 	return (cnt);
 }
 
