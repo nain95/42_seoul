@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/05/31 14:27:57 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/05/31 21:42:24 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int is_empty(t_deque *q)
 		return 0;
 }
 
-void push_rear_deque(t_deque *q, int data, int len)
+void push_rear(t_deque *q, int data, int len)
 {
 	if (!is_full(q, len))
 	{
@@ -45,19 +45,19 @@ void push_rear_deque(t_deque *q, int data, int len)
 	}
 }
 
-void push_front_deque(t_deque *q, int data, int len)
+void push_top(t_deque *q, int data, int len)
 {
 	if (!is_full(q, len))
 	{
+		q->value[q->front] = data;
 		if (q->front == 0)
 			q->front = len - 1;
 		else
 			q->front = (q->front - 1) % len;
-		q->value[q->front] = data;
 	}
 }
 
-int delete_front(t_deque *q, int len)
+int pop_top(t_deque *q, int len)
 {
 	int data;
 
@@ -71,8 +71,6 @@ int delete_front(t_deque *q, int len)
 		return -1;
 }
 
-
-
 void print_deque(t_deque *q)
 {
 	int cnt;
@@ -84,15 +82,55 @@ void print_deque(t_deque *q)
 	printf("=====================\n");
 }
 
+int max(int a, int b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
+
+void swap(t_deque *q, int len)
+{
+	int tmp;
+
+	if (max(q->rear - q->front, q->front - q->rear) >= 2)
+	{
+		tmp = q->value[(q->front + 1) % len];
+		q->value[(q->front + 1) % len] = q->value[(q->front + 2) % len];
+		q->value[(q->front + 2) % len] = tmp;
+	}
+}
+
+void push(t_deque *src, t_deque *des, int len)
+{
+	int num;
+
+	num = 5;
+	num = pop_top(&src, len);
+	push_rear(&des, num, len);
+	push_rear(&src, num, len);
+}
+
+
+
 int	main(int argc, char *argv[])
 {
-	t_deque q;
+	t_deque a;
+	t_deque b;
 	int i;
 
 	i = 1;
-	init_deque(argc, &q);
+	init_deque(argc, &a);
+	init_deque(argc, &b);
 	while (i < argc)
-		push_rear_deque(&q, ft_atoi(argv[i++]), argc);
-	print_deque(&q);
-	free(q.value);
+		push_rear(&a, ft_atoi(argv[i++]), argc);
+	print_deque(&a);
+	print_deque(&b);
+	printf("#################\n");
+	push(&a, &b, argc);
+	print_deque(&a);
+	print_deque(&b);
+	printf("#################\n");
+	free(a.value);
+	free(b.value);
 }
