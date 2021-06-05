@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:33 by ijeon             #+#    #+#             */
-/*   Updated: 2021/05/16 15:36:27 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/05/30 18:27:44 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # include <stdio.h>
 
 
-typedef struct	s_node
+typedef struct	s_deque
 {
-	int				value;
-	struct s_node	*next;
-}				t_node;
+	int		*value;
+	int		rear;
+	int		front;
+}				t_deque;
 
 
 
