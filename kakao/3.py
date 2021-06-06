@@ -42,20 +42,5 @@ def minimumMovement(obstacleLanes):
         cnt += 1
 
 
-if __name__ == '__main__':
+print(minimumMovement([2,1,2]))
 
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    obstacleLanes_count = int(input().strip())
-
-    obstacleLanes = []
-
-    for _ in range(obstacleLanes_count):
-        obstacleLanes_item = int(input().strip())
-        obstacleLanes.append(obstacleLanes_item)
-
-    result = minimumMovement(obstacleLanes)
-
-    fptr.write(str(result) + '\n')
-
-    fptr.close()

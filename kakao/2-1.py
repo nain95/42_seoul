@@ -27,10 +27,10 @@ def solve():
 if __name__ == "__main__":
     U, M = map(int, input().split())
     N = int(input())
-    user_dic = defaultdict(dict)
+    user_dic = defaultdict(dict)            #{user_id : {movie_id : rating}}
     movie_list = set()
-    movie_hash = defaultdict(int)
-    assessment = defaultdict(int)
+    movie_hash = defaultdict(int)           #{movie : movie_num}
+    assessment = defaultdict(int)           #{movie_id : count()}
     both_assessment = [[[] for _ in range(M)] for _ in range(M)]
     for _ in range(N):
         user_id, movie_id, rating = map(int, input().split())
