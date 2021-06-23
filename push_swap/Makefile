@@ -6,7 +6,7 @@
 #    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/30 19:59:00 by ijeon             #+#    #+#              #
-#    Updated: 2021/05/16 15:13:52 by ijeon            ###   ########.fr        #
+#    Updated: 2021/06/23 14:22:01 by ijeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= push_swap
 LIBFT		= libft
 LIBFT_LIB	= ft
 
-SRCS		= ./push_swap.c
+SRCS		= ./push_swap.c ./push_swap_utils.c ./push_swap_command.c ./push_swap_deque_command.c
 OBJS		= $(SRCS:.c=.o)
 INCS		= .
 RM			= rm -f
