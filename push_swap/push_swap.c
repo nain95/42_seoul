@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/23 22:56:35 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/23 22:59:15 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void a_to_b(t_deque *a, t_deque *b, int cnt, int len)
 			break;
 	}
 	//pivot /= max(1, cnt);
+	
 	printf("%d %d\n\n",cnt, pivot);
 	cnt_ra = 0;
 	cnt_pb = 0;
