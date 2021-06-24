@@ -6,192 +6,245 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/23 22:59:15 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/24 23:56:27 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void a_to_b(t_deque *a, t_deque *b, int cnt, int len)
+void	quicksort(int *arr, int left, int right)
+{
+	int l;
+	int r;
+	int pivot;
+
+	l = left;
+	r = right;
+	pivot = arr[(l + r) / 2];
+	while (l <= r)
+	{
+		while (arr[l] < pivot)
+			l++;
+		while (arr[r] > pivot)
+			r--;
+		if (l < r)
+			swap_num(&arr[l], &arr[r]);
+		else if (l == r)
+		{
+			l++;
+			r--;
+		}
+	}
+	if (left < r)
+		quicksort(arr, left, r);
+	if (l < right)
+		quicksort(arr, l, right);
+}
+
+int		*get_pivot(t_deque *q, int cnt, int len)
+{
+	int *pivot;
+	int *num_list;
+	int idx;
+
+	if (!(num_list = (int *)malloc(sizeof(int) * cnt)))
+		return (NULL);
+	if (!(pivot = (int *)malloc(sizeof(int) * 2)))
+		return (NULL);
+	idx = 0;
+	while (idx < cnt)
+	{
+		num_list[idx] = get_deque(q, idx, len);
+		idx++;
+	}
+	quicksort(num_list, 0, cnt - 1);
+	pivot[0] = num_list[cnt / 3];
+	pivot[1] = num_list[cnt / 3 * 2];
+	free(num_list);
+	return (pivot);
+}
+
+void	a_to_b(t_deque *a, t_deque *b, int cnt, int len)
 {
 	int cnt_ra;
 	int cnt_pb;
+	int cnt_rb;
 	int tmp;
-	int pivot;
-//	int num[3];
-	int max_n;
-	int min_n;
+	int *pivot;
+	int num[3];
 
-	tmp = 1;
-	pivot = -1;
-	max_n = 0;
-	min_n = -1;
-	while (tmp++ <= cnt+1)
-	{
-		if (max_n < a->value[(a->front + tmp) % len])
-			max_n = a->value[(a->front + tmp) % len];
-		if (min_n != -1 && min_n > a->value[(a->front + tmp)])
-			min_n = a->value[(a->front + tmp) % len];
-	}
-	tmp = 1;
-	while (pivot == -1 || min_n == pivot || max_n == pivot)
-	{
-		pivot = a->value[(a->front + tmp++) % len];
-		if (tmp == cnt)
-			break;
-	}
-	//pivot /= max(1, cnt);
-	
-	printf("%d %d\n\n",cnt, pivot);
 	cnt_ra = 0;
 	cnt_pb = 0;
+	cnt_rb = 0;
 	if (cnt <= 1)
-		return;
-
+		return ;
 	else if (cnt == 2)
 	{
-		if (a->value[(a->front + 1) % len] > a->value[(a->front + 2) % len])
+		if (get_deque(a, 0, len) > get_deque(a, 1, len))
+			swap(a, len);
+		return ;
+	}
+	else if (cnt == 3)
+	{
+		num[0] = get_deque(a, 0, len);
+		num[1] = get_deque(a, 1, len);
+		num[2] = get_deque(a, 2, len);
+		if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
+			swap(a, len);
+		else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
+		{
+			push(b, a, len);
+			swap(a, len);
+			push(a, b, len);
+		}
+		else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
 		{
 			swap(a, len);
-			printf("sa\n");
+			push(b, a, len);
+			swap(a, len);
+			push(a, b, len);
+		}
+		else if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
+		{
+			push(b, a, len);
+			swap(a, len);
+			push(a, b, len);
+			swap(a, len);
+		}
+		else if (num[0] > num[1] && num[1] > num[2] && num[0] > num[2])
+		{
+			swap(a, len);
+			push(b, a, len);
+			swap(a, len);
+			push(a, b, len);
+			swap(a, len);
 		}
 		return ;
 	}
-	/*
-	else if (cnt == 3)
-	{
-		printf("123\n");
-		num[0] = a->value[(a->front + 1) % len];
-		num[1] = a->value[(a->front + 2) % len];
-		num[2] = a->value[(a->front + 3) % len];
-		if (num[0] > num[1] && num[1] > num[2])
-		{
-			swap(a, len);
-			rotate(a, len);
-			rotate(a, len);
-			push(b, a, len);
-			rev_rotate(a, len);
-			rev_rotate(a, len);
-			push(a, b, len);
-			printf("pb\npb\npb\npa\npa\npa\n");
-		}
-		else if (num[0] < num[1] && num[1] > num[2])
-		{
-			if (num[0] < num[2])
-			{
-				push(b, a, len);
-				swap(a, len);
-				push(a, b, len);
-			}
-			else
-			{
-				push(b, a, len);
-				swap(a, len);
-				push(a, b, len);
-				swap(a, len);
-			}
-		}
-		else if (num[0] > num[1] && num[1] < num[2])
-			swap(a, len);
-		return;
-	}*/
-
+	pivot = get_pivot(a, cnt, len);
 	while (cnt--)
 	{
-		if (a->value[(a->front + 1) % len] > pivot && ++cnt_ra)
-		{
+		if (get_deque(a, 0, len)> pivot[1] && ++cnt_ra)
 			rotate(a, len);
-			printf("ra\n");
-		}
-		else if(++cnt_pb)
+		else if (++cnt_pb)
 		{
 			push(b, a, len);
-			printf("pb\n");
+			if (get_deque(b, 0, len) > pivot[0] && ++cnt_rb)
+				rotate(b, len);
 		}
 	}
-	tmp = cnt_ra;
-	while(tmp--)
-	{
+	tmp = min(cnt_ra, cnt_rb);
+	while (tmp--)
+		rrr(a, b, len);
+	tmp = cnt_ra - cnt_rb;
+	while (tmp++ < 0)
+		rev_rotate(b, len);
+	tmp = cnt_ra - cnt_rb;
+	while (tmp-- > 0)
 		rev_rotate(a, len);
-		printf("rra\n");
-	}
-	print_deque(a, b, len);
-	//printf("11111111111111111111\n");
 	a_to_b(a, b, cnt_ra, len);
-	b_to_a(a, b, cnt_pb, len);
+	b_to_a(a, b, cnt_rb, len);
+	b_to_a(a, b, cnt_pb - cnt_rb, len);
 }
 
-void b_to_a(t_deque *a, t_deque *b, int cnt, int len)
+void	b_to_a(t_deque *a, t_deque *b, int cnt, int len)
 {
 	int cnt_rb;
 	int cnt_pa;
+	int cnt_ra;
 	int tmp;
-	int pivot;
-	int max_n;
-	int min_n;
+	int *pivot;
+	int num[3];
 
-	tmp = 1;
-	max_n = 0;
-	min_n = -1;
-	pivot = -1;
-	while (tmp++ <= cnt+1)
-	{
-		if (max_n < b->value[(b->front + tmp) % len])
-			max_n = b->value[(b->front + tmp) % len];
-		if (min_n != -1 && min_n > b->value[(b->front + tmp)])
-			min_n = b->value[(b->front + tmp) % len];
-	}
-	tmp = 1;
-	while (pivot == -1 || min_n == pivot || max_n == pivot)
-	{
-		pivot = b->value[(b->front + tmp++) % len];
-		if (tmp == cnt)
-			break;
-	}
-	tmp = 1;
-	/*pivot = 0;
-	while (tmp++ <= cnt+1)
-	{
-		pivot += b->value[(b->front+tmp) % len];
-	}
-	//pivot /= max(1, cnt);
-	pivot = b->value[(b->front + 1 + (cnt / 2)) % len];
-	*/
 	cnt_rb = 0;
 	cnt_pa = 0;
-	if (cnt <= 1)
+	cnt_ra = 0;
+	if (cnt == 0)
+		return ;
+	else if (cnt == 1)
 	{
 		push(a, b, len);
-		printf("pa\n");
-		return;
+		return ;
 	}
-	while (cnt--)
+	else if (cnt == 2)
 	{
-		if (b->value[(b->front + 1) % len] < pivot && ++cnt_rb)
-		{
-			rotate(b, len);
-			printf("rb\n");
-		}
-		else if(++cnt_pa)
+		if (get_deque(b, 0, len) < get_deque(b, 1, len))
+			swap(b, len);
+		push(a, b, len);
+		push(a, b, len);
+		return ;
+	}
+	else if (cnt == 3)
+	{
+		num[0] = get_deque(b, 0, len);
+		num[1] = get_deque(b, 1, len);
+		num[2] = get_deque(b, 2, len);
+		if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
+			swap(b, len);
+		else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
 		{
 			push(a, b, len);
-			printf("pa\n");
+			swap(b, len);
+			push(b, a, len);
+		}
+		else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
+		{
+			swap(b, len);
+			push(a, b, len);
+			swap(b, len);
+			push(b, a, len);
+		}
+		else if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
+		{
+			push(a, b, len);
+			swap(b, len);
+			push(b, a, len);
+			swap(b, len);
+		}
+		else if (num[0] > num[1] && num[1] > num[2] && num[0] > num[2])
+		{
+			swap(b, len);
+			push(a, b, len);
+			swap(b, len);
+			push(b, a, len);
+			swap(b, len);
+		}
+		rotate(b, len);
+		rotate(b, len);
+		push(a, b, len);
+		rev_rotate(b, len);
+		push(a, b, len);
+		rev_rotate(b, len);
+		push(a, b, len);
+		return ;
+	}
+	pivot = get_pivot(b, cnt, len);
+	while (cnt--)
+	{
+		if (get_deque(b, 0, len) < pivot[0] && ++cnt_rb)
+			rotate(b, len);
+		else if (++cnt_pa)
+		{
+			push(a, b, len);
+			if (get_deque(a, 0, len) < pivot[1] && ++cnt_ra)
+				rotate(a, len);
 		}
 	}
-	tmp = cnt_rb;
+	a_to_b(a, b, cnt_pa - cnt_ra, len);
+	tmp = min(cnt_ra, cnt_rb);
 	while (tmp--)
-	{
+		rrr(a, b, len);
+	tmp = cnt_ra - cnt_rb;
+	while (tmp++ < 0)
 		rev_rotate(b, len);
-		printf("rrb\n");
-	}
-	print_deque(a, b, len);
-	//printf("2222222222222222222\n");
-	a_to_b(a, b, cnt_pa, len);
+	tmp = cnt_ra - cnt_rb;
+	while (tmp-- > 0)
+		rev_rotate(a, len);
+	a_to_b(a, b, cnt_ra, len);
 	b_to_a(a, b, cnt_rb, len);
 }
 
-
-void print_deque(t_deque *a, t_deque *b, int len)
+void	print_deque(t_deque *a, t_deque *b, int len)
 {
 	int cnt_a;
 	int cnt_b;
@@ -229,44 +282,27 @@ void print_deque(t_deque *a, t_deque *b, int len)
 	printf("|====================|\n");
 }
 
-int	main(int argc, char *argv[])
+int		main(int argc, char *argv[])
 {
-	t_deque a;
-	t_deque b;
-	int i;
-	int num;
-	int pivot;
-//	int n;
+	int		i;
+	int		num;
+	int		pivot;
+	t_deque	a;
+	t_deque	b;
 
 	pivot = 0;
 	i = 1;
-	init_deque(argc, &a);
-	init_deque(argc, &b);
+	init_deque(argc, &a, 'a');
+	init_deque(argc, &b, 'b');
 	while (i < argc)
 	{
 		num = ft_atoi(argv[i++]);
 		pivot += num;
 		push_rear(&a, num, argc);
 	}
-	print_deque(&a, &b, argc);
-	/*
-	while (1)
-	{
-		scanf("%d", &n);
-		if (n == 1)
-			a_to_b(&a, &b, argc - 1, argc);	
-		else
-			b_to_a(&a, &b, argc - 1, argc);
-	}
-	*/
-	a_to_b(&a, &b, argc - 1, argc);	
-	
-	//push(&b,&a,argc);
-	//push(&b,&a,argc);
-	//rotate(&b,argc);
-	//rev_rotate(&b,argc);
-	//printf("%d",b.value[b.front+1]);
-	print_deque(&a, &b, argc);
+	//print_deque(&a, &b, argc);
+	a_to_b(&a, &b, argc - 1, argc);
+	//print_deque(&a, &b, argc);
 	free(a.value);
 	free(b.value);
 }

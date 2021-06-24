@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:00:27 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/23 17:30:01 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/24 23:53:46 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void swap(t_deque *q, int len)
         q->value[(q->front + 1) % len] = q->value[(q->front + 2) % len];
         q->value[(q->front + 2) % len] = tmp;
     }
+	write(1, "s", 1);
+	write(1, q->name, 1);
+	write(1, "\n", 1);
+
+	//if (q->name == 'a')
+	//	write(1, "sa\n", 3);
+	//else
+	//	write(1, "sb\n", 3);
 }
 
 void push(t_deque *des, t_deque *src, int len)
@@ -33,6 +41,9 @@ void push(t_deque *des, t_deque *src, int len)
         num = pop_top(src, len);
         push_top(des, num, len);
     }
+	write(1, "p", 1);
+	write(1, des->name, 1);
+	write(1, "\n", 1);
 }
 
 void rotate(t_deque *q, int len)
@@ -44,6 +55,9 @@ void rotate(t_deque *q, int len)
         num = pop_top(q, len);
         push_rear(q, num, len);
     }
+	write(1, "r", 1);
+	write(1, q->name, 1);
+	write(1, "\n", 1);
 }
 
 
@@ -56,4 +70,15 @@ void rev_rotate(t_deque *q, int len)
         num = pop_rear(q, len);
         push_top(q, num, len);
     }
+	write(1, "rr", 2);
+	write(1, q->name, 1);
+	write(1, "\n", 1);
 }
+
+void rrr(t_deque *a, t_deque *b, int len)
+{
+	rev_rotate(a, len);
+	rev_rotate(b, len);
+	write(1, "rrr\n", 4);
+}
+
