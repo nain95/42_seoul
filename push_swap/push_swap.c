@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/24 23:56:27 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/26 02:03:52 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		*get_pivot(t_deque *q, int cnt, int len)
 	return (pivot);
 }
 
-void	a_to_b(t_deque *a, t_deque *b, int cnt, int len)
+void	a_to_b(t_deque *a, t_deque *b, int cnt, int len, int *command)
 {
 	int cnt_ra;
 	int cnt_pb;
@@ -72,6 +72,7 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int len)
 	int tmp;
 	int *pivot;
 	int num[3];
+	int count;
 
 	cnt_ra = 0;
 	cnt_pb = 0;
@@ -122,9 +123,12 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int len)
 		return ;
 	}
 	pivot = get_pivot(a, cnt, len);
+	count = 0;
+	while (get_deque(a, cnt - 1, len) > pivot[1] && ++count)
+		cnt--;
 	while (cnt--)
 	{
-		if (get_deque(a, 0, len)> pivot[1] && ++cnt_ra)
+		if (get_deque(a, 0, len) > pivot[1] && ++cnt_ra)
 			rotate(a, len);
 		else if (++cnt_pb)
 		{
@@ -133,6 +137,7 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int len)
 				rotate(b, len);
 		}
 	}
+	free(pivot);
 	tmp = min(cnt_ra, cnt_rb);
 	while (tmp--)
 		rrr(a, b, len);
@@ -142,12 +147,12 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int len)
 	tmp = cnt_ra - cnt_rb;
 	while (tmp-- > 0)
 		rev_rotate(a, len);
-	a_to_b(a, b, cnt_ra, len);
-	b_to_a(a, b, cnt_rb, len);
-	b_to_a(a, b, cnt_pb - cnt_rb, len);
+	a_to_b(a, b, cnt_ra + count, len, command);
+	b_to_a(a, b, cnt_rb, len, command);
+	b_to_a(a, b, cnt_pb - cnt_rb, len, command);
 }
 
-void	b_to_a(t_deque *a, t_deque *b, int cnt, int len)
+void	b_to_a(t_deque *a, t_deque *b, int cnt, int len, int *command)
 {
 	int cnt_rb;
 	int cnt_pa;
@@ -155,15 +160,15 @@ void	b_to_a(t_deque *a, t_deque *b, int cnt, int len)
 	int tmp;
 	int *pivot;
 	int num[3];
+	int count;
 
 	cnt_rb = 0;
 	cnt_pa = 0;
 	cnt_ra = 0;
-	if (cnt == 0)
-		return ;
-	else if (cnt == 1)
+	if (cnt <= 1)
 	{
-		push(a, b, len);
+		if (cnt == 1)
+			push(a, b, len);
 		return ;
 	}
 	else if (cnt == 2)
@@ -179,29 +184,29 @@ void	b_to_a(t_deque *a, t_deque *b, int cnt, int len)
 		num[0] = get_deque(b, 0, len);
 		num[1] = get_deque(b, 1, len);
 		num[2] = get_deque(b, 2, len);
-		if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
+		if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
 			swap(b, len);
-		else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
-		{
-			push(a, b, len);
-			swap(b, len);
-			push(b, a, len);
-		}
 		else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
 		{
+			push(a, b, len);
+			swap(b, len);
+			push(b, a, len);
+		}
+		else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
+		{
 			swap(b, len);
 			push(a, b, len);
 			swap(b, len);
 			push(b, a, len);
 		}
-		else if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
+		else if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
 		{
 			push(a, b, len);
 			swap(b, len);
 			push(b, a, len);
 			swap(b, len);
 		}
-		else if (num[0] > num[1] && num[1] > num[2] && num[0] > num[2])
+		else if (num[0] < num[1] && num[1] < num[2] && num[0] < num[2])
 		{
 			swap(b, len);
 			push(a, b, len);
@@ -209,16 +214,13 @@ void	b_to_a(t_deque *a, t_deque *b, int cnt, int len)
 			push(b, a, len);
 			swap(b, len);
 		}
-		rotate(b, len);
-		rotate(b, len);
 		push(a, b, len);
-		rev_rotate(b, len);
 		push(a, b, len);
-		rev_rotate(b, len);
 		push(a, b, len);
 		return ;
 	}
 	pivot = get_pivot(b, cnt, len);
+	count = 0;
 	while (cnt--)
 	{
 		if (get_deque(b, 0, len) < pivot[0] && ++cnt_rb)
@@ -230,7 +232,8 @@ void	b_to_a(t_deque *a, t_deque *b, int cnt, int len)
 				rotate(a, len);
 		}
 	}
-	a_to_b(a, b, cnt_pa - cnt_ra, len);
+	free(pivot);
+	a_to_b(a, b, cnt_pa - cnt_ra, len, command);
 	tmp = min(cnt_ra, cnt_rb);
 	while (tmp--)
 		rrr(a, b, len);
@@ -240,8 +243,8 @@ void	b_to_a(t_deque *a, t_deque *b, int cnt, int len)
 	tmp = cnt_ra - cnt_rb;
 	while (tmp-- > 0)
 		rev_rotate(a, len);
-	a_to_b(a, b, cnt_ra, len);
-	b_to_a(a, b, cnt_rb, len);
+	a_to_b(a, b, cnt_ra, len, command);
+	b_to_a(a, b, cnt_rb + count, len, command);
 }
 
 void	print_deque(t_deque *a, t_deque *b, int len)
@@ -282,27 +285,85 @@ void	print_deque(t_deque *a, t_deque *b, int len)
 	printf("|====================|\n");
 }
 
+void	init_a(t_deque *q, int idx, char **argv, int len)
+{
+	char	**tmp;
+	char	**split_data;
+	int		num;
+
+	split_data = ft_split(argv[idx], ' ');
+	tmp = split_data;
+	while (*split_data)
+	{
+		num = ft_atoi(*split_data);
+		push_rear(q, num, len);
+		free(*split_data);
+		split_data++;
+	}
+	free(tmp);
+}
+
+int		get_argc(int argc, char **argv)
+{
+	int		idx;
+	int		count;
+	char	*c;
+
+	idx = 1;
+	count = 0;
+	while (idx < argc)
+	{
+		count++;
+		c = argv[idx];
+		while (*c)
+		{
+			if (*c == ' ')
+				count++;
+			c++;
+		}
+		idx++;
+	}
+	return (count);
+}
+
+void	check(t_deque *a, int len)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < len - 2)
+	{
+		j = i + 1;
+		while (j < len - 1)
+		{
+			if (get_deque(a, i, len) == get_deque(a, j, len))
+				exit(1);
+			j++;
+		}
+		i++;
+	}
+}
+
 int		main(int argc, char *argv[])
 {
 	int		i;
-	int		num;
-	int		pivot;
+	int		len;
+	int		command;
 	t_deque	a;
 	t_deque	b;
 
-	pivot = 0;
+	command = -1;
 	i = 1;
-	init_deque(argc, &a, 'a');
-	init_deque(argc, &b, 'b');
+	len = get_argc(argc, argv) + 1;
+	init_deque(len, &a, 'a');
+	init_deque(len, &b, 'b');
 	while (i < argc)
-	{
-		num = ft_atoi(argv[i++]);
-		pivot += num;
-		push_rear(&a, num, argc);
-	}
-	//print_deque(&a, &b, argc);
-	a_to_b(&a, &b, argc - 1, argc);
-	//print_deque(&a, &b, argc);
+		init_a(&a, i++, argv, len);
+	check(&a, len);
+	//print_deque(&a, &b, len);
+	a_to_b(&a, &b, len-1, len, &command);
+	//print_deque(&a, &b, len);
 	free(a.value);
 	free(b.value);
 }

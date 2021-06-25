@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:21:19 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/24 23:51:20 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/25 23:51:49 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void init_deque(int len, t_deque *q, char c)
         continue;
     q->front = 0;
     q->rear = 0;
-	q->name[0] = c;
-	q->name[1] = '\0';
+	q->name = c;
 }
 
 int is_empty(t_deque *q)

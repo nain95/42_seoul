@@ -6,11 +6,30 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
-/*   Updated: 2021/01/06 19:55:06 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/25 23:02:21 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void checker(const char *str)
+{
+	char *s;
+
+	s = (char *)str;
+	if (*s == '+' || *s == '-')
+		s++;
+	while (*s)
+	{
+		if ( *s < '0' || '9' < *s)
+		{
+			write(1, "Error\n", 6);
+			exit(1);
+		}
+		s++;
+	}
+
+}
 
 int	ft_atoi(const char *str)
 {
@@ -21,10 +40,8 @@ int	ft_atoi(const char *str)
 
 	flag = 1;
 	tmp = 0;
+	checker(str);
 	s = (char *)str;
-	while (*s == ' ' || *s == '\t' || *s == '\n' ||\
-			*s == '\v' || *s == '\r' || *s == '\f')
-		s++;
 	if (*s == '+' || *s == '-')
 	{
 		if (*s == '-')
