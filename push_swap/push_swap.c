@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/26 02:03:52 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/28 01:22:15 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,187 +64,190 @@ int		*get_pivot(t_deque *q, int cnt, int len)
 	return (pivot);
 }
 
-void	a_to_b(t_deque *a, t_deque *b, int cnt, int len, int *command)
+int		get_type_num(t_deque *q, int len)
 {
-	int cnt_ra;
-	int cnt_pb;
-	int cnt_rb;
-	int tmp;
-	int *pivot;
 	int num[3];
-	int count;
 
-	cnt_ra = 0;
-	cnt_pb = 0;
-	cnt_rb = 0;
+	num[0] = get_deque(q, 0, len);
+	num[1] = get_deque(q, 1, len);
+	num[2] = get_deque(q, 2, len);
+	if (num[0] < num[1] && num[1] < num[2] && num[0] < num[2])
+		return (0); // 123
+	else if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
+		return (1); // 213
+	else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
+		return (2); // 132
+	else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
+		return (3); // 312
+	else if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
+		return (4); // 231
+	else
+		return (5); // 321
+}
+
+void	three_num_sort(t_deque *a, t_deque *b, int len, int *command)
+{
+	int type;
+
+	type = get_type_num(a, len);
+	if (type == 1)
+		swap(a, len, command);
+	else if (type == 2 || type == 3)
+	{
+		if (type == 3)
+			swap(a, len, command);
+		push(b, a, len, command);
+		swap(a, len, command);
+		push(a, b, len, command);
+	}
+	else if (type == 4 || type == 5)
+	{
+		if (type == 5)
+			swap(a, len, command);
+		push(b, a, len, command);
+		swap(a, len, command);
+		push(a, b, len, command);
+		swap(a, len, command);
+	}
+}
+
+void	three_num_rev_sort(t_deque *a, t_deque *b, int len, int *command)
+{
+	int type;
+
+	type = get_type_num(b, len);
+	if (type == 4)
+		swap(b, len, command);
+	else if (type == 3 || type == 2)
+	{
+		if (type == 2)
+			swap(b, len, command);
+		push(a, b, len, command);
+		swap(b, len, command);
+		push(b, a, len, command);
+	}
+	else if (type == 1 || type == 0)
+	{
+		if (type == 0)
+			swap(b, len, command);
+		push(a, b, len, command);
+		swap(b, len, command);
+		push(b, a, len, command);
+		swap(b, len, command);
+	}
+	push(a, b, len, command);
+	push(a, b, len, command);
+	push(a, b, len, command);
+}
+
+void	rev_ra_rb(t_deque *a, t_deque *b, int *cnt_command, int *command)
+{
+	int times;
+	int cnt_ra;
+	int cnt_rb;
+	int len;
+
+	len = a->length;
+	cnt_ra = cnt_command[0];
+	cnt_rb = cnt_command[1];
+	times = min(cnt_ra, cnt_rb);
+	while (times--)
+		rrr(a, b, len, command);
+	times = cnt_ra - cnt_rb;
+	if (times < 0)
+		while (times++ < 0)
+			rev_rotate(b, len, command);
+	else if (times > 0)
+		while (times-- > 0)
+			rev_rotate(a, len, command);
+}
+
+void	a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
+{
+	int cnt_command[3];		//{cnt_ra, cnt_rb, cnt_pb}
+	int *pivot;
+	int count;
+	int len;
+
+	len = a->length;
+	cnt_command[0] = 0;
+	cnt_command[1] = 0;
+	cnt_command[2] = 0;
 	if (cnt <= 1)
 		return ;
 	else if (cnt == 2)
 	{
 		if (get_deque(a, 0, len) > get_deque(a, 1, len))
-			swap(a, len);
+			swap(a, len, command);
 		return ;
 	}
 	else if (cnt == 3)
-	{
-		num[0] = get_deque(a, 0, len);
-		num[1] = get_deque(a, 1, len);
-		num[2] = get_deque(a, 2, len);
-		if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
-			swap(a, len);
-		else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
-		{
-			push(b, a, len);
-			swap(a, len);
-			push(a, b, len);
-		}
-		else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
-		{
-			swap(a, len);
-			push(b, a, len);
-			swap(a, len);
-			push(a, b, len);
-		}
-		else if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
-		{
-			push(b, a, len);
-			swap(a, len);
-			push(a, b, len);
-			swap(a, len);
-		}
-		else if (num[0] > num[1] && num[1] > num[2] && num[0] > num[2])
-		{
-			swap(a, len);
-			push(b, a, len);
-			swap(a, len);
-			push(a, b, len);
-			swap(a, len);
-		}
-		return ;
-	}
+		return (three_num_sort(a, b, len, command));
 	pivot = get_pivot(a, cnt, len);
 	count = 0;
 	while (get_deque(a, cnt - 1, len) > pivot[1] && ++count)
 		cnt--;
 	while (cnt--)
 	{
-		if (get_deque(a, 0, len) > pivot[1] && ++cnt_ra)
-			rotate(a, len);
-		else if (++cnt_pb)
+		if (get_deque(a, 0, len) > pivot[1] && ++cnt_command[0])
+			rotate(a, len, command);
+		else if (++cnt_command[2])
 		{
-			push(b, a, len);
-			if (get_deque(b, 0, len) > pivot[0] && ++cnt_rb)
-				rotate(b, len);
+			push(b, a, len, command);
+			if (get_deque(b, 0, len) > pivot[0] && ++cnt_command[1])
+				rotate(b, len, command);
 		}
 	}
 	free(pivot);
-	tmp = min(cnt_ra, cnt_rb);
-	while (tmp--)
-		rrr(a, b, len);
-	tmp = cnt_ra - cnt_rb;
-	while (tmp++ < 0)
-		rev_rotate(b, len);
-	tmp = cnt_ra - cnt_rb;
-	while (tmp-- > 0)
-		rev_rotate(a, len);
-	a_to_b(a, b, cnt_ra + count, len, command);
-	b_to_a(a, b, cnt_rb, len, command);
-	b_to_a(a, b, cnt_pb - cnt_rb, len, command);
+	rev_ra_rb(a, b, cnt_command, command);
+	a_to_b(a, b, cnt_command[0] + count, command);
+	b_to_a(a, b, cnt_command[1], command);
+	b_to_a(a, b, cnt_command[2] - cnt_command[1], command);
 }
 
-void	b_to_a(t_deque *a, t_deque *b, int cnt, int len, int *command)
+void	b_to_a(t_deque *a, t_deque *b, int cnt, int *command)
 {
-	int cnt_rb;
-	int cnt_pa;
-	int cnt_ra;
-	int tmp;
+	int cnt_command[3];		//{cnt_ra, cnt_rb, cnt_pa}
 	int *pivot;
-	int num[3];
-	int count;
+	int len;
 
-	cnt_rb = 0;
-	cnt_pa = 0;
-	cnt_ra = 0;
+	len = a->length;
+	cnt_command[0] = 0;
+	cnt_command[1] = 0;
+	cnt_command[2] = 0;
 	if (cnt <= 1)
 	{
 		if (cnt == 1)
-			push(a, b, len);
+			push(a, b, len, command);
 		return ;
 	}
 	else if (cnt == 2)
 	{
 		if (get_deque(b, 0, len) < get_deque(b, 1, len))
-			swap(b, len);
-		push(a, b, len);
-		push(a, b, len);
+			swap(b, len, command);
+		push(a, b, len, command);
+		push(a, b, len, command);
 		return ;
 	}
 	else if (cnt == 3)
-	{
-		num[0] = get_deque(b, 0, len);
-		num[1] = get_deque(b, 1, len);
-		num[2] = get_deque(b, 2, len);
-		if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
-			swap(b, len);
-		else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
-		{
-			push(a, b, len);
-			swap(b, len);
-			push(b, a, len);
-		}
-		else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
-		{
-			swap(b, len);
-			push(a, b, len);
-			swap(b, len);
-			push(b, a, len);
-		}
-		else if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
-		{
-			push(a, b, len);
-			swap(b, len);
-			push(b, a, len);
-			swap(b, len);
-		}
-		else if (num[0] < num[1] && num[1] < num[2] && num[0] < num[2])
-		{
-			swap(b, len);
-			push(a, b, len);
-			swap(b, len);
-			push(b, a, len);
-			swap(b, len);
-		}
-		push(a, b, len);
-		push(a, b, len);
-		push(a, b, len);
-		return ;
-	}
+		return (three_num_rev_sort(a, b, len, command));
 	pivot = get_pivot(b, cnt, len);
-	count = 0;
 	while (cnt--)
 	{
-		if (get_deque(b, 0, len) < pivot[0] && ++cnt_rb)
-			rotate(b, len);
-		else if (++cnt_pa)
+		if (get_deque(b, 0, len) < pivot[0] && ++cnt_command[1])
+			rotate(b, len, command);
+		else if (++cnt_command[2])
 		{
-			push(a, b, len);
-			if (get_deque(a, 0, len) < pivot[1] && ++cnt_ra)
-				rotate(a, len);
+			push(a, b, len, command);
+			if (get_deque(a, 0, len) < pivot[1] && ++cnt_command[0])
+				rotate(a, len, command);
 		}
 	}
 	free(pivot);
-	a_to_b(a, b, cnt_pa - cnt_ra, len, command);
-	tmp = min(cnt_ra, cnt_rb);
-	while (tmp--)
-		rrr(a, b, len);
-	tmp = cnt_ra - cnt_rb;
-	while (tmp++ < 0)
-		rev_rotate(b, len);
-	tmp = cnt_ra - cnt_rb;
-	while (tmp-- > 0)
-		rev_rotate(a, len);
-	a_to_b(a, b, cnt_ra, len, command);
-	b_to_a(a, b, cnt_rb + count, len, command);
+	a_to_b(a, b, cnt_command[2] - cnt_command[0], command);
+	rev_ra_rb(a, b, cnt_command, command);
+	a_to_b(a, b, cnt_command[0], command);
+	b_to_a(a, b, cnt_command[1], command);
 }
 
 void	print_deque(t_deque *a, t_deque *b, int len)
@@ -345,6 +348,37 @@ void	check(t_deque *a, int len)
 	}
 }
 
+void	print_command(int *command, int cur)
+{
+	char	*command_list[11];
+	
+	command_list[0] = "sa";
+	command_list[1] = "sb";
+	command_list[2] = "ss";
+	command_list[3] = "pa";
+	command_list[4] = "pb";
+	command_list[5] = "ra";
+	command_list[6] = "rb";
+	command_list[7] = "rr";
+	command_list[8] = "rra";
+	command_list[9] = "rrb";
+	command_list[10] = "rrr";
+	if ((*command == 0 && cur == 1) || (*command == 1 && cur == 0))
+		*command = 2;
+	else if ((*command == 5 && cur == 6) || (*command == 6 && cur == 5))
+		*command = 7;
+	else if ((*command == 8 && cur == 9) || (*command == 9 && cur == 8))
+		*command = 10;
+	else if (*command != -1)
+	{
+		write(1, command_list[*command], ft_strlen(command_list[*command]));
+		write(1, "\n", 1);
+		*command = cur;
+	}
+	else
+		*command = cur;
+}
+
 int		main(int argc, char *argv[])
 {
 	int		i;
@@ -354,15 +388,15 @@ int		main(int argc, char *argv[])
 	t_deque	b;
 
 	command = -1;
-	i = 1;
 	len = get_argc(argc, argv) + 1;
 	init_deque(len, &a, 'a');
 	init_deque(len, &b, 'b');
+	i = 1;
 	while (i < argc)
 		init_a(&a, i++, argv, len);
 	check(&a, len);
-	//print_deque(&a, &b, len);
-	a_to_b(&a, &b, len-1, len, &command);
+	a_to_b(&a, &b, len - 1, &command);
+	print_command(&command, -1);
 	//print_deque(&a, &b, len);
 	free(a.value);
 	free(b.value);
