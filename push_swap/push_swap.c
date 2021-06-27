@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/28 01:22:15 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/06/28 01:44:25 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,17 @@ int		get_type_num(t_deque *q, int len)
 	num[1] = get_deque(q, 1, len);
 	num[2] = get_deque(q, 2, len);
 	if (num[0] < num[1] && num[1] < num[2] && num[0] < num[2])
-		return (0); // 123
+		return (0);
 	else if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
-		return (1); // 213
+		return (1);
 	else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
-		return (2); // 132
+		return (2);
 	else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
-		return (3); // 312
+		return (3);
 	else if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
-		return (4); // 231
+		return (4);
 	else
-		return (5); // 321
+		return (5);
 }
 
 void	three_num_sort(t_deque *a, t_deque *b, int len, int *command)
@@ -164,7 +164,7 @@ void	rev_ra_rb(t_deque *a, t_deque *b, int *cnt_command, int *command)
 
 void	a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
 {
-	int cnt_command[3];		//{cnt_ra, cnt_rb, cnt_pb}
+	int cnt_command[3];
 	int *pivot;
 	int count;
 	int len;
@@ -185,8 +185,8 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
 		return (three_num_sort(a, b, len, command));
 	pivot = get_pivot(a, cnt, len);
 	count = 0;
-	while (get_deque(a, cnt - 1, len) > pivot[1] && ++count)
-		cnt--;
+//	while (get_deque(a, cnt - 1, len) > pivot[1] && ++count)
+//		cnt--;
 	while (cnt--)
 	{
 		if (get_deque(a, 0, len) > pivot[1] && ++cnt_command[0])
@@ -207,7 +207,7 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
 
 void	b_to_a(t_deque *a, t_deque *b, int cnt, int *command)
 {
-	int cnt_command[3];		//{cnt_ra, cnt_rb, cnt_pa}
+	int cnt_command[3];
 	int *pivot;
 	int len;
 
@@ -351,7 +351,7 @@ void	check(t_deque *a, int len)
 void	print_command(int *command, int cur)
 {
 	char	*command_list[11];
-	
+
 	command_list[0] = "sa";
 	command_list[1] = "sb";
 	command_list[2] = "ss";
@@ -397,7 +397,6 @@ int		main(int argc, char *argv[])
 	check(&a, len);
 	a_to_b(&a, &b, len - 1, &command);
 	print_command(&command, -1);
-	//print_deque(&a, &b, len);
 	free(a.value);
 	free(b.value);
 }
