@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 22:11:40 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:55:10 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ long long	ft_atoi(t_deque *a, t_deque *b, const char *str)
 	tmp = 0;
 	if (checker(str) == -1)
 	{
-		free(a);
-		free(b);
+		free(a->value);
+		free(b->value);
 		exit(1);
 	}
 	s = (char *)str;

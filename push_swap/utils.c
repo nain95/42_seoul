@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 23:14:09 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 22:28:24 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:56:36 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,6 @@ int		check(t_deque *a)
 	int i;
 	int j;
 
-	if (a->length == 1)
-	{
-		write(2, "Error\n", 6);
-		return (-1);
-	}
 	i = 0;
 	while (i < a->length - 2)
 	{
