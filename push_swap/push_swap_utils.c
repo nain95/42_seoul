@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 14:21:19 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 17:39:54 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 00:10:05 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	init_deque(int len, t_deque *q, char c)
 {
+	if (len == 0)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
 	while ((q->value = (int *)malloc(sizeof(int) * len)) == NULL)
 		continue;
 	q->front = 0;

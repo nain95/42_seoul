@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 23:13:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 22:08:14 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 00:34:42 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,4 @@ t_list				*ft_lstmap(t_list *lst,
 int					max(int a, int b);
 int					min(int a, int b);
 void				ft_swap(int *num1, int *num2);
-
 #endif

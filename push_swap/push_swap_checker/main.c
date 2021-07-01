@@ -6,26 +6,18 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 15:25:50 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 23:19:02 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 00:19:44 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_strcmp(char *s1, char *s2)
+void	print_error(t_deque *a, t_deque *b)
 {
-	int i;
-
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0')
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	if (s1[i] != s2[i])
-		return (s1[i] - s2[i]);
-	return (0);
+	write(2, "Error\n", 6);
+	free(a->value);
+	free(b->value);
+	exit(1);
 }
 
 void	checker(t_deque *q)
@@ -118,28 +110,18 @@ int		main(int argc, char *argv[])
 
 	if (argc == 1)
 		return (1);
-	if ((len = get_argc(argc, argv) + 1) == 0)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+	len = get_argc(argc, argv) + 1;
 	init_deque(len, &a, 'a');
 	init_deque(len, &b, 'b');
 	i = 1;
 	while (i < argc)
 		if (init_a(&a, &b, i++, argv) == -1)
-		{
-			free(a.value);
-			free(b.value);
-			exit(1);
-		}
+			print_error(&a, &b);
 	if (check(&a, len) == 1)
 	{
 		while (get_next_line(0, &command) >= 1)
-		{
 			if (exec(&a, &b, command) == -1)
 				return (0);
-		}
 		checker(&a);
 	}
 	free(a.value);

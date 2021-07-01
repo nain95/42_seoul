@@ -6,11 +6,27 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:47:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/02/23 15:20:44 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 00:34:06 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int		ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	if (s1[i] != s2[i])
+		return (s1[i] - s2[i]);
+	return (0);
+}
 
 int		line_split(char **backup, int idx, char **split_line)
 {

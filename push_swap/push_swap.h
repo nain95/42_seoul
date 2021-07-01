@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:33 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 22:54:41 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 00:05:41 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void			under_three_a_to_b(t_deque *a, t_deque *b,\
 void			under_three_b_to_a(t_deque *a, t_deque *b,\
 		int cnt, int *command);
 
+void			print_error(t_deque *a, t_deque *b);
 void			a_to_b(t_deque *a, t_deque *b, int cnt, int *command);
 void			b_to_a(t_deque *a, t_deque *b, int cnt, int *command);
 void			rev_ra_rb(t_deque *a, t_deque *b,\

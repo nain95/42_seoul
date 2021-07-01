@@ -6,11 +6,19 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 23:29:51 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 00:39:58 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	print_error(t_deque *a, t_deque *b)
+{
+	write(2, "Error\n", 6);
+	free(a->value);
+	free(b->value);
+	exit(1);
+}
 
 void	rev_ra_rb(t_deque *a, t_deque *b, int *cnt_command, int *command)
 {
@@ -102,21 +110,12 @@ int		main(int argc, char *argv[])
 
 	command = -1;
 	len = get_argc(argc, argv) + 1;
-	if (len == 0)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
 	init_deque(len, &a, 'a');
 	init_deque(len, &b, 'b');
 	i = 1;
 	while (i < argc)
 		if (init_a(&a, &b, i++, argv) == -1)
-		{
-			free(a.value);
-			free(b.value);
-			exit(1);
-		}
+			print_error(&a, &b);
 	if (check(&a) != -1)
 	{
 		a_to_b(&a, &b, len - 1, &command);

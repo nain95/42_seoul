@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:22:26 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 22:32:15 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 23:47:40 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		get_type_num(t_deque *q)
 void	three_num_sort(t_deque *a, t_deque *b, int *command)
 {
 	int type;
-	
+
 	type = get_type_num(a);
 	if (type == 1)
 		swap(a, command);

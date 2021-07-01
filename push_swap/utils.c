@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 23:14:09 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 23:45:45 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 00:39:33 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		init_a(t_deque *a, t_deque *b, int idx, char **argv)
 		tmp_num = ft_atoi(a, b, *split_data);
 		if (tmp_num < -2147483648 || tmp_num > 2147483647)
 		{
-			write(2, "Error\n", 6);
 			free(*split_data);
 			free(tmp);
 			return (-1);
@@ -52,7 +51,7 @@ int		get_argc(int argc, char **argv)
 	while (idx < argc)
 	{
 		tmp = 0;
-		c = argv[idx];
+		c = argv[idx++];
 		while (*c)
 		{
 			while (*c == ' ')
@@ -65,7 +64,6 @@ int		get_argc(int argc, char **argv)
 		if (tmp == 0)
 			return (-1);
 		count += tmp;
-		idx++;
 	}
 	return (count);
 }
@@ -76,10 +74,10 @@ int		check(t_deque *a)
 	int j;
 
 	i = 0;
-	while (i < a->length - 1)
+	while (i < a->length - 2)
 	{
 		j = i + 1;
-		while (j < a->length)
+		while (j < a->length - 1)
 		{
 			if (get_deque(a, i) == get_deque(a, j))
 			{
