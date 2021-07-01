@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 23:13:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/02/23 11:53:20 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 13:00:57 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,9 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst,
 	void *(*f)(void *), void (*del)(void *));
+
+int					max(int a, int b);
+int					min(int a, int b);
+void				ft_swap(int *num1, int *num2);
 
 #endif
