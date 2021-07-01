@@ -6,15 +6,15 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 12:58:44 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 12:59:09 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 17:44:51 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int max(int a, int b)
+int	max(int a, int b)
 {
 	if (a > b)
-		return a;
-	return b;
+		return (a);
+	return (b);
 }

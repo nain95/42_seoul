@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 13:01:03 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 13:01:35 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 17:44:07 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_swap(int *num1, int *num2)
+void	ft_swap(int *num1, int *num2)
 {
 	int tmp;
 

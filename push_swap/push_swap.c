@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 16:58:07 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 17:30:18 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,58 +38,50 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
 {
 	int cnt_command[3];
 	int *pivot;
-	int count;
-	int len;
 
-	len = a->length;
 	cnt_command[0] = 0;
 	cnt_command[1] = 0;
 	cnt_command[2] = 0;
 	if (cnt <= 3)
 		return (under_three_a_to_b(a, b, cnt, command));
-	pivot = get_pivot(a, cnt, len);
-	count = 0;
-//	while (get_deque(a, cnt - 1, len) > pivot[1] && ++count)
-//		cnt--;
+	pivot = get_pivot(a, cnt);
 	while (cnt--)
 	{
-		if (get_deque(a, 0, len) > pivot[1] && ++cnt_command[0])
+		if (get_deque(a, 0) > pivot[1] && ++cnt_command[0])
 			rotate(a, command);
 		else if (++cnt_command[2])
 		{
 			push(b, a, command);
-			if (get_deque(b, 0, len) > pivot[0] && ++cnt_command[1])
+			if (get_deque(b, 0) > pivot[0] && ++cnt_command[1])
 				rotate(b, command);
 		}
 	}
 	free(pivot);
 	rev_ra_rb(a, b, cnt_command, command);
-	a_to_b(a, b, cnt_command[0] + count, command);
+	a_to_b(a, b, cnt_command[0], command);
 	b_to_a(a, b, cnt_command[1], command);
 	b_to_a(a, b, cnt_command[2] - cnt_command[1], command);
 }
 
 void	b_to_a(t_deque *a, t_deque *b, int cnt, int *command)
 {
-	int cnt_command[3];
+	int	cnt_command[3];
 	int *pivot;
-	int len;
 
-	len = a->length;
 	cnt_command[0] = 0;
 	cnt_command[1] = 0;
 	cnt_command[2] = 0;
 	if (cnt <= 3)
 		return (under_three_b_to_a(a, b, cnt, command));
-	pivot = get_pivot(b, cnt, len);
+	pivot = get_pivot(b, cnt);
 	while (cnt--)
 	{
-		if (get_deque(b, 0, len) < pivot[0] && ++cnt_command[1])
+		if (get_deque(b, 0) < pivot[0] && ++cnt_command[1])
 			rotate(b, command);
 		else if (++cnt_command[2])
 		{
 			push(a, b, command);
-			if (get_deque(a, 0, len) < pivot[1] && ++cnt_command[0])
+			if (get_deque(a, 0) < pivot[1] && ++cnt_command[0])
 				rotate(a, command);
 		}
 	}
@@ -99,7 +91,6 @@ void	b_to_a(t_deque *a, t_deque *b, int cnt, int *command)
 	a_to_b(a, b, cnt_command[0], command);
 	b_to_a(a, b, cnt_command[1], command);
 }
-
 
 int		main(int argc, char *argv[])
 {
@@ -115,8 +106,8 @@ int		main(int argc, char *argv[])
 	init_deque(len, &b, 'b');
 	i = 1;
 	while (i < argc)
-		init_a(&a, i++, argv, len);
-	if (check(&a, len) != -1)
+		init_a(&a, i++, argv);
+	if (check(&a) != -1)
 	{
 		a_to_b(&a, &b, len - 1, &command);
 		print_command(&a, &command, -1);

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 23:14:09 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 17:01:57 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 17:37:32 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,23 @@ int		get_argc(int argc, char **argv)
 	return (count);
 }
 
-int		check(t_deque *a, int len)
+int		check(t_deque *a)
 {
 	int i;
 	int j;
 
-	if (len == 1)
-	{	
+	if (a->length == 1)
+	{
 		write(2, "Error\n", 6);
 		return (-1);
 	}
 	i = 0;
-	while (i < len - 2)
+	while (i < a->length - 2)
 	{
 		j = i + 1;
-		while (j < len - 1)
+		while (j < a->length - 1)
 		{
-			if (get_deque(a, i, len) == get_deque(a, j, len))
+			if (get_deque(a, i) == get_deque(a, j))
 			{
 				write(2, "Error\n", 6);
 				return (-1);
@@ -112,7 +112,7 @@ void	quicksort(int *arr, int left, int right)
 		quicksort(arr, l, right);
 }
 
-int		*get_pivot(t_deque *q, int cnt, int len)
+int		*get_pivot(t_deque *q, int cnt)
 {
 	int *pivot;
 	int *num_list;
@@ -125,7 +125,7 @@ int		*get_pivot(t_deque *q, int cnt, int len)
 	idx = 0;
 	while (idx < cnt)
 	{
-		num_list[idx] = get_deque(q, idx, len);
+		num_list[idx] = get_deque(q, idx);
 		idx++;
 	}
 	quicksort(num_list, 0, cnt - 1);
@@ -133,42 +133,4 @@ int		*get_pivot(t_deque *q, int cnt, int len)
 	pivot[1] = num_list[cnt / 3 * 2];
 	free(num_list);
 	return (pivot);
-}
-
-void	print_deque(t_deque *a, t_deque *b, int len)
-{
-	int cnt_a;
-	int cnt_b;
-	int tmp_a;
-	int tmp_b;
-	int tmp;
-
-	tmp_a = deque_len(a, len);
-	tmp_b = deque_len(b, len);
-	tmp = (tmp_a - tmp_b);
-	cnt_a = a->front;
-	cnt_b = b->front;
-	printf("|==== a ====== b ====|\n");
-	while (tmp_a > 0 || tmp_b > 0)
-	{
-		if (tmp > 0)
-		{
-			tmp--;
-			printf("|    %3d             |\n", a->value[(++cnt_a) % len]);
-			tmp_a--;
-		}
-		else if (tmp < 0)
-		{
-			tmp++;
-			tmp_b--;
-			printf("|             %3d    |\n", b->value[(++cnt_b) % len]);
-		}
-		else
-		{
-			printf("|    %3d      %3d    |\n", a->value[(++cnt_a) % len], b->value[(++cnt_b) % len]);
-			tmp_a--;
-			tmp_b--;
-		}
-	}
-	printf("|====================|\n");
 }
