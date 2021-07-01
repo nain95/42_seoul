@@ -6,7 +6,7 @@
 #    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/30 19:59:00 by ijeon             #+#    #+#              #
-#    Updated: 2021/07/01 17:06:06 by ijeon            ###   ########.fr        #
+#    Updated: 2021/07/01 22:08:44 by ijeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT_LIB	= ft
 
 CHECKER		= push_swap_checker
 CHECKER_NAME= checker
-SRCS		= ./push_swap.c ./utils.c ./push_swap_utils.c ./push_swap_command.c ./push_swap_deque_command.c ./push_swap_under_three_case.c
+SRCS		= ./push_swap.c ./utils.c ./push_swap_utils.c ./push_swap_command.c ./push_swap_deque_command.c ./push_swap_under_three_case.c ./ft_atoi.c
 OBJS		= $(SRCS:.c=.o)
 INCS		= .
 RM			= rm -f

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 23:13:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 19:36:17 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:08:14 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *big,
 	const char *little, size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-long long			ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);

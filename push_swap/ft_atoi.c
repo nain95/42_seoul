@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 19:35:57 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:11:40 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-static void	checker(const char *str)
+static int	checker(const char *str)
 {
 	char *s;
 
@@ -23,14 +23,15 @@ static void	checker(const char *str)
 	{
 		if (*s < '0' || '9' < *s)
 		{
-			write(1, "Error\n", 6);
-			exit(1);
+			write(2, "Error\n", 6);
+			return (-1);
 		}
 		s++;
 	}
+	return (1);
 }
 
-long long	ft_atoi(const char *str)
+long long	ft_atoi(t_deque *a, t_deque *b, const char *str)
 {
 	long long			tmp;
 	long long			answer;
@@ -39,7 +40,12 @@ long long	ft_atoi(const char *str)
 
 	flag = 1;
 	tmp = 0;
-	checker(str);
+	if (checker(str) == -1)
+	{
+		free(a);
+		free(b);
+		exit(1);
+	}
 	s = (char *)str;
 	if (*s == '+' || *s == '-')
 	{

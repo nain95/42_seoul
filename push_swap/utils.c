@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 23:14:09 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 19:41:34 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:28:24 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		init_a(t_deque *q, int idx, char **argv)
+int		init_a(t_deque *a, t_deque *b, int idx, char **argv)
 {
 	char		**tmp;
 	char		**split_data;
@@ -23,14 +23,16 @@ int		init_a(t_deque *q, int idx, char **argv)
 	tmp = split_data;
 	while (*split_data)
 	{
-		tmp_num = ft_atoi(*split_data);
+		tmp_num = ft_atoi(a, b, *split_data);
 		if (tmp_num < -2147483648 || tmp_num > 2147483647)
 		{
 			write(2, "Error\n", 6);
+			free(*split_data);
+			free(tmp);
 			return (-1);
 		}
 		num = tmp_num;
-		push_rear(q, num);
+		push_rear(a, num);
 		free(*split_data);
 		split_data++;
 	}

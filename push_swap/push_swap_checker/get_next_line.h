@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:48:05 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 17:43:44 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:24:50 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ void			rrr(t_deque *a, t_deque *b, int *command);
 int				pop_rear(t_deque *q, int len);
 int				pop_top(t_deque *q, int len);
 int				deque_len(t_deque *q, int len);
-void			push_rear(t_deque *q, int data, int len);
-void			push_top(t_deque *q, int data, int len);
+void			push_rear(t_deque *q, int data);
+void			push_top(t_deque *q, int data);
 
-int				get_deque(t_deque *q, int idx, int len);
+int				get_deque(t_deque *q, int idx);
 int				is_empty(t_deque *q);
-int				is_full(t_deque *q, int len);
+int				is_full(t_deque *q);
 void			init_deque(int len, t_deque *q, char c);
 void			print_command(t_deque *q, int *command, int cur);
 
 int				get_argc(int argc, char **argv);
-int				*get_pivot(t_deque *q, int cnt, int len);
+int				*get_pivot(t_deque *q, int cnt);
 void			quicksort(int *arr, int left, int right);
-void			init_a(t_deque *q, int idx, char **argv, int len);
+int				init_a(t_deque *a, t_deque *b, int idx, char **argv);
 int				check(t_deque *q, int len);
 
 int				exec2(t_deque *a, t_deque *b, char *command);
@@ -70,4 +70,5 @@ char			*malloc_buf(void);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strdup(const char *src);
 char			*ft_strcat(char *dest, char *src);
+long long		ft_atoi(t_deque *a, t_deque *b, const char *str);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:33 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 19:39:37 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:17:47 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			print_command(t_deque *q, int *command, int cur);
 int				get_argc(int argc, char **argv);
 int				*get_pivot(t_deque *q, int cnt);
 void			quicksort(int *arr, int left, int right);
-int				init_a(t_deque *q, int idx, char **argv);
+int				init_a(t_deque *a, t_deque *b, int idx, char **argv);
 int				check(t_deque *a);
 
 int				get_type_num(t_deque *q);
@@ -62,4 +62,5 @@ void			a_to_b(t_deque *a, t_deque *b, int cnt, int *command);
 void			b_to_a(t_deque *a, t_deque *b, int cnt, int *command);
 void			rev_ra_rb(t_deque *a, t_deque *b,\
 		int *cnt_command, int *command);
+long long		ft_atoi(t_deque *a, t_deque *b, const char *str);
 #endif

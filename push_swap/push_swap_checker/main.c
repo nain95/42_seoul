@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 15:25:50 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 16:45:02 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 22:23:59 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,12 @@ int		main(int argc, char *argv[])
 	init_deque(len, &b, 'b');
 	i = 1;
 	while (i < argc)
-		init_a(&a, i++, argv, len);
+		if (init_a(&a, &b, i++, argv) == -1)
+		{
+			free(a.value);
+			free(b.value);
+			exit(1);
+		}
 	if (check(&a, len) == 1)
 	{
 		while (get_next_line(0, &command) >= 1)
