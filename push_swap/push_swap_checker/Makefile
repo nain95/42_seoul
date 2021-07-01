@@ -6,7 +6,7 @@
 #    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/07 19:57:15 by ijeon             #+#    #+#              #
-#    Updated: 2021/07/01 22:18:50 by ijeon            ###   ########.fr        #
+#    Updated: 2021/07/02 00:45:16 by ijeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = checker
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = get_next_line.c get_next_line_utils.c main.c\
+SRCS = get_next_line.c get_next_line_utils.c checker.c\
 	   ../push_swap_command.c ../push_swap_utils.c\
 	   ../push_swap_deque_command.c ../utils.c\
 	   ../ft_atoi.c
