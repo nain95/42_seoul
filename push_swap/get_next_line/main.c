@@ -6,26 +6,26 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 15:25:50 by ijeon             #+#    #+#             */
-/*   Updated: 2021/06/30 16:36:45 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 16:45:02 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strcmp(char *s1, char *s2)
+int		ft_strcmp(char *s1, char *s2)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (s1[i] != '\0' && s2[i] != '\0')
-    {
-        if (s1[i] != s2[i])
-            return (s1[i] - s2[i]);
-        i++;
-    }
-    if (s1[i] != s2[i])
-        return (s1[i] - s2[i]);
-    return (0);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	if (s1[i] != s2[i])
+		return (s1[i] - s2[i]);
+	return (0);
 }
 
 void	checker(t_deque *q)
@@ -38,7 +38,7 @@ void	checker(t_deque *q)
 	idx = q->front + 1;
 	len = q->length;
 	if (len != 1)
-	{	
+	{
 		while (cnt++ < len - 2)
 		{
 			if (q->value[idx % len] >= q->value[(idx + 1) % len])
@@ -52,7 +52,7 @@ void	checker(t_deque *q)
 	write(1, "OK\n", 3);
 }
 
-int 	exec(t_deque *a, t_deque *b, char *command)
+int		exec(t_deque *a, t_deque *b, char *command)
 {
 	int tmp;
 
@@ -72,6 +72,8 @@ int 	exec(t_deque *a, t_deque *b, char *command)
 		push(b, a, &tmp);
 	else if (ft_strcmp(command, "ra") == 0)
 		rotate(a, &tmp);
+	else if (ft_strcmp(command, "rb") == 0)
+		rotate(b, &tmp);
 	else
 		return (exec2(a, b, command));
 	return (1);
@@ -82,9 +84,7 @@ int		exec2(t_deque *a, t_deque *b, char *command)
 	int tmp;
 
 	tmp = -1;
-	if (ft_strcmp(command, "rb") == 0)
-		rotate(b, &tmp);
-	else if (ft_strcmp(command, "rr") == 0)
+	if (ft_strcmp(command, "rr") == 0)
 	{
 		rotate(a, &tmp);
 		rotate(b, &tmp);
@@ -101,39 +101,38 @@ int		exec2(t_deque *a, t_deque *b, char *command)
 	else
 	{
 		write(2, "Error\n", 6);
+		free(a->value);
+		free(b->value);
 		return (-1);
 	}
 	return (1);
 }
-int     main(int argc, char *argv[])
+
+int		main(int argc, char *argv[])
 {
-    int     i;
-    int     len;
-    char	*command;
+	int		i;
+	int		len;
+	char	*command;
 	t_deque a;
-    t_deque b;
-	
+	t_deque b;
+
 	if (argc == 1)
 		return (1);
 	len = get_argc(argc, argv) + 1;
-    init_deque(len, &a, 'a');
-    init_deque(len, &b, 'b');
-    i = 1;
-    while (i < argc)
+	init_deque(len, &a, 'a');
+	init_deque(len, &b, 'b');
+	i = 1;
+	while (i < argc)
 		init_a(&a, i++, argv, len);
 	if (check(&a, len) == 1)
 	{
 		while (get_next_line(0, &command) >= 1)
 		{
 			if (exec(&a, &b, command) == -1)
-			{
-				free(a.value);
-    			free(b.value);
 				return (0);
-			}
 		}
 		checker(&a);
 	}
 	free(a.value);
-    free(b.value);
+	free(b.value);
 }

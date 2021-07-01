@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 13:26:41 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 16:58:07 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,11 @@ int		main(int argc, char *argv[])
 	i = 1;
 	while (i < argc)
 		init_a(&a, i++, argv, len);
-	check(&a, len);
-	a_to_b(&a, &b, len - 1, &command);
-	print_command(&a, &command, -1);
+	if (check(&a, len) != -1)
+	{
+		a_to_b(&a, &b, len - 1, &command);
+		print_command(&a, &command, -1);
+	}
 	free(a.value);
 	free(b.value);
 }
