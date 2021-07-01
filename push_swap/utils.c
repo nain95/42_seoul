@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 23:14:09 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 22:56:36 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 23:45:45 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,27 @@ int		get_argc(int argc, char **argv)
 {
 	int		idx;
 	int		count;
+	int		tmp;
 	char	*c;
 
 	idx = 1;
 	count = 0;
 	while (idx < argc)
 	{
-		count++;
+		tmp = 0;
 		c = argv[idx];
-		if (*c == '\0')
-			count--;
 		while (*c)
 		{
-			if (*c == ' ')
-				count++;
-			c++;
+			while (*c == ' ')
+				c++;
+			if (*c)
+				tmp++;
+			while (*c != ' ' && *c != '\0')
+				c++;
 		}
+		if (tmp == 0)
+			return (-1);
+		count += tmp;
 		idx++;
 	}
 	return (count);
@@ -71,10 +76,10 @@ int		check(t_deque *a)
 	int j;
 
 	i = 0;
-	while (i < a->length - 2)
+	while (i < a->length - 1)
 	{
 		j = i + 1;
-		while (j < a->length - 1)
+		while (j < a->length)
 		{
 			if (get_deque(a, i) == get_deque(a, j))
 			{

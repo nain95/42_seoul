@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 22:13:40 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 23:29:51 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ int		main(int argc, char *argv[])
 
 	command = -1;
 	len = get_argc(argc, argv) + 1;
+	if (len == 0)
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
 	init_deque(len, &a, 'a');
 	init_deque(len, &b, 'b');
 	i = 1;
