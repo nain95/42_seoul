@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 17:45:30 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 19:35:57 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	checker(const char *str)
 	}
 }
 
-int			ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
-	unsigned int		tmp;
-	int					answer;
+	long long			tmp;
+	long long			answer;
 	int					flag;
 	char				*s;
 

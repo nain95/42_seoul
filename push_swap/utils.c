@@ -6,28 +6,36 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 23:14:09 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 17:47:21 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/01 19:41:34 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_a(t_deque *q, int idx, char **argv)
+int		init_a(t_deque *q, int idx, char **argv)
 {
-	char	**tmp;
-	char	**split_data;
-	int		num;
+	char		**tmp;
+	char		**split_data;
+	long long	tmp_num;
+	int			num;
 
 	split_data = ft_split(argv[idx], ' ');
 	tmp = split_data;
 	while (*split_data)
 	{
-		num = ft_atoi(*split_data);
+		tmp_num = ft_atoi(*split_data);
+		if (tmp_num < -2147483648 || tmp_num > 2147483647)
+		{
+			write(2, "Error\n", 6);
+			return (-1);
+		}
+		num = tmp_num;
 		push_rear(q, num);
 		free(*split_data);
 		split_data++;
 	}
 	free(tmp);
+	return (1);
 }
 
 int		get_argc(int argc, char **argv)
