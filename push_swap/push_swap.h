@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:33 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/02 00:05:41 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 17:43:42 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int				init_a(t_deque *a, t_deque *b, int idx, char **argv);
 int				check(t_deque *a);
 
 int				get_type_num(t_deque *q);
-void			three_num_sort(t_deque *a, t_deque *b, int *command);
-void			three_num_rev_sort(t_deque *a, t_deque *b, int *command);
+void			three_num_sort(t_deque *a, t_deque *b, int *command,\
+		int type);
+void			three_num_rev_sort(t_deque *a, t_deque *b, int *command,\
+		int type);
 void			under_three_a_to_b(t_deque *a, t_deque *b,\
 		int cnt, int *command);
 void			under_three_b_to_a(t_deque *a, t_deque *b,\

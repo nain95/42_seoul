@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:22:26 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 23:47:40 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/02 17:44:24 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,39 @@ int		get_type_num(t_deque *q)
 	num[1] = get_deque(q, 1);
 	num[2] = get_deque(q, 2);
 	if (num[0] < num[1] && num[1] < num[2] && num[0] < num[2])
-		return (0);
+		return (123);
 	else if (num[0] > num[1] && num[1] < num[2] && num[0] < num[2])
-		return (1);
+		return (213);
 	else if (num[0] < num[1] && num[1] > num[2] && num[0] < num[2])
-		return (2);
+		return (132);
 	else if (num[0] > num[1] && num[1] < num[2] && num[0] > num[2])
-		return (3);
+		return (312);
 	else if (num[0] < num[1] && num[1] > num[2] && num[0] > num[2])
-		return (4);
+		return (231);
 	else
-		return (5);
+		return (321);
 }
 
-void	three_num_sort(t_deque *a, t_deque *b, int *command)
+void	three_num_sort(t_deque *a, t_deque *b, int *command, int type)
 {
-	int type;
-
-	type = get_type_num(a);
-	if (type == 1)
+	if (type == 213)
 		swap(a, command);
-	else if (type == 2 || type == 3)
+	else if (type == 132 || type == 312)
 	{
-		if (type == 3)
+		if (type == 312 && deque_len(a) == 3)
+			return (rotate(a, command));
+		if (type == 312)
 			swap(a, command);
 		push(b, a, command);
 		swap(a, command);
 		push(a, b, command);
 	}
-	else if (type == 4 || type == 5)
+	else if (type == 231 || type == 321)
 	{
-		if (type == 5)
+		if (type == 321)
 			swap(a, command);
+		if (deque_len(a) == 3)
+			return (rev_rotate(a, command));
 		push(b, a, command);
 		swap(a, command);
 		push(a, b, command);
@@ -59,33 +60,31 @@ void	three_num_sort(t_deque *a, t_deque *b, int *command)
 	}
 }
 
-void	three_num_rev_sort(t_deque *a, t_deque *b, int *command)
+void	three_num_rev_sort(t_deque *a, t_deque *b, int *command, int type)
 {
-	int type;
-
-	type = get_type_num(b);
-	if (type == 4)
+	if (type == 231)
 		swap(b, command);
-	else if (type == 3 || type == 2)
+	else if (type == 312 || type == 132)
 	{
-		if (type == 2)
+		if (type == 132 && deque_len(b) == 3)
+			return (rotate(b, command));
+		if (type == 132)
 			swap(b, command);
 		push(a, b, command);
 		swap(b, command);
 		push(b, a, command);
 	}
-	else if (type == 1 || type == 0)
+	else if (type == 213 || type == 123)
 	{
-		if (type == 0)
+		if (type == 123)
 			swap(b, command);
+		if (deque_len(b) == 3)
+			return (rev_rotate(b, command));
 		push(a, b, command);
 		swap(b, command);
 		push(b, a, command);
 		swap(b, command);
 	}
-	push(a, b, command);
-	push(a, b, command);
-	push(a, b, command);
 }
 
 void	under_three_a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
@@ -99,7 +98,7 @@ void	under_three_a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
 		return ;
 	}
 	else if (cnt == 3)
-		return (three_num_sort(a, b, command));
+		return (three_num_sort(a, b, command, get_type_num(a)));
 }
 
 void	under_three_b_to_a(t_deque *a, t_deque *b, int cnt, int *command)
@@ -119,5 +118,11 @@ void	under_three_b_to_a(t_deque *a, t_deque *b, int cnt, int *command)
 		return ;
 	}
 	else if (cnt == 3)
-		return (three_num_rev_sort(a, b, command));
+	{
+		three_num_rev_sort(a, b, command, get_type_num(b));
+		push(a, b, command);
+		push(a, b, command);
+		push(a, b, command);
+		return ;
+	}
 }
