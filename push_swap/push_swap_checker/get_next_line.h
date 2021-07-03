@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 20:48:05 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/02 19:32:09 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/03 16:06:02 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int				init_a(t_deque *a, t_deque *b, int idx, char **argv);
 int				check(t_deque *q, int len);
 
 long long		ft_atoi(t_deque *a, t_deque *b, const char *str);
+void			print_error(t_deque *a, t_deque *b);
 
 int				ft_strcmp(char *s1, char *s2);
 int				get_next_line(int fd, char **line);
@@ -68,8 +69,7 @@ int				line_split(char **backup, int idx, char **split_line);
 int				backup_read(char **backup, int read_size, char **split_line);
 char			*malloc_buf(void);
 
-void			print_error(t_deque *a, t_deque *b);
-void			checker(t_deque *q);
+void			sort_check(t_deque *q);
 int				exec(t_deque *a, t_deque *b, char *command);
 int				exec2(t_deque *a, t_deque *b, char *command);
 

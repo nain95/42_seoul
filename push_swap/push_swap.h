@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:33 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/02 17:43:42 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/03 16:12:02 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ void			under_three_a_to_b(t_deque *a, t_deque *b,\
 void			under_three_b_to_a(t_deque *a, t_deque *b,\
 		int cnt, int *command);
 
-void			print_error(t_deque *a, t_deque *b);
 void			a_to_b(t_deque *a, t_deque *b, int cnt, int *command);
 void			b_to_a(t_deque *a, t_deque *b, int cnt, int *command);
 void			rev_ra_rb(t_deque *a, t_deque *b,\
 		int *cnt_command, int *command);
+
 long long		ft_atoi(t_deque *a, t_deque *b, const char *str);
+void			print_error(t_deque *a, t_deque *b);
+int				sort_checker(t_deque *q);
 #endif

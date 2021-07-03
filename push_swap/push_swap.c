@@ -6,18 +6,31 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:56:34 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/02 00:42:59 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/03 16:37:03 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_error(t_deque *a, t_deque *b)
+int		sort_check(t_deque *q)
 {
-	write(2, "Error\n", 6);
-	free(a->value);
-	free(b->value);
-	exit(1);
+	int idx;
+	int cnt;
+	int len;
+
+	cnt = 0;
+	idx = q->front + 1;
+	len = q->length;
+	if (len != 1)
+	{
+		while (cnt++ < len - 2)
+		{
+			if (q->value[idx % len] >= q->value[(idx + 1) % len])
+				return (-1);
+			idx++;
+		}
+	}
+	return (1);
 }
 
 void	rev_ra_rb(t_deque *a, t_deque *b, int *cnt_command, int *command)
@@ -30,6 +43,10 @@ void	rev_ra_rb(t_deque *a, t_deque *b, int *cnt_command, int *command)
 	len = a->length;
 	cnt_ra = cnt_command[0];
 	cnt_rb = cnt_command[1];
+	if (deque_len(a) == cnt_ra)
+		cnt_ra = 0;
+	if (deque_len(b) == cnt_rb)
+		cnt_rb = 0;
 	times = min(cnt_ra, cnt_rb);
 	while (times--)
 		rrr(a, b, command);
@@ -55,7 +72,7 @@ void	a_to_b(t_deque *a, t_deque *b, int cnt, int *command)
 	pivot = get_pivot(a, cnt);
 	while (cnt--)
 	{
-		if (get_deque(a, 0) > pivot[1] && ++cnt_command[0])
+		if (get_deque(a, 0) >= pivot[1] && ++cnt_command[0])
 			rotate(a, command);
 		else if (++cnt_command[2])
 		{
@@ -84,7 +101,7 @@ void	b_to_a(t_deque *a, t_deque *b, int cnt, int *command)
 	pivot = get_pivot(b, cnt);
 	while (cnt--)
 	{
-		if (get_deque(b, 0) < pivot[0] && ++cnt_command[1])
+		if (get_deque(b, 0) <= pivot[0] && ++cnt_command[1])
 			rotate(b, command);
 		else if (++cnt_command[2])
 		{
@@ -116,7 +133,7 @@ int		main(int argc, char *argv[])
 	while (i < argc)
 		if (init_a(&a, &b, i++, argv) == -1)
 			print_error(&a, &b);
-	if (check(&a) != -1)
+	if (check(&a) != -1 && sort_check(&a) == -1)
 	{
 		a_to_b(&a, &b, len - 1, &command);
 		print_command(&a, &command, -1);

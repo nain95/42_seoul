@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 20:51:37 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/01 23:53:42 by ijeon            ###   ########.fr       */
+/*   Created: 2021/07/03 16:00:03 by ijeon             #+#    #+#             */
+/*   Updated: 2021/07/03 16:11:38 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ long long	ft_atoi(t_deque *a, t_deque *b, const char *str)
 	}
 	answer = tmp * flag;
 	return (answer);
+}
+
+void		print_error(t_deque *a, t_deque *b)
+{
+	write(2, "Error\n", 6);
+	free(a->value);
+	free(b->value);
+	exit(1);
 }

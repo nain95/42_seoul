@@ -6,21 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 15:25:50 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/02 00:45:26 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/03 16:06:39 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	print_error(t_deque *a, t_deque *b)
-{
-	write(2, "Error\n", 6);
-	free(a->value);
-	free(b->value);
-	exit(1);
-}
-
-void	checker(t_deque *q)
+void	sort_check(t_deque *q)
 {
 	int idx;
 	int cnt;
@@ -122,7 +114,7 @@ int		main(int argc, char *argv[])
 		while (get_next_line(0, &command) >= 1)
 			if (exec(&a, &b, command) == -1)
 				return (0);
-		checker(&a);
+		sort_check(&a);
 	}
 	free(a.value);
 	free(b.value);
