@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 15:34:48 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/04 00:08:11 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/04 20:41:38 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int redirect_in(const char *file)
 	if (fd < 0)
 	{
 		perror(file);
-		return (-1);
+		exit(1);
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
@@ -70,6 +70,7 @@ void	exec(char *command, char **envp)
 	char	*cmd;
 	char	**env;
 	char	**chunk;
+	char 	*error_message;
 	int		i;
 
 	i = 0;
@@ -81,6 +82,8 @@ void	exec(char *command, char **envp)
 		cmd = ft_strjoin(cmd, chunk[0]);
 		execve(cmd, chunk, 0);
 	}
+	error_message = ft_strjoin(command, ": No such command\n");
+	write(2, error_message, ft_strlen(error_message));
 }
 
 int main(int argc, char *argv[], char *envp[])
@@ -88,32 +91,27 @@ int main(int argc, char *argv[], char *envp[])
 	int i;
 	int status;
 	int	pipefd[2];
-	//char *cmd1;
-	//char *cmd2;
 	pid_t pid;
 
 	i = argc;
 	pipe(pipefd);
 	pid = fork();
 	if (pid == -1)
-	{
 		return (-1);
-	}
 	else if (pid == 0)	//child
 	{
 		redirect_in(argv[1]);
 		connect_pipe(pipefd, STDOUT_FILENO);
 		exec(argv[2], envp);
-		//cmd1 = ft_strjoin("/bin/", argv[2]);
-		//execve(cmd1, STDIN_FILENO, 0);
 	}
 	else if (pid > 0)	//parent
 	{
-		waitpid(pid, &status, 0);
+		//waitpid(pid, &status, 0);
+		wait(&status);
+		if (WIFEXITED(status) == 0)
+			exit(1);
 		redirect_out(argv[4]);
 		connect_pipe(pipefd, STDIN_FILENO);
 		exec(argv[3], envp);
-		//cmd2 = ft_strjoin("/bin/", argv[3]);
-		//execve(cmd2, STDIN_FILENO, 0);
 	}
 }
