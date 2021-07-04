@@ -1,21 +1,14 @@
 #include <stdio.h>
-#include "libft/libft.h"
+#include <stdlib.h>
+char **ft_split(char const *s, char c);
 
-int main(int argc, char **argv, char **envp)
+int main()
 {
-	int i;
-	char **path;
+	char *tmp = "test 'test3 123' 456 123 23 testing 44";
+	char **split;
 
-	while(1)
-	{
-		if (ft_strnstr(envp[i], "PATH", 4))
-			break;
-		i++;
-	}
-	printf("%s\n", &envp[i][5]);
-	path = ft_split(&envp[i][5], ':');
-	while(*path)
-	{
-		printf("%s\n", *path++);
-	}
+	split = ft_split(tmp, ' ');
+	printf("%s\n", tmp);
+	while (*split)
+		printf("%s\n",*split++);
 }

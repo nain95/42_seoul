@@ -6,13 +6,13 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 15:34:48 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/04 20:41:38 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/04 23:47:44 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int redirect_in(const char *file)
+int		redirect_in(const char *file)
 {
 	int fd;
 
@@ -27,7 +27,7 @@ int redirect_in(const char *file)
 	return (1);
 }
 
-int redirect_out(const char *file)
+int		redirect_out(const char *file)
 {
 	int fd;
 
@@ -49,16 +49,16 @@ void	connect_pipe(int pipefd[2], int io)
 	close(pipefd[1]);
 }
 
-char **get_env(char **envp)
+char	**get_env(char **envp)
 {
-	int i;
-	char **path;
+	int		i;
+	char	**path;
 
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
 		if (ft_strnstr(envp[i], "PATH", 4))
-			break;
+			break ;
 		i++;
 	}
 	path = ft_split(&envp[i][5], ':');
@@ -70,7 +70,7 @@ void	exec(char *command, char **envp)
 	char	*cmd;
 	char	**env;
 	char	**chunk;
-	char 	*error_message;
+	char	*error_message;
 	int		i;
 
 	i = 0;
@@ -86,25 +86,25 @@ void	exec(char *command, char **envp)
 	write(2, error_message, ft_strlen(error_message));
 }
 
-int main(int argc, char *argv[], char *envp[])
+int		main(int argc, char *argv[], char *envp[])
 {
-	int i;
-	int status;
-	int	pipefd[2];
-	pid_t pid;
+	int		i;
+	int		status;
+	int		pipefd[2];
+	pid_t	pid;
 
 	i = argc;
 	pipe(pipefd);
 	pid = fork();
 	if (pid == -1)
 		return (-1);
-	else if (pid == 0)	//child
+	else if (pid == 0)
 	{
 		redirect_in(argv[1]);
 		connect_pipe(pipefd, STDOUT_FILENO);
 		exec(argv[2], envp);
 	}
-	else if (pid > 0)	//parent
+	else if (pid > 0)
 	{
 		//waitpid(pid, &status, 0);
 		wait(&status);
