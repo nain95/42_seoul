@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 15:34:48 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/04 23:47:44 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/05 19:31:53 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		redirect_out(const char *file)
 	if (fd < 0)
 	{
 		perror(file);
-		return (-1);
+		exit (1);
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
@@ -84,6 +84,8 @@ void	exec(char *command, char **envp)
 	}
 	error_message = ft_strjoin(command, ": No such command\n");
 	write(2, error_message, ft_strlen(error_message));
+	free(error_message);
+	exit(1);
 }
 
 int		main(int argc, char *argv[], char *envp[])
