@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 15:34:48 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/05 19:31:53 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/07/06 00:17:08 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	exec(char *command, char **envp)
 	i = 0;
 	chunk = ft_split(command, ' ');
 	env = get_env(envp);
+	execve(command, 0, 0);
 	while (env[i])
 	{
 		cmd = ft_strjoin(env[i++], "/");
