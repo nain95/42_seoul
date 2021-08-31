@@ -6,15 +6,15 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 15:34:48 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/06 00:17:08 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/08/22 23:12:05 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int		redirect_in(const char *file)
+int	redirect_in(const char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -27,9 +27,9 @@ int		redirect_in(const char *file)
 	return (1);
 }
 
-int		redirect_out(const char *file)
+int	redirect_out(const char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_CREAT | O_RDWR, 0644);
 	if (fd < 0)
@@ -89,7 +89,7 @@ void	exec(char *command, char **envp)
 	exit(1);
 }
 
-int		main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	int		i;
 	int		status;

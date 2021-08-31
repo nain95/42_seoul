@@ -6,16 +6,16 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/07/04 23:09:07 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/08/22 23:10:10 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int			malloc_size(const char *str, char c)
+static int	malloc_size(const char *str, char c)
 {
 	int	cnt;
-	int flag;
+	int	flag;
 
 	flag = 1;
 	if (!*str)
@@ -32,7 +32,7 @@ static int			malloc_size(const char *str, char c)
 			cnt++;
 			while (*str && *str == c)
 				str++;
-			continue;
+			continue ;
 		}
 		str++;
 	}
@@ -41,7 +41,7 @@ static int			malloc_size(const char *str, char c)
 	return (cnt);
 }
 
-static char			**ft_free(char **str, int i)
+static char	**ft_free(char **str, int i)
 {
 	while (i >= 0)
 		free(str[i--]);
@@ -49,7 +49,7 @@ static char			**ft_free(char **str, int i)
 	return (NULL);
 }
 
-static char			*split_malloc(char *s, char c, int *flag)
+static char	*split_malloc(char *s, char c, int *flag)
 {
 	int		i;
 	char	*res;
@@ -62,16 +62,17 @@ static char			*split_malloc(char *s, char c, int *flag)
 	}
 	while (s[i] && s[i] != c)
 		i++;
-	if (!(res = (char *)malloc(i + 1)))
-		return (NULL);
+	res = NULL;
+	while (res == NULL)
+		res = (char *)malloc(i + 1);
 	ft_memset(res, 'a', i);
 	res[i] = '\0';
 	return (res);
 }
 
-static void			insert_string(char **answer, char **tmp)
+static void	insert_string(char **answer, char **tmp)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while ((*answer)[j] != '\0')
@@ -83,7 +84,7 @@ static void			insert_string(char **answer, char **tmp)
 		(*tmp)++;
 }
 
-char				**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		flag;
