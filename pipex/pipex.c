@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 15:34:48 by ijeon             #+#    #+#             */
-/*   Updated: 2021/08/22 23:12:05 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/27 21:29:50 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	redirect_out(const char *file)
 {
 	int	fd;
 
-	fd = open(file, O_CREAT | O_RDWR, 0644);
+	fd = open(file, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (fd < 0)
 	{
 		perror(file);
@@ -49,46 +49,6 @@ void	connect_pipe(int pipefd[2], int io)
 	close(pipefd[1]);
 }
 
-char	**get_env(char **envp)
-{
-	int		i;
-	char	**path;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strnstr(envp[i], "PATH", 4))
-			break ;
-		i++;
-	}
-	path = ft_split(&envp[i][5], ':');
-	return (path);
-}
-
-void	exec(char *command, char **envp)
-{
-	char	*cmd;
-	char	**env;
-	char	**chunk;
-	char	*error_message;
-	int		i;
-
-	i = 0;
-	chunk = ft_split(command, ' ');
-	env = get_env(envp);
-	execve(command, 0, 0);
-	while (env[i])
-	{
-		cmd = ft_strjoin(env[i++], "/");
-		cmd = ft_strjoin(cmd, chunk[0]);
-		execve(cmd, chunk, 0);
-	}
-	error_message = ft_strjoin(command, ": No such command\n");
-	write(2, error_message, ft_strlen(error_message));
-	free(error_message);
-	exit(1);
-}
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	int		i;
@@ -97,6 +57,8 @@ int	main(int argc, char *argv[], char *envp[])
 	pid_t	pid;
 
 	i = argc;
+	if (argc < 5)
+		return (1);
 	pipe(pipefd);
 	pid = fork();
 	if (pid == -1)
@@ -109,12 +71,12 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	else if (pid > 0)
 	{
-		//waitpid(pid, &status, 0);
-		wait(&status);
+		waitpid(pid, &status, WNOWAIT);
 		if (WIFEXITED(status) == 0)
 			exit(1);
 		redirect_out(argv[4]);
 		connect_pipe(pipefd, STDIN_FILENO);
 		exec(argv[3], envp);
 	}
+	return (0);
 }

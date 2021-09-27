@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/08/22 23:10:10 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/27 16:39:58 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ static char	*split_malloc(char *s, char c, int *flag)
 	}
 	while (s[i] && s[i] != c)
 		i++;
-	res = NULL;
-	while (res == NULL)
-		res = (char *)malloc(i + 1);
+	res = (char *)malloc(i + 1);
 	ft_memset(res, 'a', i);
 	res[i] = '\0';
 	return (res);
@@ -86,29 +84,28 @@ static void	insert_string(char **answer, char **tmp)
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		flag;
 	char	*tmp;
 	char	**answer;
-	char	*pointer;
+	t_split	split_var;
 
-	if (s == NULL || !(answer = \
-				(char **)malloc(sizeof(char*) * (malloc_size(s, c) + 1))))
+	answer = (char **)malloc(sizeof(char *) * (malloc_size(s, c) + 1));
+	if (s == NULL || answer == NULL)
 		return (NULL);
-	i = -1;
+	split_var.idx = -1;
 	tmp = (char *)s;
-	flag = 1;
-	while (++i < malloc_size(s, c))
+	split_var.flag = 1;
+	while (++split_var.idx < malloc_size(s, c))
 	{
 		while (*tmp == c)
 			tmp++;
 		if (*tmp == '\'' && tmp++)
-			flag *= -1;
-		if (!(answer[i] = split_malloc(tmp, c, &flag)))
-			return (ft_free(answer, i - 1));
-		pointer = answer[i];
-		insert_string(&pointer, &tmp);
+			split_var.flag *= -1;
+		answer[split_var.idx] = split_malloc(tmp, c, &split_var.flag);
+		if (answer[split_var.idx] == NULL)
+			return (ft_free(answer, split_var.idx - 1));
+		split_var.pointer = answer[split_var.idx];
+		insert_string(&split_var.pointer, &tmp);
 	}
-	answer[i] = NULL;
+	answer[split_var.idx] = NULL;
 	return (answer);
 }
