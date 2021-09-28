@@ -6,7 +6,7 @@
 #    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/09 14:58:11 by ijeon             #+#    #+#              #
-#    Updated: 2021/09/27 16:41:32 by ijeon            ###   ########.fr        #
+#    Updated: 2021/09/28 13:48:03 by ijeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= pipex
 LIBFT		= libft
 LIBFT_LIB	= libft.a
 
-SRCS		= ./pipex.c ./pipex_utils.c ./ft_memset.c ./ft_split.c
+SRCS		= ./pipex.c ./pipex_utils.c
 OBJS		= $(SRCS:.c=.o)
 INCS		= .
 RM			= rm -f

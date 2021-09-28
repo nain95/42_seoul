@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 14:45:08 by ijeon             #+#    #+#             */
-/*   Updated: 2021/09/27 16:05:35 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/28 13:50:01 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-
-typedef struct s_split
-{
-	int		idx;
-	int		flag;
-	char	*pointer;
-}t_split;
 
 char	**ft_split(char const *s, char c);
 

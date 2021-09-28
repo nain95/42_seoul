@@ -1,8 +1,36 @@
-test 'test3 123' 456 123 23 testing 44
-test
-test3 123
-456
-123
-23
-testing
-44
+Process:         pipex [94652]
+Path:            /Volumes/VOLUME/*/pipex
+Load Address:    0x106ca8000
+Identifier:      pipex
+Version:         ???
+Code Type:       X86-64
+Parent Process:  zsh [87452]
+
+Date/Time:       2021-09-28 14:49:20.517 +0900
+Launch Time:     2021-09-28 14:49:20.148 +0900
+OS Version:      Mac OS X 10.15.7 (19H1419)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 12.3 (12C33)
+
+Physical footprint:         320K
+Physical footprint (peak):  320K
+----
+
+leaks Report Version: 4.0
+Process 94652: 177 nodes malloced for 8 KB
+Process 94652: 11 leaks for 224 total leaked bytes.
+
+    11 (224 bytes) << TOTAL >>
+      1 (32 bytes) ROOT LEAK: 0x7fa9fd405900 [32]  length: 21  "/usr/local/bin/cat123"
+      1 (32 bytes) ROOT LEAK: 0x7fa9fd405970 [32]  length: 16  "/usr/sbin/cat123"
+      1 (32 bytes) ROOT LEAK: 0x7fa9fd4059b0 [32]  length: 17  "/usr/local/munki/"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd4058f0 [16]  length: 15  "/usr/local/bin/"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd405920 [16]  length: 9  "/usr/bin/"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd405930 [16]  length: 15  "/usr/bin/cat123"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd405940 [16]  length: 5  "/bin/"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd405950 [16]  length: 11  "/bin/cat123"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd405960 [16]  length: 10  "/usr/sbin/"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd405990 [16]  length: 6  "/sbin/"
+      1 (16 bytes) ROOT LEAK: 0x7fa9fd4059a0 [16]  length: 12  "/sbin/cat123"
+

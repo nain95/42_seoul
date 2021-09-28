@@ -6,11 +6,11 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 19:36:28 by ijeon             #+#    #+#             */
-/*   Updated: 2021/09/27 16:39:58 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/28 13:48:30 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
 static int	malloc_size(const char *str, char c)
 {

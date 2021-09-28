@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 16:02:52 by ijeon             #+#    #+#             */
-/*   Updated: 2021/09/27 21:20:00 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/28 14:50:57 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	exec(char *command, char **envp)
 	error_message = ft_strjoin(command, ": command not found\n");
 	write(2, error_message, ft_strlen(error_message));
 	free(error_message);
+	system("leaks pipex");
 	exit(1);
 }

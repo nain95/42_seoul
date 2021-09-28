@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:03:47 by ijeon             #+#    #+#             */
-/*   Updated: 2021/01/02 23:24:57 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/28 13:52:25 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int answer;
+	int	answer;
 
 	answer = 0;
 	while (*s++)

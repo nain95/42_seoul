@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:04:49 by ijeon             #+#    #+#             */
-/*   Updated: 2021/01/07 01:50:05 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/28 13:52:12 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strcat(char *dest, char *src)
 {
-	char *d;
-	char *s;
+	char	*d;
+	char	*s;
 
 	d = dest;
 	s = src;
@@ -39,7 +39,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	tmp1 = (char *)s1;
 	tmp2 = (char *)s2;
 	malloc_size = ft_strlen(tmp1) + ft_strlen(tmp2);
-	if (!(result = (char *)malloc(malloc_size + 1)))
+	result = (char *)malloc(malloc_size + 1);
+	if (result == NULL)
 		return (NULL);
 	result[0] = '\0';
 	result = ft_strcat(result, tmp1);

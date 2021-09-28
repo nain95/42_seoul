@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 15:34:48 by ijeon             #+#    #+#             */
-/*   Updated: 2021/09/27 21:29:50 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/09/28 14:43:22 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,10 @@ void	connect_pipe(int pipefd[2], int io)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	int		i;
 	int		status;
 	int		pipefd[2];
 	pid_t	pid;
 
-	i = argc;
 	if (argc < 5)
 		return (1);
 	pipe(pipefd);
@@ -78,5 +76,5 @@ int	main(int argc, char *argv[], char *envp[])
 		connect_pipe(pipefd, STDIN_FILENO);
 		exec(argv[3], envp);
 	}
-	return (0);
+	system("leaks pipex");
 }
