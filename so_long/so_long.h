@@ -6,7 +6,7 @@
 /*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 15:41:18 by ijeon             #+#    #+#             */
-/*   Updated: 2021/11/16 19:05:48 by ijeon            ###   ########.fr       */
+/*   Updated: 2021/11/17 16:10:03 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,58 @@
 # include "./libft/libft.h"
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h> /*삭제*/
 
 typedef struct s_player
 {
-	int pos_x;
-	int pos_y;
+	int	pos_x;
+	int	pos_y;
 }	t_player;
+
+typedef struct s_collection
+{
+	int						pos_x;
+	int						pos_y;
+	int						collection_num;
+	struct s_collection		*next;
+}	t_collection;
+
+typedef struct s_collection_list
+{
+	int				is_empty;
+	t_collection	*first;
+}	t_collection_list;
+
+typedef struct s_exit
+{
+	int				pos_x;
+	int				pos_y;
+	int				exit_num;
+	struct s_exit	*next;
+}	t_exit;
+
+typedef struct s_exit_list
+{
+	int		is_empty;
+	t_exit	*first;
+}	t_exit_list;
 
 typedef struct s_info
 {
-	t_player *player;
-	int item[2];
-	int exit[2];
+	int					item[2];
+	int					exit[2];
+	int					map_row;
+	int					map_col;
+	int					collection_count;
+	t_player			*player;
+	t_collection_list	*collection_list;
+	t_exit_list			*exit_list;
 }	t_info;
 
 int	checker_map_type(char *file);
 int	checker_map(char *file, t_info *info);
 int	ft_strchr_idx(const char *s, int c);
+
+int	print_error(char *error_message);
 
 #endif

@@ -14,7 +14,7 @@
 
 t_player	*init_player(void)
 {
-	t_player *player;
+	t_player	*player;
 
 	player = (t_player *)malloc(sizeof(t_player));
 	player->pos_x = -1;
@@ -33,7 +33,7 @@ t_info	*init_info(void)
 
 int	main(int argc, char *argv[])
 {
-	t_info *info;
+	t_info	*info;
 
 	info = init_info();
 	if (checker_map_type(argv[1]) == -1)
