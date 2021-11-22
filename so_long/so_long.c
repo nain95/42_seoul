@@ -28,6 +28,8 @@ t_info	*init_info(void)
 
 	info = (t_info *)malloc(sizeof(t_info));
 	info->player = init_player();
+	info->map_row = -1;
+	info->map_col = -1;
 	return (info);
 }
 
@@ -38,7 +40,7 @@ int	main(int argc, char *argv[])
 	info = init_info();
 	if (checker_map_type(argv[1]) == -1)
 		write(1, "type error\n", 11);
-	else if (checker_map(argv[1], info) == -1)
+	else if (checker(argv[1], info) == -1)
 		write(1, "not found file error\n", 22);
 	printf("%d, %d", info->player->pos_x, info->player->pos_y);
 	system("leaks so_long");

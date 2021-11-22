@@ -41,8 +41,8 @@ void	push_e_list(t_info *info, int x, int y)
 	t_exit	*temp;
 
 	exit = (t_exit *)malloc(sizeof(t_exit));
-	if (!exit)
-		free_memory(info);
+	//if (!exit)
+		//free_memory(info);
 	exit->pos_x = x;
 	exit->pos_y = y;
 	exit->exit_num = 1;

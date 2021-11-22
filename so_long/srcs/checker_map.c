@@ -23,35 +23,68 @@ int	checker_map_type(char *file)
 	return (1);
 }
 
+int	checker_map_border(int x, char *line, t_info *info)
+{
+	int	y;
+
+	y = 0;
+	if (x == 0 || x == info->map_row)
+	{
+		while (y < info->map_col)
+		{
+			if (line[y++] != '1')
+				return (-1);
+		}
+	}
+	else
+	{
+		if (line[0] != '1' || line[info->map_col - 1] != '1')
+			return (-1);
+	}
+	return (1);
+}
+
 char	**checker_map_conditions(char *file, t_info *info)
 {
 	int		fd;
-	int		gnl_res;
 	int		x;
 	char	*line;
 	char	**map;
 
+	printf("%d, %d\n", info->map_row, info->map_col);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (-1);
-	gnl_res = get_next_line(fd, &line);
-	x = 0;
-	while (x++ < info->map_row)
+		return (NULL);
+	get_next_line(fd, &line);
+	x = -1;
+	while (x++ <= info->map_row)
 	{
+		if (checker_map_border(x, line, info) == -1)
+		{
+			free(line);
+			close(fd);
+			print_error("border error");
+			return (NULL);
+		}
 		if (ft_strchr(line, 'P'))
+		{	
 			if (save_info(line, info, x, ft_strchr_idx(line, 'P')) == -1)
-				break ;
+			{
+				print_error("double P");
+				free(line);
+				close(fd);
+				return (NULL);
+			}
+		}
 		if (ft_strchr(line, 'C'))
 			push_c_list(info, x, ft_strchr_idx(line, 'C'));
+		if (ft_strchr(line, 'E'))
+			push_e_list(info, x, ft_strchr_idx(line, 'E'));
 		free(line);
-		gnl_res = get_next_line(fd, &line);
-		if (gnl_res != 1)
-			break ;
+		get_next_line(fd, &line);
 	}
 	free(line);
 	close(fd);
-	if (gnl_res == 1)
-		write(1, "Error\n", 6);
 	return (1);
 }
 
@@ -70,12 +103,13 @@ int	checker_map_shape(char *file, t_info *info)
 	int		gnl_res;
 	int		len;
 	char	*line;
-
+	
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	gnl_res = get_next_line(fd, &line);
 	len = ft_strlen(line);
+	info->map_col = len;
 	while (gnl_res == 1)
 	{
 		if (ft_strchr(line, ' ') || len != ft_strlen(line))
@@ -96,5 +130,7 @@ int	checker_map_shape(char *file, t_info *info)
 int	checker(char *file, t_info *info)
 {
 	if (checker_map_shape(file, info) == -1)
+		return (-1);
+	else if (checker_map_conditions(file, info) == NULL)
 		return (-1);
 }

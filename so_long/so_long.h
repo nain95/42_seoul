@@ -68,6 +68,12 @@ typedef struct s_info
 int	checker_map_type(char *file);
 int	checker_map(char *file, t_info *info);
 int	ft_strchr_idx(const char *s, int c);
+int	checker_map_border(int x, char *line, t_info *info);
+int	save_info(char *line, t_info *info, int x, int y);
+int	checker(char *file, t_info *info);
+
+void	push_c_list(t_info *info, int x, int y);
+void	push_e_list(t_info *info, int x, int y);
 
 int	print_error(char *error_message);
 
