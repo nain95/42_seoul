@@ -12,37 +12,17 @@
 
 #include "so_long.h"
 
-t_player	*init_player(void)
-{
-	t_player	*player;
-
-	player = (t_player *)malloc(sizeof(t_player));
-	player->pos_x = -1;
-	player->pos_y = -1;
-	return (player);
-}
-
-t_info	*init_info(void)
-{
-	t_info	*info;
-
-	info = (t_info *)malloc(sizeof(t_info));
-	info->player = init_player();
-	info->map_row = -1;
-	info->map_col = -1;
-	return (info);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_info	*info;
 
+	if (argc == 1)
+		write(1, "not found file name\n", 20);
 	info = init_info();
-	if (checker_map_type(argv[1]) == -1)
-		write(1, "type error\n", 11);
-	else if (checker(argv[1], info) == -1)
-		write(1, "not found file error\n", 22);
-	printf("%d, %d", info->player->pos_x, info->player->pos_y);
+	info->collection_list = init_collection_list();
+	info->exit_list = init_exit_list();
+	if (checker(argv[1], info) == -1)
+		return (0);
 	system("leaks so_long");
 	return (0);
 }

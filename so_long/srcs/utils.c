@@ -12,8 +12,9 @@
 
 #include "../so_long.h"
 
-int	print_error(char *error_message)
+int	print_error(char *error_message, t_info *info)
 {
 	write(1, error_message, ft_strlen(error_message));
+	free_memory(info);
 	return (-1);
 }

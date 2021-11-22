@@ -12,13 +12,18 @@
 
 #include "../so_long.h"
 
-void	push_c_list(t_info *info, int x, int y)
+void	push_c_list(char *line, t_info *info, int x, int y)
 {
 	t_collection	*collect;
 	t_collection	*temp;
 
+	info->collection_count++;
 	collect = (t_collection *)malloc(sizeof(t_collection));
-	//malloc 예외처리
+	if (!collect)
+	{
+		free(line);
+		free_memory(info);
+	}
 	collect->pos_x = x;
 	collect->pos_y = y;
 	collect->collection_num = 1;
@@ -35,14 +40,18 @@ void	push_c_list(t_info *info, int x, int y)
 	collect->next = NULL;
 }
 
-void	push_e_list(t_info *info, int x, int y)
+void	push_e_list(char *line, t_info *info, int x, int y)
 {
 	t_exit	*exit;
 	t_exit	*temp;
 
+	info->exit_count++;
 	exit = (t_exit *)malloc(sizeof(t_exit));
-	//if (!exit)
-		//free_memory(info);
+	if (!exit)
+	{
+		free(line);
+		free_memory(info);
+	}
 	exit->pos_x = x;
 	exit->pos_y = y;
 	exit->exit_num = 1;
@@ -57,4 +66,13 @@ void	push_e_list(t_info *info, int x, int y)
 		temp = temp->next;
 	temp->next = exit;
 	exit->next = NULL;
+}
+
+int	save_info(char *line, t_info *info, int x, int y)
+{
+	if (info->player->pos_x != -1)
+		return (-1);
+	info->player->pos_x = x;
+	info->player->pos_y = y;
+	return (1);
 }

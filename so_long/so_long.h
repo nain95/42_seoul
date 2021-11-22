@@ -35,7 +35,6 @@ typedef struct s_collection
 
 typedef struct s_collection_list
 {
-	int				is_empty;
 	t_collection	*first;
 }	t_collection_list;
 
@@ -49,7 +48,6 @@ typedef struct s_exit
 
 typedef struct s_exit_list
 {
-	int		is_empty;
 	t_exit	*first;
 }	t_exit_list;
 
@@ -60,21 +58,30 @@ typedef struct s_info
 	int					map_row;
 	int					map_col;
 	int					collection_count;
+	int					exit_count;
 	t_player			*player;
 	t_collection_list	*collection_list;
 	t_exit_list			*exit_list;
 }	t_info;
 
-int	checker_map_type(char *file);
-int	checker_map(char *file, t_info *info);
-int	ft_strchr_idx(const char *s, int c);
-int	checker_map_border(int x, char *line, t_info *info);
-int	save_info(char *line, t_info *info, int x, int y);
-int	checker(char *file, t_info *info);
+int					checker_file_type(char *file);
+int					checker_map(char *file, t_info *info);
+int					ft_strchr_idx(const char *s, int c);
+int					checker_map_border(int x, char *line, t_info *info);
+int					save_info(char *line, t_info *info, int x, int y);
+int					checker(char *file, t_info *info);
+int					checker_map_shape(char *file, t_info *info);
+int					checker_map_elements(t_info *info);
+int					checker_map_conditions(char *file, t_info *info);
 
-void	push_c_list(t_info *info, int x, int y);
-void	push_e_list(t_info *info, int x, int y);
+t_exit_list			*init_exit_list(void);
+t_collection_list	*init_collection_list(void);
+t_info				*init_info(void);
+t_player			*init_player(void);
 
-int	print_error(char *error_message);
+void				push_c_list(char *line, t_info *info, int x, int y);
+void				push_e_list(char *line, t_info *info, int x, int y);
+
+int					print_error(char *error_message, t_info *info);
 
 #endif
