@@ -20,23 +20,48 @@
 # include <fcntl.h>
 # include <stdio.h> /*삭제*/
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_l;
+	int		endian;
+	int		width;
+	int		height;
+}				t_img;
+
 typedef struct s_player
 {
+	t_img	img;
 	int	pos_x;
 	int	pos_y;
 }	t_player;
+
+typedef struct s_draw
+{
+	int		x;
+	int		y;
+	int		color;
+	int		pos_x;
+	int		pos_y;
+	int		p_data_x;
+	int		p_data_y;
+	float	r_y;
+	float	r_x;
+}				t_draw;
 
 typedef struct s_collection
 {
 	int						pos_x;
 	int						pos_y;
-	int						collection_num;
 	struct s_collection		*next;
 }	t_collection;
 
 typedef struct s_collection_list
 {
 	t_collection	*first;
+	t_img			img;
 }	t_collection_list;
 
 typedef struct s_exit
@@ -50,19 +75,24 @@ typedef struct s_exit
 typedef struct s_exit_list
 {
 	t_exit	*first;
+	t_img			img;
 }	t_exit_list;
 
 typedef struct s_info
 {
-	int					item[2];
-	int					exit[2];
+	char					**matrix;
 	int					map_row;
 	int					map_col;
 	int					collection_count;
 	int					exit_count;
+	void				*mlx;
+	void				*win;
+	t_img				*floor;
+	t_img				*bottom;
 	t_player			*player;
 	t_collection_list	*collection_list;
 	t_exit_list			*exit_list;
+	t_img				*img;
 }	t_info;
 
 int					checker_file_type(char *file);
@@ -83,6 +113,27 @@ t_player			*init_player(void);
 void				push_c_list(char *line, t_info *info, int x, int y);
 void				push_e_list(char *line, t_info *info, int x, int y);
 
+void				free_memory(t_info *info);
+
 int					print_error(char *error_message, t_info *info);
+
+void	init_player_image(t_info *info);
+void	init_floor_image(t_info *info);
+void	init_wall_image(t_info *info);
+void	init_exit_image(t_info *info);
+void	init_collection_image(t_info *info);
+
+void	draw_on_img(t_img *img, t_img *img2, int x, int y);
+void	ft_player_draw(t_info *info);
+void	ft_draw(t_info *info);
+void	ft_element_sub(t_info *info, t_collection *collect, int i, int j);
+void	ft_element(t_info *info);
+int		save_matrix(t_info *info, int x, char *line);
+t_img	load_image(void *mlx, char *path);
+t_img	*init_img();
+
+int		get_pixel(t_img *img, int x, int y);
+void	set_pixel(t_img *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 #endif

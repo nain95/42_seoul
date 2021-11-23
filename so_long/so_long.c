@@ -12,6 +12,43 @@
 
 #include "so_long.h"
 
+int	loop(t_info *info)
+{
+	mlx_put_image_to_window(info->mlx,
+		info->win, info->img->img, 0, 0);
+	ft_draw(info);
+	ft_player_draw(info);
+	ft_element(info);
+	return (0);
+}
+
+int main_loop(t_info *info)
+{
+	mlx_loop_hook(info->mlx, loop, info);
+	mlx_loop(info->mlx);
+}
+
+int	mlx_initial(t_info *info)
+{
+	info->map_row++;
+	info->mlx = mlx_init();
+	info->win = mlx_new_window(info->mlx,
+			info->map_col * 64,
+			info->map_row * 64, "so_Long");
+	info->img->img = mlx_new_image(info->mlx, info->map_col * 64,
+			info->map_row * 64);
+	info->img->addr = mlx_get_data_addr(info->img->img, &info->img->bpp,
+			&info->img->line_l, &info->img->endian);
+	init_player_image(info);
+	init_floor_image(info);
+	init_wall_image(info);
+	init_exit_image(info);
+	init_collection_image(info);
+	main_loop(info);
+	//display_moves(info);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_info	*info;
@@ -21,8 +58,10 @@ int	main(int argc, char *argv[])
 	info = init_info();
 	info->collection_list = init_collection_list();
 	info->exit_list = init_exit_list();
+	info->img = init_img();
 	if (checker(argv[1], info) == -1)
 		return (0);
+	mlx_initial(info);
 	system("leaks so_long");
 	return (0);
 }

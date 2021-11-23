@@ -34,6 +34,9 @@ t_info	*init_info(void)
 	info->map_col = -1;
 	info->collection_count = 0;
 	info->exit_count = 0;
+	info->matrix = NULL;
+	info->mlx = NULL;
+	info->win = NULL;
 	return (info);
 }
 
@@ -57,4 +60,22 @@ t_exit_list	*init_exit_list(void)
 		return (NULL);
 	exit_list->first = NULL;
 	return (exit_list);
+}
+
+
+t_img	*init_img()
+{
+	t_img	*img;
+
+	img = (t_img *)malloc(sizeof(t_img));
+	if (!img)
+		return (NULL);
+	img->img = NULL;
+	img->addr = NULL;
+	img->bpp = 0;
+	img->line_l = 0;
+	img->endian = 0;
+	img->width = 0;
+	img->height = 0;
+	return (img);
 }

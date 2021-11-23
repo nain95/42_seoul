@@ -37,14 +37,12 @@ int	checker_line_elements(int x, char *line, t_info *info)
 {
 	if (checker_map_border(x, line, info) == -1)
 	{
-		free(line);
 		return (-1);
 	}
 	if (ft_strchr(line, 'P'))
 	{	
 		if (save_info(line, info, x, ft_strchr_idx(line, 'P')) == -1)
 		{
-			free(line);
 			return (-1);
 		}
 	}
@@ -63,9 +61,12 @@ int	checker_map_conditions(char *file, t_info *info)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (NULL);
+		return (-1);
 	get_next_line(fd, &line);
 	x = -1;
+	info->matrix = (char **)malloc(sizeof(char *) * (info->map_row + 2));
+	if (!info->matrix)
+		free_memory(info);
 	while (x++ < info->map_row)
 	{
 		if (checker_line_elements(x, line, info) == -1)
@@ -74,9 +75,11 @@ int	checker_map_conditions(char *file, t_info *info)
 			close(fd);
 			return (-1);
 		}
+		save_matrix(info, x, line);
 		free(line);
 		get_next_line(fd, &line);
 	}
+	info->matrix[x+1] = NULL;
 	free(line);
 	close(fd);
 	return (1);
@@ -117,7 +120,7 @@ int	checker_map_elements(t_info *info)
 		return (-1);
 	else if (info->collection_count == 0)
 		return (-1);
-	else if (info->exit_list == 0)
+	else if (info->exit_count == 0)
 		return (-1);
 	return (1);
 }

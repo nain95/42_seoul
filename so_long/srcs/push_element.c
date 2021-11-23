@@ -17,7 +17,7 @@ void	push_c_list(char *line, t_info *info, int x, int y)
 	t_collection	*collect;
 	t_collection	*temp;
 
-	info->collection_count++;
+	(info->collection_count)++;
 	collect = (t_collection *)malloc(sizeof(t_collection));
 	if (!collect)
 	{
@@ -26,7 +26,6 @@ void	push_c_list(char *line, t_info *info, int x, int y)
 	}
 	collect->pos_x = x;
 	collect->pos_y = y;
-	collect->collection_num = 1;
 	if (!info->collection_list->first)
 	{
 		collect->next = NULL;
@@ -45,7 +44,7 @@ void	push_e_list(char *line, t_info *info, int x, int y)
 	t_exit	*exit;
 	t_exit	*temp;
 
-	info->exit_count++;
+	(info->exit_count)++;
 	exit = (t_exit *)malloc(sizeof(t_exit));
 	if (!exit)
 	{
@@ -75,4 +74,10 @@ int	save_info(char *line, t_info *info, int x, int y)
 	info->player->pos_x = x;
 	info->player->pos_y = y;
 	return (1);
+}
+
+int	save_matrix(t_info *info, int x, char *line)
+{
+	info->matrix[x] = ft_strdup(line);
+	printf("%s\n",info->matrix[x]);
 }

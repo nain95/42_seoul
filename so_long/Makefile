@@ -6,7 +6,7 @@
 #    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:16:02 by ijeon             #+#    #+#              #
-#    Updated: 2021/11/22 02:38:44 by ijeon            ###   ########.fr        #
+#    Updated: 2021/11/23 17:03:36 by ijeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ FLAGS = -Wall -Wextra -Werror
 LIBFT = libft
 LIBFT_LIB = libft.a
 GNL = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
-SRC = ./so_long.c ./srcs/so_long_utils.c ./srcs/checker_map.c ./srcs/utils.c ./srcs/push_element.c ./srcs/init.c ./srcs/checker.c
-	./srcs/free.c
+SRC = ./so_long.c ./srcs/so_long_utils.c ./srcs/checker_map.c ./srcs/utils.c\
+ ./srcs/push_element.c ./srcs/init.c ./srcs/checker.c ./srcs/free.c \
+ ./srcs/pixel_put_image.c ./srcs/draw_function1.c ./srcs/draw_function2.c
 NAME = so_long
 OBJ = ${SRC:.c=.o}
 OBJS = ${GNL:.c=.o}
