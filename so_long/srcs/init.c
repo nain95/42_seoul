@@ -37,6 +37,7 @@ t_info	*init_info(void)
 	info->matrix = NULL;
 	info->mlx = NULL;
 	info->win = NULL;
+	info->img = NULL;
 	return (info);
 }
 
