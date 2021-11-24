@@ -12,9 +12,9 @@
 
 #include "get_next_line.h"
 
-int		gnl_strlen(const char *str)
+int	gnl_strlen(const char *str)
 {
-	int i;
+	int	i;
 
 	if (!str)
 		return (0);
@@ -32,7 +32,8 @@ char	*gnl_strdup(const char *src)
 	count = 0;
 	while (src[count])
 		count++;
-	if (!(answer = (char *)malloc(sizeof(char) * (count + 1))))
+	answer = (char *)malloc(sizeof(char) * (count + 1));
+	if (answer == NULL)
 		return (NULL);
 	answer[count] = '\0';
 	while (--count >= 0)
@@ -42,7 +43,7 @@ char	*gnl_strdup(const char *src)
 	return (answer);
 }
 
-int		gnl_strchr(const char *s, char c)
+int	gnl_strchr(const char *s, char c)
 {
 	int		i;
 
@@ -60,8 +61,8 @@ int		gnl_strchr(const char *s, char c)
 
 char	*gnl_strcat(char *dest, char *src)
 {
-	char *d;
-	char *s;
+	char	*d;
+	char	*s;
 
 	d = dest;
 	s = src;
@@ -91,7 +92,8 @@ char	*gnl_strjoin(char *s1, char *s2)
 	tmp1 = (char *)s1;
 	tmp2 = (char *)s2;
 	malloc_size = gnl_strlen(tmp1) + gnl_strlen(tmp2);
-	if (!(result = (char *)malloc(malloc_size + 1)))
+	result = (char *)malloc(malloc_size + 1);
+	if (result == NULL)
 		return (NULL);
 	result[0] = '\0';
 	result = gnl_strcat(result, tmp1);

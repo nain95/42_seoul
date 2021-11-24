@@ -79,5 +79,5 @@ int	save_info(char *line, t_info *info, int x, int y)
 int	save_matrix(t_info *info, int x, char *line)
 {
 	info->matrix[x] = ft_strdup(line);
-	printf("%s\n",info->matrix[x]);
+	printf("%s\n", info->matrix[x]);
 }

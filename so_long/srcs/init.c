@@ -38,33 +38,17 @@ t_info	*init_info(void)
 	info->mlx = NULL;
 	info->win = NULL;
 	info->img = NULL;
+	info->exit_list = (t_exit_list *)malloc(sizeof(t_exit_list));
+	info->collection_list = (t_collection_list *) \
+							malloc(sizeof(t_collection_list));
+	if (!info->collection_list || !info->exit_list)
+		return (NULL);
+	info->collection_list->first = NULL;
+	info->exit_list->first = NULL;
 	return (info);
 }
 
-t_collection_list	*init_collection_list(void)
-{
-	t_collection_list	*collection_list;
-
-	collection_list = (t_collection_list *)malloc(sizeof(t_collection_list));
-	if (!collection_list)
-		return (NULL);
-	collection_list->first = NULL;
-	return (collection_list);
-}
-
-t_exit_list	*init_exit_list(void)
-{
-	t_exit_list	*exit_list;
-
-	exit_list = (t_exit_list *)malloc(sizeof(t_exit_list));
-	if (!exit_list)
-		return (NULL);
-	exit_list->first = NULL;
-	return (exit_list);
-}
-
-
-t_img	*init_img()
+t_img	*init_img(void)
 {
 	t_img	*img;
 
@@ -79,4 +63,12 @@ t_img	*init_img()
 	img->width = 0;
 	img->height = 0;
 	return (img);
+}
+
+void	init_matrix(t_info *info)
+{
+	info->matrix = (char **)malloc(sizeof(char *) * (info->map_row + 2));
+	if (!info->matrix)
+		free_memory(info);
+	info->matrix[info->map_row + 1] = NULL;
 }

@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 typedef struct a
 {
 	int i;
@@ -29,7 +29,8 @@ b *make(void)
 int main()
 {
 	b	*str;
+	int a;
 
-	str = make();
-	test(str);
+	str = (b *)malloc(sizeof(b));
+	a = free(str);
 }

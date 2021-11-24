@@ -19,13 +19,16 @@ int	loop(t_info *info)
 	ft_draw(info);
 	ft_player_draw(info);
 	ft_element(info);
+	wait(1);
 	return (0);
 }
 
-int main_loop(t_info *info)
+int	main_loop(t_info *info)
 {
 	mlx_loop_hook(info->mlx, loop, info);
+	mlx_key_hook(info->win, key_hook, info);
 	mlx_loop(info->mlx);
+	// mlx_hook(info->mlx, );
 }
 
 int	mlx_initial(t_info *info)
@@ -40,8 +43,8 @@ int	mlx_initial(t_info *info)
 	info->img->addr = mlx_get_data_addr(info->img->img, &info->img->bpp,
 			&info->img->line_l, &info->img->endian);
 	init_player_image(info);
-	init_floor_image(info);
 	init_wall_image(info);
+	init_bottom_image(info);
 	init_exit_image(info);
 	init_collection_image(info);
 	main_loop(info);
@@ -56,8 +59,8 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 		write(1, "not found file name\n", 20);
 	info = init_info();
-	info->collection_list = init_collection_list();
-	info->exit_list = init_exit_list();
+	if (info == NULL)
+		return (-1);
 	info->img = init_img();
 	if (checker(argv[1], info) == -1)
 		return (0);

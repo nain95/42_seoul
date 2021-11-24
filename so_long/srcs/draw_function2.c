@@ -39,7 +39,7 @@ void	draw_on_img(t_img *img, t_img *img2, int x, int y)
 
 void	ft_player_draw(t_info *info)
 {
-	draw_on_img(info->img, &(info->player->img),
+	draw_on_img(info->img, info->player->img,
 		(int)info->player->pos_x * 64, (int)info->player->pos_y * 64);
 }
 
@@ -55,7 +55,7 @@ void	ft_draw(t_info *info)
 		while (info->matrix[i][j])
 		{
 			if (info->matrix[i][j] == '1')
-				draw_on_img(info->img, info->floor, j * 64, i * 64);
+				draw_on_img(info->img, info->wall, j * 64, i * 64);
 			else
 				draw_on_img(info->img, info->bottom, j * 64, i * 64);
 			j++;
@@ -68,20 +68,20 @@ void	ft_element_sub(t_info *info, t_collection *collect, int i, int j)
 {
 	if (info->matrix[i][j] == 'C')
 	{
-		draw_on_img(info->img, &(info->collection_list->img),
+		draw_on_img(info->img, info->collection_list->img,
 			j * 64, i * 64);
 	}
 	else if (info->matrix[i][j] == 'E')
-		draw_on_img(info->img, &(info->exit_list->img),
+		draw_on_img(info->img, info->exit_list->img,
 			j * 64, i * 64);
 }
 
 void	ft_element(t_info *info)
 {
-	int	i;
-	int	j;
-	int	x;
-	int	y;
+	int				i;
+	int				j;
+	int				x;
+	int				y;
 	t_collection	*collect;
 
 	collect = NULL;

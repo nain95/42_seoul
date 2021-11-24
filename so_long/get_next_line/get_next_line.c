@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int		line_split(char **backup, int idx, char **split_line)
+int	line_split(char **backup, int idx, char **split_line)
 {
 	char	*tmp;
 	int		len;
@@ -32,14 +32,18 @@ int		line_split(char **backup, int idx, char **split_line)
 	return (1);
 }
 
-int		backup_read(char **backup, int read_size, char **split_line)
+int	backup_read(char **backup, int read_size, char **split_line)
 {
-	int idx;
+	int	idx;
 
 	if (read_size < 0)
 		return (-1);
-	if (*backup && (idx = gnl_strchr(*backup, '\n')) >= 0)
-		return (line_split(backup, idx, split_line));
+	if (*backup)
+	{
+		idx = gnl_strchr(*backup, '\n');
+		if (idx >= 0)
+			return (line_split(backup, idx, split_line));
+	}
 	else if (*backup)
 	{
 		*split_line = *backup;
@@ -52,31 +56,36 @@ int		backup_read(char **backup, int read_size, char **split_line)
 
 char	*malloc_buf(void)
 {
-	char *buf;
+	char	*buf;
 
-	if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+	buf = (char *)malloc(BUFFER_SIZE + 1);
+	if (buf == NULL)
 		return (NULL);
 	return (buf);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char		*backup[OPEN_MAX];
 	char			*buf;
 	int				read_size;
 	int				line_idx;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0 || !(buf = malloc_buf()))
+	buf = malloc_buf();
+	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0 || buf == NULL )
 		return (-1);
-	while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
+	read_size = read(fd, buf, BUFFER_SIZE);
+	while (read_size > 0)
 	{
 		buf[read_size] = '\0';
 		backup[fd] = gnl_strjoin(backup[fd], buf);
-		if ((line_idx = gnl_strchr(backup[fd], '\n')) >= 0)
+		line_idx = gnl_strchr(backup[fd], '\n');
+		if (line_idx >= 0)
 		{
 			free(buf);
 			return (line_split(&backup[fd], line_idx, line));
 		}
+		read_size = read(fd, buf, BUFFER_SIZE);
 	}
 	free(buf);
 	return (backup_read(&backup[fd], read_size, line));

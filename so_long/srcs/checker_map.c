@@ -59,14 +59,12 @@ int	checker_map_conditions(char *file, t_info *info)
 	int		x;
 	char	*line;
 
+	init_matrix(info);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	get_next_line(fd, &line);
 	x = -1;
-	info->matrix = (char **)malloc(sizeof(char *) * (info->map_row + 2));
-	if (!info->matrix)
-		free_memory(info);
 	while (x++ < info->map_row)
 	{
 		if (checker_line_elements(x, line, info) == -1)
@@ -79,7 +77,6 @@ int	checker_map_conditions(char *file, t_info *info)
 		free(line);
 		get_next_line(fd, &line);
 	}
-	info->matrix[x+1] = NULL;
 	free(line);
 	close(fd);
 	return (1);
