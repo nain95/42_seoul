@@ -47,9 +47,9 @@ int	checker_line_elements(int x, char *line, t_info *info)
 		}
 	}
 	if (ft_strchr(line, 'C'))
-		push_c_list(line, info, x, ft_strchr_idx(line, 'C'));
+		info->collection_count++;
 	if (ft_strchr(line, 'E'))
-		push_e_list(line, info, x, ft_strchr_idx(line, 'E'));
+		info->exit_count++;
 	return (1);
 }
 

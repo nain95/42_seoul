@@ -17,18 +17,17 @@ int	loop(t_info *info)
 	mlx_put_image_to_window(info->mlx,
 		info->win, info->img->img, 0, 0);
 	ft_draw(info);
-	ft_player_draw(info);
 	ft_element(info);
-	wait(1);
+	ft_player_draw(info);
 	return (0);
 }
 
-int	main_loop(t_info *info)
+void	main_loop(t_info *info)
 {
 	mlx_loop_hook(info->mlx, loop, info);
 	mlx_key_hook(info->win, key_hook, info);
+	mlx_hook(info->win, 17, 0, close_clean, info);
 	mlx_loop(info->mlx);
-	// mlx_hook(info->mlx, );
 }
 
 int	mlx_initial(t_info *info)
@@ -48,7 +47,6 @@ int	mlx_initial(t_info *info)
 	init_exit_image(info);
 	init_collection_image(info);
 	main_loop(info);
-	//display_moves(info);
 	return (1);
 }
 
@@ -65,6 +63,6 @@ int	main(int argc, char *argv[])
 	if (checker(argv[1], info) == -1)
 		return (0);
 	mlx_initial(info);
-	system("leaks so_long");
+	//system("leaks so_long");
 	return (0);
 }

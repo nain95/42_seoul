@@ -29,6 +29,7 @@ t_info	*init_info(void)
 	info = (t_info *)malloc(sizeof(t_info));
 	if (!info)
 		return (NULL);
+	info->moves = 0;
 	info->player = init_player();
 	info->map_row = -1;
 	info->map_col = -1;
@@ -38,13 +39,6 @@ t_info	*init_info(void)
 	info->mlx = NULL;
 	info->win = NULL;
 	info->img = NULL;
-	info->exit_list = (t_exit_list *)malloc(sizeof(t_exit_list));
-	info->collection_list = (t_collection_list *) \
-							malloc(sizeof(t_collection_list));
-	if (!info->collection_list || !info->exit_list)
-		return (NULL);
-	info->collection_list->first = NULL;
-	info->exit_list->first = NULL;
 	return (info);
 }
 

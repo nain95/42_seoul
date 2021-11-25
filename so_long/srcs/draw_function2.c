@@ -64,15 +64,15 @@ void	ft_draw(t_info *info)
 	}
 }
 
-void	ft_element_sub(t_info *info, t_collection *collect, int i, int j)
+void	ft_element_sub(t_info *info, int i, int j)
 {
 	if (info->matrix[i][j] == 'C')
 	{
-		draw_on_img(info->img, info->collection_list->img,
+		draw_on_img(info->img, info->collection,
 			j * 64, i * 64);
 	}
 	else if (info->matrix[i][j] == 'E')
-		draw_on_img(info->img, info->exit_list->img,
+		draw_on_img(info->img, info->exit,
 			j * 64, i * 64);
 }
 
@@ -82,9 +82,7 @@ void	ft_element(t_info *info)
 	int				j;
 	int				x;
 	int				y;
-	t_collection	*collect;
 
-	collect = NULL;
 	i = 0;
 	y = 1;
 	while (info->matrix[i])
@@ -93,7 +91,7 @@ void	ft_element(t_info *info)
 		j = 0;
 		while (info->matrix[i][j])
 		{
-			ft_element_sub(info, collect, i, j);
+			ft_element_sub(info, i, j);
 			x += 64;
 			j++;
 		}

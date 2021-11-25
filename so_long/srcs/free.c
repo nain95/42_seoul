@@ -12,88 +12,52 @@
 
 #include "../so_long.h"
 
-/*void	free_map1(t_info *info)
+void	free_map1(t_info *info)
 {
 	int	i;
 
-	if (!info->map)
+	if (!info->matrix)
 		return ;
-	i = info->map->index;
+	i = info->map_row;
 	if (i < 0)
 	{
 		write(1, "ERROR", 5);
-        write(1, "map free error\n", 16);
+		write(1, "map free error\n", 16);
 		return ;
 	}
 	while (i >= 0)
 	{
-		if (info->mapver[i])
+		if (info->matrix[i])
 		{
-			free(info->mapver[i]);
+			free(info->matrix[i]);
 		}
 		i--;
 	}
-}
-
-void	free_img(t_info *info)
-{
-	if (info->img)
-		free(info->img);
-}
-*/
-void	free_exit_list(t_exit_list *list)
-{
-	t_exit	*exit;
-	t_exit	*next;
-
-	exit = list->first;
-	while (exit)
-	{
-		next = exit->next;
-		free(exit);
-		exit = next;
-	}
-	free(list);
-}
-
-void	free_collection_list(t_collection_list *list)
-{
-	t_collection	*collection;
-	t_collection	*next;
-
-	collection = list->first;
-	while (collection)
-	{
-		next = collection->next;
-		free(collection);
-		collection = next;
-	}
-	free(list);
+	free(info->matrix);
 }
 
 void	free_memory(t_info *info)
 {
-	if (!info)
+	/*if (!info)
 		exit (0);
-	/*if (info->img)
-		free_img(info);
-	if (info->mapver)
+	if (info->img)
+		free(info->img);
+	if (info->matrix)
 		free_map1(info);
-	if (info->var)
-		free(info->var);
-	if (info->floor)
-		free(info->floor);
+	if (info->wall)
+		free(info->wall);
 	if (info->bottom)
 		free(info->bottom);
-    if (info->tmp)
-		free(info->tmp);*/
-	if (info->exit_list)
-		free_exit_list(info->exit_list);
-	if (info->collection_list)
-		free_collection_list(info->collection_list);
+	if (info->exit)
+		free(info->exit);
+	if (info->collection)
+		free(info->collection);
+	if (info->player->img)
+		free(info->player->img);
 	if (info->player)
 		free(info->player);
 	if (info)
-		free(info);
+		free(info);*/
+	//system("leaks so_long");
 	exit (1);
 }

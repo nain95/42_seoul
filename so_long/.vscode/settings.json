@@ -3,6 +3,8 @@
         "so_long.h": "c",
         "istream": "c",
         "chrono": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "__string": "c",
+        "ios": "c"
     }
 }
