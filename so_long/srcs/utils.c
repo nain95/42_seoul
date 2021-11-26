@@ -12,19 +12,6 @@
 
 #include "../so_long.h"
 
-t_img	*load_image(void *mlx, char *path)
-{
-	t_img	*img;
-
-	img = (t_img *)malloc(sizeof(t_img));
-	img->img = mlx_xpm_file_to_image(mlx, path, &img->width, &img->height);
-	if (!img->img)
-		return (img);
-	img->addr = mlx_get_data_addr(img->img, &img->bpp, \
-								&img->line_l, &img->endian);
-	return (img);
-}
-
 int	print_error(char *error_message, t_info *info)
 {
 	write(1, error_message, ft_strlen(error_message));
@@ -62,4 +49,34 @@ void	ft_putnbr(int nb)
 	}
 	while (i--)
 		ft_putchar(nb_arry[i] + '0');
+}
+
+int	ft_strchr_idx(const char *s, int c, int start)
+{
+	int	res;
+
+	res = start + 1;
+	while (s[res])
+	{
+		if (s[res] == (char)c)
+			return (res);
+		res++;
+	}
+	return (-1);
+}
+
+int	ft_strchr_count(const char *s, int c)
+{
+	int	idx;
+	int	count;
+
+	idx = 0;
+	count = 0;
+	while (s[idx])
+	{
+		if (s[idx] == (char)c)
+			count++;
+		idx++;
+	}
+	return (count);
 }

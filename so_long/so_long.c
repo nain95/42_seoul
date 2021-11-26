@@ -63,6 +63,5 @@ int	main(int argc, char *argv[])
 	if (checker(argv[1], info) == -1)
 		return (0);
 	mlx_initial(info);
-	//system("leaks so_long");
 	return (0);
 }

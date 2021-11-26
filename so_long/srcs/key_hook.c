@@ -55,10 +55,8 @@ int	close_clean(t_info *info)
 		mlx_destroy_image(info->mlx, info->img->img);
 	if (info->win)
 		mlx_destroy_window(info->mlx, info->win);
-	//if (info->mlx)
-		//free(info->mlx);
 	free_memory(info);
-	exit (0);
+	exit(1);
 }
 
 void	pos_check(t_info *info)

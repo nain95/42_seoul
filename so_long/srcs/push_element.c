@@ -12,9 +12,9 @@
 
 #include "../so_long.h"
 
-int	save_info(char *line, t_info *info, int x, int y)
+int	save_player_pos(t_info *info, int x, int y)
 {
-	if (info->player->pos_x != -1)
+	if (info->player->pos_x != -1 && info->player->pos_y != -1)
 		return (-1);
 	info->player->pos_x = y;
 	info->player->pos_y = x;
@@ -24,4 +24,5 @@ int	save_info(char *line, t_info *info, int x, int y)
 void	save_matrix(t_info *info, int x, char *line)
 {
 	info->matrix[x] = ft_strdup(line);
+	info->matrix[x + 1] = NULL;
 }

@@ -18,27 +18,21 @@ void	free_map1(t_info *info)
 
 	if (!info->matrix)
 		return ;
-	i = info->map_row;
-	if (i < 0)
-	{
-		write(1, "ERROR", 5);
-		write(1, "map free error\n", 16);
-		return ;
-	}
-	while (i >= 0)
+	i = 0;
+	while (info->matrix[i] && i <= info->map_row)
 	{
 		if (info->matrix[i])
 		{
 			free(info->matrix[i]);
 		}
-		i--;
+		i++;
 	}
 	free(info->matrix);
 }
 
 void	free_memory(t_info *info)
 {
-	/*if (!info)
+	if (!info)
 		exit (0);
 	if (info->img)
 		free(info->img);
@@ -56,8 +50,5 @@ void	free_memory(t_info *info)
 		free(info->player->img);
 	if (info->player)
 		free(info->player);
-	if (info)
-		free(info);*/
-	//system("leaks so_long");
 	exit (1);
 }

@@ -22,13 +22,13 @@ int	checker_map_border(int x, char *line, t_info *info)
 		while (y < info->map_col)
 		{
 			if (line[y++] != '1')
-				return (-1);
+				print_error("border_error", info);
 		}
 	}
 	else
 	{
 		if (line[0] != '1' || line[info->map_col - 1] != '1')
-			return (-1);
+			print_error("border_error", info);
 	}
 	return (1);
 }
@@ -36,20 +36,15 @@ int	checker_map_border(int x, char *line, t_info *info)
 int	checker_line_elements(int x, char *line, t_info *info)
 {
 	if (checker_map_border(x, line, info) == -1)
-	{
 		return (-1);
-	}
-	if (ft_strchr(line, 'P'))
+	while (ft_strchr_idx(line, 'P', info->player->pos_x) != -1)
 	{	
-		if (save_info(line, info, x, ft_strchr_idx(line, 'P')) == -1)
-		{
-			return (-1);
-		}
+		if (save_player_pos(info, x, \
+			ft_strchr_idx(line, 'P', info->player->pos_x)) == -1)
+			print_error("Too_many_player Error", info);
 	}
-	if (ft_strchr(line, 'C'))
-		info->collection_count++;
-	if (ft_strchr(line, 'E'))
-		info->exit_count++;
+	info->collection_count += ft_strchr_count(line, 'C');
+	info->exit_count += ft_strchr_count(line, 'E');
 	return (1);
 }
 
@@ -96,8 +91,8 @@ int	checker_map_shape(char *file, t_info *info)
 	info->map_row++;
 	while (gnl_res == 1)
 	{
-		if (ft_strchr(line, ' ') || info->map_col != ft_strlen(line))
-			break ;
+		if (ft_strchr(line, ' ') || info->map_col != (int)ft_strlen(line))
+			print_error("border error\n", info);
 		free(line);
 		gnl_res = get_next_line(fd, &line);
 		if (gnl_res != 1)
@@ -114,10 +109,12 @@ int	checker_map_shape(char *file, t_info *info)
 int	checker_map_elements(t_info *info)
 {
 	if (info->player->pos_x == -1)
-		return (-1);
+		print_error("not found player", info);
+	else if (info->collection_count == 0 && info->exit_count == 0)
+		print_error("not found collection and exit", info);
 	else if (info->collection_count == 0)
-		return (-1);
+		print_error("not found collection", info);
 	else if (info->exit_count == 0)
-		return (-1);
+		print_error("not found exit", info);
 	return (1);
 }

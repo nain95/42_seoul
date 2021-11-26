@@ -26,14 +26,12 @@ int	checker_file_type(char *file)
 int	checker(char *file, t_info *info)
 {
 	if (checker_file_type(file) == -1)
-		print_error("file type error", info);
+		return (-1);
 	else if (checker_map_shape(file, info) == -1)
-		print_error("map shape error", info);
+		return (-1);
 	else if (checker_map_conditions(file, info) == -1)
-		print_error("map conditions error", info);
+		return (-1);
 	else if (checker_map_elements(info) == -1)
-		print_error("elements error", info);
-	else
-		return (1);
-	return (-1);
+		return (-1);
+	return (1);
 }

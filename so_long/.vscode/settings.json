@@ -5,6 +5,7 @@
         "chrono": "c",
         "cmath": "c",
         "__string": "c",
-        "ios": "c"
+        "ios": "c",
+        "fcntl.h": "c"
     }
 }

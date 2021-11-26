@@ -36,6 +36,10 @@ t_info	*init_info(void)
 	info->collection_count = 0;
 	info->exit_count = 0;
 	info->matrix = NULL;
+	info->bottom = NULL;
+	info->wall = NULL;
+	info->collection = NULL;
+	info->exit = NULL;
 	info->mlx = NULL;
 	info->win = NULL;
 	info->img = NULL;

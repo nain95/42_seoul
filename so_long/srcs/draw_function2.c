@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_function2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjin <sjin@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/05 22:36:45 by sjin              #+#    #+#             */
-/*   Updated: 2021/07/05 22:36:46 by sjin             ###   ########.fr       */
+/*   Created: 2021/11/26 11:19:04 by ijeon             #+#    #+#             */
+/*   Updated: 2021/11/26 11:19:07 by ijeon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	ft_draw(t_info *info)
 
 void	ft_element_sub(t_info *info, int i, int j)
 {
+	if (info->matrix[i][j] == '1' || info->matrix[i][j] == '0' \
+			|| info->matrix[i][j] == 'P')
+		return ;
 	if (info->matrix[i][j] == 'C')
 	{
 		draw_on_img(info->img, info->collection,
@@ -74,6 +77,11 @@ void	ft_element_sub(t_info *info, int i, int j)
 	else if (info->matrix[i][j] == 'E')
 		draw_on_img(info->img, info->exit,
 			j * 64, i * 64);
+	else
+	{
+		write(1, "map_error\n", 10);
+		close_clean(info);
+	}
 }
 
 void	ft_element(t_info *info)
