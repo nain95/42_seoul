@@ -26,7 +26,7 @@ OBJS = ${GNL:.c=.o}
 all : $(NAME)
 
 .c.o: $(SRC) $(GNL)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(FLAGS) -c -o $@ $<
 
 ${NAME} :  ${OBJ}  ${OBJS}
 		gcc ${FLAGS} -o ${NAME} ${OBJ} ${OBJS} -L $(MMSPATH) $(CLFLAGS)
