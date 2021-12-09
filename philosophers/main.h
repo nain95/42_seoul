@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+
 # include <stdio.h>
 
 typedef struct s_philo
@@ -41,8 +42,9 @@ typedef struct s_info
 	long		base_time;
 	long		cur_time;
 	t_philo		*philo;
-	pthread_t	*thread_id;
+	pthread_mutex_t	*thread_id;
 	pthread_t	tid_print;
+	pthread_mutex_t	forks[250];
 }	t_info;
 
 int		ft_atoi(const char *str);

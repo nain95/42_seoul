@@ -14,19 +14,22 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-void	init_info(t_info *info)
+int	init_info(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	info->base_time = get_time();
 	info->cur_time = 0;
 	info->monitor_flag = 0;
-	info->thread_id = malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
+	info->thread_id = \
+	malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
+	if (!(info->thread_id))
+		return (-1);
 	while (++i < info->number_of_philosophers)
 		pthread_mutex_init(&(info->thread_id[i]), NULL);
 	pthread_mutex_init(&(info->tid_print), NULL);
-	
+	return (1);
 }
 
 int	init_philo(t_info *info, t_philo *philo)
@@ -41,10 +44,12 @@ int	init_philo(t_info *info, t_philo *philo)
 	{
 		philo[i].philo_num = i;
 		philo[i].last_eat = get_time;
-		philo[i].left = -1;
-		philo[i].right = -1;
+		philo[i].left = i;
+		philo[i].right = (i + 1) % info->number_of_philosophers;
+		philo[i].last_eat = 0;
 		philo[i].info = info;
 	}
+	return (1);
 }
 
 long	get_time(void)
@@ -60,9 +65,14 @@ long	get_time(void)
 void	philo(t_info *info)
 {
 	t_philo	*philo;
+	int		check;
 
-	init_philo(info, philo);
-	init_info(info);
+	check = init_philo(info, philo);
+	if (check == -1)
+		return ;
+	check = init_info(info);
+	if (check == -1)
+		return ;
 }
 
 int	main(int argc, char *argv[])
@@ -77,9 +87,17 @@ int	main(int argc, char *argv[])
 		info.time_to_die = ft_atoi(argv[2]);
 		info.time_to_eat = ft_atoi(argv[3]);
 		info.time_to_sleep = ft_atoi(argv[4]);
-		info.number_of_time_must_eat = 0;
+		info.number_of_time_must_eat = -1;
 		if (argc == 6)
+		{
 			info.number_of_time_must_eat = ft_atoi(argv[5]);
+			if (info.number_of_time_must_eat < 0)
+				return (0);
+		}
+		if (info.number_of_philosophers < 2 || info.time_to_die < 0 || \
+		info.time_to_eat < 0 || info.time_to_sleep < 0 || \
+		info.number_of_philosophers > 250)
+			return (0);
 		philo(&info);
 	}
 	return (0);
