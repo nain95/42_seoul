@@ -28,7 +28,8 @@ typedef struct s_philo
 	int			left;
 	int			right;
 	long		last_eat;
-	t_info		*info;
+	pthread_t	thread_id;
+	struct s_info		*info;
 }	t_philo;
 
 typedef struct s_info
@@ -39,15 +40,25 @@ typedef struct s_info
 	int			time_to_sleep;
 	int			number_of_time_must_eat;
 	int			monitor_flag;
+	int			dieded;
 	long		base_time;
 	long		cur_time;
 	t_philo		*philo;
+	//pthread_t	tid_print;
 	pthread_mutex_t	*thread_id;
-	pthread_t	tid_print;
+	pthread_mutex_t writing;
 	pthread_mutex_t	forks[250];
 }	t_info;
 
 int		ft_atoi(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 size_t	ft_strlen(const char *s);
+
+int		init_info(t_info *info);
+t_philo		*init_philo(t_info *info);
+void	philo(t_info *info);
+long	get_time(void);
+
+int		launcher(t_info *info, t_philo *philo);
+
 #endif

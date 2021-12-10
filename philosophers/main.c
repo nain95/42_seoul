@@ -19,37 +19,41 @@ int	init_info(t_info *info)
 	int	i;
 
 	i = -1;
-	info->base_time = get_time();
+	//info->base_time = get_time();
 	info->cur_time = 0;
 	info->monitor_flag = 0;
+	info->dieded = 0;
+	if (pthread_mutex_init(&(info->writing), NULL))
+		return (1);
 	info->thread_id = \
 	malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
 	if (!(info->thread_id))
 		return (-1);
 	while (++i < info->number_of_philosophers)
 		pthread_mutex_init(&(info->thread_id[i]), NULL);
-	pthread_mutex_init(&(info->tid_print), NULL);
+	//pthread_mutex_init(&(info->tid_print), NULL);
 	return (1);
 }
 
-int	init_philo(t_info *info, t_philo *philo)
+t_philo	*init_philo(t_info *info)
 {
 	int	i;
+	t_philo *philo;
 
 	i = -1;
 	philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philosophers);
 	if (!philo)
-		return (-1);
+		return (NULL);
 	while (++i < info->number_of_philosophers)
 	{
 		philo[i].philo_num = i;
-		philo[i].last_eat = get_time;
+		philo[i].last_eat = -1;
 		philo[i].left = i;
 		philo[i].right = (i + 1) % info->number_of_philosophers;
 		philo[i].last_eat = 0;
 		philo[i].info = info;
 	}
-	return (1);
+	return (philo);
 }
 
 long	get_time(void)
@@ -57,8 +61,8 @@ long	get_time(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	printf("%ld\n", tv.tv_sec);
-	printf("%d", tv.tv_usec);
+	//printf("%ld\n", tv.tv_sec);
+	//printf("%d", tv.tv_usec);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
@@ -67,12 +71,13 @@ void	philo(t_info *info)
 	t_philo	*philo;
 	int		check;
 
-	check = init_philo(info, philo);
-	if (check == -1)
+	philo = init_philo(info);
+	if (!philo)
 		return ;
 	check = init_info(info);
 	if (check == -1)
 		return ;
+	launcher(info, philo);
 }
 
 int	main(int argc, char *argv[])

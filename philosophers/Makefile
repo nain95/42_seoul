@@ -12,7 +12,7 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread
-SRC = ./main.c ./ft_atoi.c ./ft_putstr_fd.c
+SRC = ./main.c ./ft_atoi.c ./ft_putstr_fd.c ./launcher.c
 NAME = philo
 OBJ = ${SRC:.c=.o}
 
