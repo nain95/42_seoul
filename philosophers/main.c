@@ -19,19 +19,14 @@ int	init_info(t_info *info)
 	int	i;
 
 	i = -1;
-	//info->base_time = get_time();
 	info->cur_time = 0;
 	info->monitor_flag = 0;
 	info->dieded = 0;
-	if (pthread_mutex_init(&(info->writing), NULL))
-		return (1);
-	info->thread_id = \
-	malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
-	if (!(info->thread_id))
-		return (-1);
+	info->all_ate = 0;
+	pthread_mutex_init(&(info->writing), NULL);
 	while (++i < info->number_of_philosophers)
-		pthread_mutex_init(&(info->thread_id[i]), NULL);
-	//pthread_mutex_init(&(info->tid_print), NULL);
+		pthread_mutex_init(&(info->forks[i]), NULL);
+	pthread_mutex_init(&(info->meal_check), NULL);
 	return (1);
 }
 
@@ -61,8 +56,6 @@ long	get_time(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	//printf("%ld\n", tv.tv_sec);
-	//printf("%d", tv.tv_usec);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 

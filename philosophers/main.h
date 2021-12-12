@@ -41,12 +41,14 @@ typedef struct s_info
 	int			number_of_time_must_eat;
 	int			monitor_flag;
 	int			dieded;
+	int			all_ate;
 	long		base_time;
 	long		cur_time;
 	t_philo		*philo;
 	//pthread_t	tid_print;
 	pthread_mutex_t	*thread_id;
 	pthread_mutex_t writing;
+	pthread_mutex_t meal_check;
 	pthread_mutex_t	forks[250];
 }	t_info;
 

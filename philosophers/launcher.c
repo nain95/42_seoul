@@ -12,6 +12,24 @@
 
 #include "main.h"
 
+long long	time_diff(long long past, long long pres)
+{
+	return (pres - past);
+}
+
+void		smart_sleep(long long time, t_info *rules)
+{
+	long long i;
+
+	i = get_time();
+	while (!(rules->dieded))
+	{
+		if (time_diff(i, get_time()) >= time)
+			break ;
+		usleep(50);
+	}
+}
+
 void		action_print(t_info *info, int philo_num, char *string)
 {
 	pthread_mutex_lock(&(info->writing));
@@ -34,11 +52,11 @@ void	philo_eats(t_philo *philo)
 	action_print(info, philo->philo_num, "has taken a fork");
 	pthread_mutex_lock(&(info->forks[philo->right]));
 	action_print(info, philo->philo_num, "has taken a fork");
-	//pthread_mutex_lock(&(info->meal_check));
+	pthread_mutex_lock(&(info->meal_check));
 	action_print(info, philo->philo_num, "is eating");
 	philo->last_eat = get_time();
-	//pthread_mutex_unlock(&(info->meal_check));
-	//smart_sleep(info->time_eat, rules);
+	pthread_mutex_unlock(&(info->meal_check));
+	smart_sleep(info->time_to_eat, info);
 	philo->eat_cnt++;
 	pthread_mutex_unlock(&(info->forks[philo->left]));
 	pthread_mutex_unlock(&(info->forks[philo->right]));
@@ -53,20 +71,63 @@ void    *p_thread(void *void_philo)
 	i = 0;
 	philo = (t_philo *)void_philo;
 	info = philo->info;
-	if (philo->philo_num % 2)
-		usleep(15000);
+	if (philo->philo_num % 2 == 1)
+		usleep(150000);
 	while (!(info->dieded))
 	{
 		philo_eats(philo);
-		//if (info->all_ate)
-		//	break ;
+		if (info->all_ate)
+			break ;
 		action_print(info, philo->philo_num, "is sleeping");
-		//smart_sleep(info->time_sleep, info);
+		//smart_sleep(info->time_to_sleep, info);
 		action_print(info, philo->philo_num, "is thinking");
 		//break;
 		i++;
 	}
 	return (NULL);
+}
+
+void	exit_launcher(t_info *info, t_philo *philos)
+{
+	int i;
+
+	i = -1;
+	while (++i < info->number_of_philosophers)
+		pthread_join(philos[i].thread_id, NULL);
+	i = -1;
+	while (++i < info->number_of_philosophers)
+		pthread_mutex_destroy(&(info->forks[i]));
+	pthread_mutex_destroy(&(info->writing));
+	
+}
+
+void	death_checker(t_info *r, t_philo *p)
+{
+	int i;
+
+	while (!(r->all_ate))
+	{
+		i = -1;
+		while (++i < r->number_of_philosophers && !(r->dieded))
+		{
+			pthread_mutex_lock(&(r->meal_check));
+			if (time_diff(p[i].last_eat, get_time()) > r->time_to_die)
+			{
+				action_print(r, i, "died");
+				r->dieded = 1;
+			}
+			pthread_mutex_unlock(&(r->meal_check));
+			usleep(100);
+		}
+		if (r->dieded)
+			break ;
+		i = 0;
+		while (r->number_of_time_must_eat != -1 && \
+		i < r->number_of_philosophers && p[i].eat_cnt >= r->number_of_time_must_eat)
+			i++;
+		if (i == r->number_of_philosophers)
+			r->all_ate = 1;
+	}
 }
 
 int launcher(t_info *info, t_philo *philo)
@@ -82,7 +143,7 @@ int launcher(t_info *info, t_philo *philo)
 		philo[i].last_eat = get_time();
 		i++;
 	}
-	//death_checker(info, info->philosophers);
-	//exit_launcher(info, phi);
+	death_checker(info, philo);
+	exit_launcher(info, philo);
 	return (0);
 }
