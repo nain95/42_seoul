@@ -6,13 +6,13 @@
 #    By: ijeon <ijeon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/29 16:20:52 by ijeon             #+#    #+#              #
-#    Updated: 2021/11/29 16:20:56 by ijeon            ###   ########.fr        #
+#    Updated: 2021/12/13 15:57:02 by ijeon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread
-SRC = ./main.c ./ft_atoi.c ./ft_putstr_fd.c ./launcher.c
+SRC = ./main.c ./launcher.c ./utils.c
 NAME = philo
 OBJ = ${SRC:.c=.o}
 
