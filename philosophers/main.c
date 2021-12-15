@@ -19,6 +19,10 @@ int	init_info(t_info *info)
 	i = -1;
 	info->dieded = 0;
 	info->all_ate = 0;
+	info->forks = (pthread_mutex_t *)malloc \
+	(sizeof(pthread_mutex_t) * info->number_of_philosophers);
+	if (!info->forks)
+		return (0);
 	pthread_mutex_init(&(info->printing), NULL);
 	while (++i < info->number_of_philosophers)
 		pthread_mutex_init(&(info->forks[i]), NULL);
@@ -53,7 +57,8 @@ void	philo(t_info *info)
 	philo = init_philo(info);
 	if (!philo)
 		return ;
-	init_info(info);
+	if (!init_info(info))
+		return ;
 	launcher(info, philo);
 }
 

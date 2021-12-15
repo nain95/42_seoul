@@ -22,7 +22,6 @@ void	philo_eats(t_philo *philo)
 	pthread_mutex_lock(&(info->forks[philo->right]));
 	action_print(info, philo->philo_num, "has taken a fork");
 	pthread_mutex_lock(&(info->meal_check));
-	usleep(200);
 	action_print(info, philo->philo_num, "is eating");
 	philo->last_eat = get_time();
 	pthread_mutex_unlock(&(info->meal_check));
@@ -42,18 +41,15 @@ void	*p_thread(void *void_philo)
 	philo = (t_philo *)void_philo;
 	info = philo->info;
 	if (philo->philo_num % 2 == 1)
-		usleep(15000);
+		usleep(5000);
 	while (!(info->dieded))
 	{
 		philo_eats(philo);
 		if (info->all_ate)
 			break ;
-		usleep(200);
 		action_print(info, philo->philo_num, "is sleeping");
-		usleep(200);
 		smart_sleep(info->time_to_sleep, info);
 		action_print(info, philo->philo_num, "is thinking");
-		usleep(200);
 		i++;
 	}
 	return (NULL);
@@ -66,16 +62,16 @@ void	exit_launcher(t_info *info, t_philo *philo)
 	i = -1;
 	while (++i < info->number_of_philosophers)
 	{
-		//pthread_mutex_unlock(&(info->forks[i]));
-		//usleep(10);
+		pthread_mutex_unlock(&(info->forks[i]));
 		pthread_mutex_destroy(&(info->forks[i]));
 	}
 	i = -1;
-	//while (++i < info->number_of_philosophers)
-	//	pthread_join(philo[i].thread_id, NULL);
+	while (++i < info->number_of_philosophers)
+		pthread_join(philo[i].thread_id, NULL);
 	pthread_mutex_destroy(&(info->printing));
 	pthread_mutex_destroy(&(info->meal_check));
 	free(philo);
+	free(info->forks);
 }
 
 void	death_checker(t_info *i, t_philo *p)
@@ -118,7 +114,6 @@ int	launcher(t_info *info, t_philo *philo)
 		if (pthread_create(&(philo[i].thread_id), NULL, p_thread, &(philo[i])))
 			return (1);
 		philo[i].last_eat = get_time();
-		pthread_detach(philo[i].thread_id);
 		i++;
 	}
 	death_checker(info, philo);

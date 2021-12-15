@@ -40,10 +40,9 @@ typedef struct s_info
 	int				dieded;
 	int				all_ate;
 	long			base_time;
-	pthread_mutex_t	*thread_id;
 	pthread_mutex_t	printing;
 	pthread_mutex_t	meal_check;
-	pthread_mutex_t	forks[250];
+	pthread_mutex_t	*forks;
 }	t_info;
 
 int		init_info(t_info *info);
