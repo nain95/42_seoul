@@ -1,0 +1,14 @@
+SO ./textures/bluestone.xpm
+NO ./textures/redbrick.xpm
+WE ./textures/barrel.xpm
+EA ./textures/mossy.xpm
+
+F 0,0,250
+C 255,0 ,0
+
+
+1111111111111
+1000000000001
+1000001000W01
+1000100001001
+1111111111111

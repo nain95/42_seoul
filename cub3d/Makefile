@@ -1,46 +1,29 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
- 
+MMSPATH = ./minilibx
+CLFLAGS = -lmlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Wextra -Werror
+GNL = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
+SRCS = ./src/load_image.c ./src/raycasting.c ./src/description.c ./src/description1.c ./src/description2.c  ./src/key.c ./src/key1.c ./src/floar_ceiling.c ./src/map_checker.c \
+ 	./src/map_player.c  ./src/memory.c ./src/libft1.c ./src/libft2.c ./src/libft3.c ./src/map_checker_utils.c \
+ 	./main.c
+
 NAME = cub3d
- 
-SRCS_DIR = ./srcs
-SRCS_NAME = #... files.c
-SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
-OBJS = $(SRCS:.c=.o)
- 
-LIB_NAME = ft
-LIB_DIR = ./libft
-LIB = $(addprefix $(LIB_DIR)/, libft.a)
- 
-MLX_NAME = mlx
-MLX_DIR = ./mlx
-MLX = $(addprefix $(MLX_DIR)/, libmlx.a)
- 
- 
-$(NAME) : $(OBJS)
-	$(MAKE) -C $(LIB_DIR) bonus
-	$(MAKE) -C $(MLX_DIR) all
-	$(CC) $(CFLAGS) -L$(LIB_DIR) -l$(LIB_NAME) -L$(MLX_DIR) -l$(MLX_NAME) \
-           -framework OpenGL -framework AppKit $^ -o $@
- 
-$(SRCS_DIR)/%.o : $(SRCS_DIR)/%.c
-	$(CC) $(CFLAGS) -I$(MLX_DIR) -I$(LIB_DIR) -c $< -o $@
- 
- 
-all : $(NAME)
- 
+OBJS = ${SRCS:.c=.o}
+OBJ = ${GNL:.c=.o}
+
+all : ${NAME}
+
+.c.o : ${SRCS} ${GNL}
+	${CC} ${CFLAGS} -c -o $@ $<
+
+${NAME} : ${OBJS} ${OBJ}
+	gcc $(FLAGS) -o  ${NAME} ${OBJ} ${OBJS} -L $(MMSPATH) $(CLFLAGS)
+
 clean :
-	$(MAKE) -C $(LIB_DIR) clean
-	$(MAKE) -C $(MLX_DIR) clean
-	rm -rf $(OBJS)
- 
-fclean :
-	$(MAKE) -C $(LIB_DIR) fclean
-	$(MAKE) -C $(MLX_DIR) fclean
-	rm -rf $(NAME) $(OBJS)
- 
+	rm -rf $(OBJ) ${OBJS} 
+
+fclean : clean
+	rm -rf ${NAME}
+
 re : fclean all
- 
-bonus : all
- 
-.PHONY : all clean fclean re bonus
+
+
