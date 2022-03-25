@@ -1,19 +1,19 @@
-#include "array.hpp"
+#include "PhoneBook.hpp"
 
 int main()
 {
-	std :: string oper;
-	Array ar;
+	std::string oper;
+	PhoneBook pb;
 
 	while (1)
 	{
-		std::cout << CYN  "press push cmd : SEARCH | ADD | EXIT" << NC << std::endl;
+		std::cout << "press push cmd : SEARCH | ADD | EXIT" << std::endl;
 		std::cin >> oper;
         std::cin.ignore();
 		if (oper == "SEARCH")
-			ar.searchBook();
+			pb.searchBook();
 		else if (oper == "ADD")
-			ar.addBook();
+			pb.addBook();
 		else if (oper == "EXIT")
 			break;
 	}

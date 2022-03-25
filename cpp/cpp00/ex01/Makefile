@@ -1,5 +1,5 @@
-FLAGS = -Wall -Wextra -Werror
-SRCS = ./phonebook.cpp ./main.cpp ./array.cpp
+FLAGS = -Wall -Wextra -Werror -std=c++98
+SRCS = ./PhoneBook.cpp ./main.cpp ./Contact.cpp
 NAME = phonebook
 
 OBJS = ${SRCS:.c=.o}

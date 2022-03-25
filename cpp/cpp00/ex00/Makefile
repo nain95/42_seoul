@@ -1,4 +1,4 @@
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = ./megaphone.cpp
 NAME = megaphone
 
@@ -10,7 +10,6 @@ all : ${NAME}
 
 $(NAME) :  $(OBJS)
 	c++ $(FLAGS) -o $(NAME)  $(OBJS)
-
 
 clean :
 		rm -rf $(OBJS)
