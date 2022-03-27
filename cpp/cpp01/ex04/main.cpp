@@ -24,12 +24,17 @@ int main(int ac, char **av)
     if (ac == 4)
     {
         ifs.open(av[1]);
+        if (!ifs.good())   
+        {       
+            std::cout << "File Open Error" << std::endl;
+            return 0;
+        }
         s1 = av[2];
         s2 = av[3];
         newFile =  av[1];
         newFile += ".replace";
         ofs.open(newFile);
-        while (ifs.good() && std::getline(ifs,temp))
+        while (std::getline(ifs,temp))
         {
             size_t check = temp.find(s1);
             if (check != std::string::npos)
@@ -43,4 +48,6 @@ int main(int ac, char **av)
         ifs.close();
         ofs.close();
     }
+    else
+        std::cout << "Invalid input please try again" << std::endl;
 }

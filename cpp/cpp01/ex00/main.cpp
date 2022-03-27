@@ -2,14 +2,8 @@
 
 int main()
 {
-	Zombie zombieStack = Zombie("stack");
-	Zombie *zombieHeap = new Zombie("heap");
-	Zombie *zombieNew = newZombie("newZombie");
-
-	zombieStack.announceName();
-	zombieHeap->announceName();
-	zombieNew->announceName();
+	Zombie *zombie = newZombie("Foo");
+	zombie->announceName();
 	randomChump("randomChump");
-	delete zombieHeap;
-	delete zombieNew;
+	delete zombie;
 }

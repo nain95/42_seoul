@@ -10,10 +10,9 @@ private:
 public:
 	Weapon(std::string type);
 	Weapon();
-	void setType(std::string _type);
-	std::string &getType();
+	void setType(std::string type);
+	std::string const &getType();
 	~Weapon();
-
 };
 
 #endif
