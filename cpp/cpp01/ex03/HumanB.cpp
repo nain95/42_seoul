@@ -1,9 +1,5 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB()
-{
-}
-
 HumanB::HumanB(std::string humanName) : humanName(humanName) , weapon(NULL)
 {
 }

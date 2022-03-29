@@ -4,10 +4,8 @@
 
 
 
-void replace_str(std::string *str, int first, int length, std::string s2)
+void replace_str(std::string *str, int index, int length, std::string s2)
 {
-    int index;
-    index = first;
     str->erase(index, length);
     str->insert(index, s2);
 }
@@ -41,10 +39,12 @@ int main(int ac, char **av)
         }
         while (std::getline(ifs,temp))
         {
-            size_t check = temp.find(s1);
-            if (check != std::string::npos)
+            size_t check = 0;
+            check = temp.find(s1, 0);
+            while (check != std::string::npos)
             {
-                replace_str(&temp, temp.find(s1), s1.length(), s2);
+                replace_str(&temp, check, s1.length(), s2);
+                check = temp.find(s1, check+1);
             }
             temp += '\n';
             if (ofs.good())

@@ -42,22 +42,11 @@ Harl::~Harl(){}
 
 void Harl::complain(std::string level)
 {
-    // int flag = 0;
-
     int idx = 0;
     std::string *tmp;
 
     tmp = find(this->level, this->level + 4, level);
     idx = tmp - this->level;
-    // if (0 <= idx && idx < 4)
-    // {
-    //     flag = 1;
-    //     for (; idx < 4; idx++)
-    //         (this->*list[idx])();
-    // }
-    // if (flag == 0)
-    //     etc();
-    // const char* chr = &level;
 
     switch(idx)
     {

@@ -43,9 +43,4 @@ void Harl::complain(std::string level)
     idx = tmp - this->level;
     if (0 <= idx && idx < 4)
         (this->*list[idx])();
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     if (list[i].level == level)
-	// 		(this->*list[i].function)();
-    // }
 } 
