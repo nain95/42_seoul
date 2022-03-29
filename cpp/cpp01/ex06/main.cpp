@@ -1,8 +1,8 @@
-#include "karen.hpp"
+#include "Harl.hpp"
 
 int main(int ac, char **av)
 {
-    karen ex = karen();
+    Harl ex = Harl();
     std::string level;
 
     if (ac == 2)

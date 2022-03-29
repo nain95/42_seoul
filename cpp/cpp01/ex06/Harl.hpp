@@ -1,5 +1,5 @@
-#ifndef KAREN
-#define KAREN
+#ifndef HARL
+#define HARL
 #include <iostream>
 
 class karen;
@@ -7,18 +7,19 @@ typedef struct s_functionList{
     std::string level;
     void (karen::*function)(void);
 }               t_functionList;
-class karen{
+class Harl{
 private:
     void debug(void);
     void info(void);
     void warning(void);
     void error(void);
     void etc(void);
-    int etcCheck;
-    t_functionList list[4];
+    // t_functionList list[4];
+    void (Harl::*list[4])(void);
+    std::string level[4];
 public:
     void complain(std::string level);
-    ~karen();
-    karen();
+    ~Harl();
+    Harl();
 };
 #endif

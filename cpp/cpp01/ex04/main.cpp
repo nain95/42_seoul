@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 #include <fstream>
 
 
@@ -34,6 +34,11 @@ int main(int ac, char **av)
         newFile =  av[1];
         newFile += ".replace";
         ofs.open(newFile);
+        if (!ofs.good())
+        {       
+            std::cout << "Write File Open Error" << std::endl;
+            return 0;
+        }
         while (std::getline(ifs,temp))
         {
             size_t check = temp.find(s1);

@@ -1,8 +1,8 @@
-#include "karen.hpp"
+#include "Harl.hpp"
 
 int main()
 {
-    karen ex = karen();
+    Harl ex = Harl();
 
     ex.complain("DEBUG");
     ex.complain("info");
