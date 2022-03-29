@@ -8,11 +8,11 @@
 
 class PhoneBook {
 	private:
+		Contact contacts[BOOKSIZE];
 		int index;
 		bool isEmpty;
 		bool isFull;
 	public:
-		Contact contacts[BOOKSIZE];
 		PhoneBook();
 		void saveInfo();
 		void checkEmpty();

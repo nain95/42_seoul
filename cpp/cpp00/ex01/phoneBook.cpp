@@ -10,25 +10,43 @@ void PhoneBook::saveInfo()
 {
     std::string input_data;
 
-    std::cout << "firt_name :";
-
-    getline(std::cin, input_data);
+    while (input_data.empty())
+    {
+        std::cout << "\nfirt_name :";
+        getline(std::cin, input_data);
+    }
     this->contacts[index].setFirstName(input_data);
 
-	std::cout << "last_name :" ;
-    getline(std::cin, input_data);
+    input_data.clear();
+    while (input_data.empty())
+	{
+        std::cout << "last_name :" ;
+        getline(std::cin, input_data);
+    }
     this->contacts[index].setLastName(input_data);
 
-	std::cout << "nick_name :";
-    getline(std::cin, input_data);
+    input_data.clear();
+    while (input_data.empty())
+	{
+        std::cout << "nick_name :";
+        getline(std::cin, input_data);
+    }
     this->contacts[index].setNickname(input_data);
 
-	std::cout << "phone_number :";
-    getline(std::cin, input_data);
+    input_data.clear();
+    while (input_data.empty())
+	{
+        std::cout << "phone_number :";
+        getline(std::cin, input_data);
+    }
     this->contacts[index].setPhoneNumber(input_data);
 
-	std::cout << "darkest_secret :";
-    getline(std::cin, input_data);
+    input_data.clear();
+    while (input_data.empty())
+    {
+        std::cout << "darkest_secret :";
+        getline(std::cin, input_data);
+    }
     this->contacts[index].setDarkestSecrete(input_data);
     this->isEmpty = false;
     contacts[index].showInfo();
@@ -51,24 +69,27 @@ void PhoneBook::searchBook()
         std::cout << "NO SEARCH DATA" << std:: endl;
         return ;
     }
-    int start;
-    int idx = 0;
+    int end;
     if (this->isFull)
-        start = (this->index % 8);
+        end = 8;
     else
-        start = 0;
+        end = this->index;
+    for (int i = 0; i < end; i ++)
+        contacts[i].showsubInfo(i);
+    std::cout << "Select the index to search" << std::endl;
+    int num;
     while (1){
-        contacts[start].showsubInfo(idx++);
-        start++;
-        start %= 8;
-        if (start == this->index)
-            break;
-    }
-    while (1){
-        int num;
         std::cin >> num;
-        if (this->isFull && 0 <= num && num < BOOKSIZE){
-            contacts[(this->index + num) % 8].showInfo();
+        if (std::cin.fail())
+        {
+            std::cout << "INDEX ERROR" << std::endl;
+            std::cin.clear();
+			std::cin.ignore(100, '\n');
+        }
+        else if (num == -1)
+            break;
+        else if (this->isFull && 0 <= num && num < BOOKSIZE){
+            contacts[num].showInfo();
             break;
         } 
         else if (!this->isFull && 0 <= num && num < this->index){

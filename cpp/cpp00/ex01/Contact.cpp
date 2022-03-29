@@ -47,11 +47,12 @@ void Contact::setDarkestSecrete(std::string& darkestSecret) {
 
 void Contact::showInfo() const
 {
-	std::cout << "first name = "  << firstName << std::endl;
-	std::cout << "last name = " <<  lastName << std::endl;
-	std::cout << "nick name = " <<  nickname << std::endl;
-	std::cout << "phone number = " <<  phoneNumber << std::endl;
-	std::cout << "darkest secrete = " <<  darkestSecret << std::endl;
+	std::cout << "\n=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=\n";
+	std::cout << "| " << "first name = "  << firstName << std::endl;
+	std::cout << "| " << "last name = " <<  lastName << std::endl;
+	std::cout << "| " << "nick name = " <<  nickname << std::endl;
+	std::cout << "| " << "phone number = " <<  phoneNumber << std::endl;
+	std::cout << "| " << "darkest secrete = " <<  darkestSecret << std::endl;
 }
 
 void Contact::showsubInfo(int idx) const

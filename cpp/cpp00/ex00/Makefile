@@ -2,18 +2,21 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = ./megaphone.cpp
 NAME = megaphone
 
-OBJS = ${SRCS:.c=.o}
+OBJS = ${SRCS:.cpp=.o}
+
 all : ${NAME}
 
-.c.o: $(SRCS) ${LIBFT}
-	c++ $(FLAGS) -c -o $@ $<
+.cpp.o:
+	c++ $(FLAGS) -o $@ -c $<
 
-$(NAME) :  $(OBJS)
+$(NAME) : $(OBJS)
 	c++ $(FLAGS) -o $(NAME)  $(OBJS)
 
 clean :
 		rm -rf $(OBJS)
-fclean : 
+fclean : clean
 	rm -rf ./megaphone
 
 re : fclean all
+
+.PHONE : all clean fclean re
