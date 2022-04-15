@@ -10,8 +10,8 @@ private:
     int RawBits;
 public:
     Fixed();
-    Fixed(float const val);
-    Fixed(int const val);
+    Fixed(const int val);
+    Fixed(const float val);
     ~Fixed();
     Fixed(const Fixed& f);
     Fixed& operator=(const Fixed& f);

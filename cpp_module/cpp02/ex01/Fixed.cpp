@@ -11,13 +11,13 @@ Fixed::~Fixed()
     std::cout << "Destructor called" << std::endl;
 }
 
-Fixed::Fixed(int const val)
+Fixed::Fixed(const int val)
 {
     std::cout << "Int constructor called" << std::endl;
     RawBits = (val << Fixed::bits);
 }
 
-Fixed::Fixed(float const val)
+Fixed::Fixed(const float val)
 {
     std::cout << "Float constructor called" << std::endl;
     RawBits = roundf(val * (1 << Fixed::bits));
@@ -25,7 +25,6 @@ Fixed::Fixed(float const val)
 
 Fixed::Fixed(const Fixed& f)
 {
-    // this->RawBits = f.getRawBits();
     std::cout << "Copy constructor called" << std::endl;
     *this = f;
 }
@@ -57,7 +56,7 @@ std::ostream &operator<<(std::ostream &ost, const Fixed& f)
 
 float Fixed::toFloat(void) const
 {
-    return ((float)this->RawBits / (float)(1 << Fixed::bits));
+    return static_cast<float>(this->RawBits) / (1 << Fixed::bits);
 }
 
 int Fixed::toInt(void) const

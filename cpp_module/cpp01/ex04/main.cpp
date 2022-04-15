@@ -2,8 +2,6 @@
 #include <string>
 #include <fstream>
 
-
-
 void replace_str(std::string *str, int index, int length, std::string s2)
 {
     str->erase(index, length);

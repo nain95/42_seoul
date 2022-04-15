@@ -25,21 +25,21 @@ public:
     Fixed operator/(const Fixed& f);
 
     Fixed operator++(int);
-    Fixed operator++();
+    Fixed &operator++();
     Fixed operator--(int);
-    Fixed operator--();
+    Fixed &operator--();
 
     static Fixed const &min(Fixed const &a, Fixed const &b);
     static Fixed &min(Fixed &a, Fixed &b);
     static Fixed const &max(Fixed const &a, Fixed const &b);
     static Fixed &max(Fixed &a, Fixed &b);
-    int getIntVal() const;
-    void setIntVal(const int val);
+    int getRawBits() const;
+    void setRawBits(const int val);
     float toFloat(void) const;
     int toInt(void) const;
 
 private:
-    int intVal;
+    int RawBits;
     const static int bits = 8;
 };
 
