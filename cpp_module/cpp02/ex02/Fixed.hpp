@@ -29,9 +29,9 @@ public:
     Fixed operator--(int);
     Fixed &operator--();
 
-    static Fixed const &min(Fixed const &a, Fixed const &b);
+    static const Fixed &min(const Fixed &a, const Fixed &b);
     static Fixed &min(Fixed &a, Fixed &b);
-    static Fixed const &max(Fixed const &a, Fixed const &b);
+    static const Fixed &max(const Fixed &a, const Fixed &b);
     static Fixed &max(Fixed &a, Fixed &b);
     int getRawBits() const;
     void setRawBits(const int val);
@@ -44,5 +44,6 @@ private:
 };
 
 std::ostream &operator<<(std::ostream &ost, Fixed const &f);
+
 
 #endif

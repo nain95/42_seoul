@@ -1,53 +1,71 @@
-#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name){
-    hitPoints = 100;
-    energyPoints = 50;
-    attackDamage = 20;
-    std::cout << Yellow;
-    std::cout << "ScavTrap name constructor called" << std::endl;
-    std::cout << RESET;
+ClapTrap::ClapTrap()
+{
+    std::cout << "default constructor called" << std::endl;
+    this->name = "NULL";
+    hitPoints = 10;
+    energyPoints = 10;
+    attackDamage = 0;
 }
 
-ScavTrap::ScavTrap() : ClapTrap()
+ClapTrap::ClapTrap(std::string name)
 {
-    hitPoints = 100;
-    energyPoints = 50;
-    attackDamage = 20;
-    name = "NULL";
-    std::cout << Yellow;
-    std::cout << "ScavTrap default constructor called" << std::endl;
-    std::cout << RESET;
+    std::cout << "ClapTrap name constructor called" << std::endl;
+    this->name = name;
+    hitPoints = 10;
+    energyPoints = 10;
+    attackDamage = 0;
 }
 
-ScavTrap::ScavTrap(ScavTrap const & s) : ClapTrap(s)
+void ClapTrap::attack(const std::string & target)
+{
+    std::cout << "ClapTrap " << this->name << " attack " << target << " , causing " << this->attackDamage << " points of damage!" << std::endl;
+}
+
+void ClapTrap::takeDamage(unsigned int amount)
+{
+    if ((unsigned int)energyPoints <= amount)
+    {
+        energyPoints = 0;
+        std::cout << name << " died" <<  std::endl;
+    }
+    else
+    {
+        energyPoints -= amount;
+        std::cout << name << "take Damage : " << amount << " present energy = " << energyPoints << std::endl;
+    }
+}
+
+void ClapTrap::beRepaired(unsigned int amount)
+{
+    if (energyPoints + amount < 100)
+    {
+        energyPoints += amount;
+    }
+    else
+    {
+        energyPoints = 100;
+    }
+    
+    std::cout << "ClapTrap <" << this->name << "> be Repaired <" << amount << ">" <<std::endl;
+}
+
+ClapTrap::~ClapTrap()
+{
+    std::cout << "ClapTrap destructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(ClapTrap const & src) : name(src.name), hitPoints(src.hitPoints), energyPoints(src.energyPoints), attackDamage(src.attackDamage)
 {
 
 }
 
-ScavTrap& ScavTrap::operator=(ScavTrap const& s)
+ClapTrap & ClapTrap::operator=(ClapTrap const & src)
 {
-    ClapTrap::operator=(s);
+    name = src.name;
+    hitPoints = src.hitPoints;
+    energyPoints = src.energyPoints;
+    attackDamage = src.attackDamage;
     return (*this);
 }
-
-ScavTrap::~ScavTrap()
-{
-    std::cout << Yellow;
-    std::cout << "ScavTrap destructor called" << std::endl;
-    std::cout << RESET;
-}
-
-void ScavTrap::attack(std::string const & target)
-{
-    std::cout << Blue <<  "ScavTrap <" << this->name << "> attack <" << target << "> , causing <" << this->attackDamage << "> points of damage!" << RESET << std::endl;
-}
-
-void ScavTrap::guardGate()
-{
-    if(energyPoints)
-        std::cout << Blue << "guardGateOpen" << RESET << std::endl;
-    else
-        std::cout << Blue << "not guardGateOpen" << RESET << std::endl;
-}
-

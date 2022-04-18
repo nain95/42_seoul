@@ -2,9 +2,7 @@
 
 ClapTrap::ClapTrap()
 {
-    std::cout << Green;
     std::cout << "default constructor called" << std::endl;
-    std::cout << RESET;
     this->name = "NULL";
     hitPoints = 10;
     energyPoints = 10;
@@ -13,20 +11,16 @@ ClapTrap::ClapTrap()
 
 ClapTrap::ClapTrap(std::string name)
 {
-    std::cout << Green;
     std::cout << "ClapTrap name constructor called" << std::endl;
-    std::cout << RESET;
     this->name = name;
     hitPoints = 10;
     energyPoints = 10;
     attackDamage = 0;
 }
 
-void ClapTrap::attack(std::string const & target)
+void ClapTrap::attack(const std::string & target)
 {
-    std::cout << RED;
-    std::cout << "ClapTrap <" << this->name << "> attack <" << target << "> , causing <" << this->attackDamage << "> points of damage!" << std::endl;
-    std::cout << RESET;
+    std::cout << "ClapTrap " << this->name << " attack " << target << " , causing " << this->attackDamage << " points of damage!" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -34,12 +28,12 @@ void ClapTrap::takeDamage(unsigned int amount)
     if ((unsigned int)energyPoints <= amount)
     {
         energyPoints = 0;
-        std::cout << RED << name << " died" << RESET <<  std::endl;
+        std::cout << name << " died" <<  std::endl;
     }
     else
     {
         energyPoints -= amount;
-        std::cout << RED << name << "take Damage : " << amount << " present energy = " << energyPoints << RESET << std::endl;
+        std::cout << name << "take Damage : " << amount << " present energy = " << energyPoints << std::endl;
     }
 }
 
@@ -54,14 +48,12 @@ void ClapTrap::beRepaired(unsigned int amount)
         energyPoints = 100;
     }
     
-    std::cout << RED << "ClapTrap <" << this->name << "> be Repaired <" << amount << ">" << RESET <<std::endl;
+    std::cout << "ClapTrap <" << this->name << "> be Repaired <" << amount << ">" <<std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << Green;
     std::cout << "ClapTrap destructor called" << std::endl;
-    std::cout << RESET;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src) : name(src.name), hitPoints(src.hitPoints), energyPoints(src.energyPoints), attackDamage(src.attackDamage)
