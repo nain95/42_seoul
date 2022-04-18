@@ -2,14 +2,6 @@
 #define HARL
 #include <iostream>
 #include <string>
-#include <algorithm>
-
-// class Harl;
-
-// typedef struct s_functionList{
-//     std::string level;
-//     void (Harl::*function)(void);
-// }             t_functionList;
 
 class Harl{
 private:

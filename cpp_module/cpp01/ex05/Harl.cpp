@@ -32,15 +32,19 @@ Harl::Harl()
     level[3] = "ERROR";
     list[3] = &Harl::error;
 }
+
 Harl::~Harl(){}
 
 void Harl::complain(std::string level)
 {
-    int idx = 0;
-    std::string *tmp;
+    int idx = 4;
 
-    tmp = find(this->level, this->level + 4, level);
-    idx = tmp - this->level;
+    for (int i = 0 ; i < 4 ; ++i)
+        if (level == this->level[i])
+            {
+                idx = i;
+                break;
+            }
     if (0 <= idx && idx < 4)
         (this->*list[idx])();
 } 

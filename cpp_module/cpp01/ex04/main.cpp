@@ -23,9 +23,14 @@ int main(int ac, char **av)
         if (!ifs.good())   
         {       
             std::cout << "File Open Error" << std::endl;
-            return 0;
+            return -1;
         }
         s1 = av[2];
+        if (s1.length() == 0)
+        {
+            std::cout << "Invalid input please try again" << std::endl;
+            return -1;
+        }
         s2 = av[3];
         newFile =  av[1];
         newFile += ".replace";
@@ -33,20 +38,26 @@ int main(int ac, char **av)
         if (!ofs.good())
         {       
             std::cout << "Write File Open Error" << std::endl;
-            return 0;
+            return -1;
         }
         while (std::getline(ifs,temp))
         {
+            if (!ifs.eof())
+                temp+= '\n';
             size_t check = 0;
             check = temp.find(s1, 0);
             while (check != std::string::npos)
             {
                 replace_str(&temp, check, s1.length(), s2);
-                check = temp.find(s1, check+1);
+                check = temp.find(s1, check + s2.length());
             }
-            temp += '\n';
             if (ofs.good())
                 ofs << temp;
+            else
+            {     
+                std::cout << "Write File Error" << std::endl;
+                return -1;
+            }
         }
         ifs.close();
         ofs.close();

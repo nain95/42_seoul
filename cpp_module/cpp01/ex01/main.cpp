@@ -6,6 +6,6 @@ int main()
 	std::cin >> n;
 	Zombie *zombie = zombieHorde(n, "zombie");
 	for (int i = 0; i < n ; i++)
-		zombie[i].announceName();
+		zombie[i].announce();
 	delete[] zombie;
 }

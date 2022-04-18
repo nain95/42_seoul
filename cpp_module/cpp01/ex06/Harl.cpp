@@ -44,7 +44,7 @@ void Harl::complain(std::string level)
 {
     int idx = 4;
 
-    for (int i = 1 ; i < 5 ; ++i)
+    for (int i = 0 ; i < 4 ; ++i)
         if (level == this->level[i])
             {
                 idx = i;
