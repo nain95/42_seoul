@@ -1,18 +1,20 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name){
+ScavTrap::ScavTrap(std::string name)
+{
+    this->name = name;
     hitPoints = 100;
     energyPoints = 50;
     attackDamage = 20;
-    std::cout << "ScavTrap name constructor called" << std::endl;
+    std::cout << "ScavTrap name constructor called" << name << std::endl;
 }
 
-ScavTrap::ScavTrap() : ClapTrap()
+ScavTrap::ScavTrap()
 {
+    name = "NULL";
     hitPoints = 100;
     energyPoints = 50;
     attackDamage = 20;
-    name = "NULL";
     std::cout << "ScavTrap default constructor called" << std::endl;
 }
 

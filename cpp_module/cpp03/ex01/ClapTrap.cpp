@@ -1,21 +1,13 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap(): name("NULL"), hitPoints(10), energyPoints(10), attackDamage(0)
 {
     std::cout << "default constructor called" << std::endl;
-    this->name = "NULL";
-    hitPoints = 10;
-    energyPoints = 10;
-    attackDamage = 0;
 }
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap(std::string name): name(name), hitPoints(10), energyPoints(10), attackDamage(0)
 {
     std::cout << "ClapTrap name constructor called" << std::endl;
-    this->name = name;
-    hitPoints = 10;
-    energyPoints = 10;
-    attackDamage = 0;
 }
 
 void ClapTrap::attack(const std::string & target)
@@ -25,27 +17,27 @@ void ClapTrap::attack(const std::string & target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if ((unsigned int)energyPoints <= amount)
+    if ((unsigned int)hitPoints <= amount)
     {
-        energyPoints = 0;
+        hitPoints = 0;
         std::cout << name << " died" <<  std::endl;
     }
     else
     {
-        energyPoints -= amount;
-        std::cout << name << "take Damage : " << amount << " present energy = " << energyPoints << std::endl;
+        hitPoints -= amount;
+        std::cout << name << "take Damage : " << amount << " present HP = " << hitPoints << std::endl;
     }
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (energyPoints + amount < 100)
+    if (hitPoints + amount < 100)
     {
-        energyPoints += amount;
+        hitPoints += amount;
     }
     else
     {
-        energyPoints = 100;
+        hitPoints = 100;
     }
     
     std::cout << "ClapTrap <" << this->name << "> be Repaired <" << amount << ">" <<std::endl;
@@ -56,16 +48,19 @@ ClapTrap::~ClapTrap()
     std::cout << "ClapTrap destructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap const & src) : name(src.name), hitPoints(src.hitPoints), energyPoints(src.energyPoints), attackDamage(src.attackDamage)
+ClapTrap::ClapTrap(ClapTrap const & src)
 {
-
+    *this = src;
 }
 
 ClapTrap & ClapTrap::operator=(ClapTrap const & src)
 {
-    name = src.name;
-    hitPoints = src.hitPoints;
-    energyPoints = src.energyPoints;
-    attackDamage = src.attackDamage;
+    if (this != &src)
+    {
+        name = src.name;
+        hitPoints = src.hitPoints;
+        energyPoints = src.energyPoints;
+        attackDamage = src.attackDamage;
+    }
     return (*this);
 }
